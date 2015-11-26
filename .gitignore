@@ -9,10 +9,6 @@ _assets
 
 #Export
 _site
-css
-images
-videos
-js
 
 #Node
 node_modules
