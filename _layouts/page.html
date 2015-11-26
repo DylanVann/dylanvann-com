@@ -1,0 +1,14 @@
+{% include header.html %}
+
+{% include navbar.html %}
+
+<div class="page
+  {% if page.fluid %}
+  container-fluid
+  {% else %}
+  container
+  {% endif %}">
+  {{ content }}
+</div>
+
+{% include footer.html %}

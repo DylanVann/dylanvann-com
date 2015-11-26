@@ -1,0 +1,10 @@
+s3_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
+s3_secret: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
+s3_bucket: dylanvann.com
+
+max_age:
+# CSS uses cache busting, so it's safe to cache for the maximum possible time.
+  "css/*": 31536000
+  "*": 300
+
+gzip: true

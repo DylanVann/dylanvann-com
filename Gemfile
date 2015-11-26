@@ -1,0 +1,8 @@
+source 'https://rubygems.org'
+gem 'bootstrap-sass'
+gem 'jekyll'
+gem 'rdiscount'
+gem 'listen', '2.7.11'
+gem 's3_website'
+gem 'jekyll-tagging'
+gem 'compass'

@@ -1,0 +1,34 @@
+---
+layout: page
+---
+
+<ul class=posts>
+  {% for post in paginator.posts %}
+  {% if post.category == "projects" %}
+  {% else if %}
+    <li class="post">
+      {% include post.html %}
+    </li>
+  {% endif %}
+  {% endfor %}
+</ul>
+  
+{% if paginator.next_page or paginator.previous_page %}
+  <div class="navigation">
+
+    {% if paginator.previous_page %}
+      <a href="{{ paginator.previous_page_path }}" class="previous">Previous</a>
+    {% else %}
+      <span class="previous">Previous</span>
+    {% endif %}
+
+    <span> | </span>
+
+    {% if paginator.next_page %}
+      <a href="{{ paginator.next_page_path }}" class="next">Next</a>
+    {% else %}
+      <span class="next">Next</span>
+    {% endif %}
+
+  </div>
+{% endif %}

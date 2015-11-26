@@ -1,0 +1,38 @@
+name: "Dylan Vann"
+author: "Dylan Vann"
+description: "Dylan Vann's website."
+url: "http://dylanvann.com"
+permalink: :title
+paginate: 4
+markdown: KramdownPygments
+highlighter: pygments
+exclude: [
+  README.md,
+  config.rb,
+  Gruntfile.js,
+  package.json,
+  node_modules,
+  Gemfile,
+  s3_website.yml,
+  LICENSE
+]
+keep_files: [
+  ".git",
+  "css",
+  "assets",
+  "js"
+]
+defaults:
+  -
+    scope:
+      path: "" # all files
+      type: "posts"
+    values:
+      layout: "post"
+blog:
+    tags:
+        url: /tags/
+        title_prefix: ""
+        layout: tag_index.html
+tag_page_layout: tag_page
+tag_page_dir: tag

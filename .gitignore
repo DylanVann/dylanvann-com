@@ -1,0 +1,18 @@
+#SASS
+/.sass-cache/*
+
+#OS X
+*.DS_Store
+
+#Media, files too large, diffs meaningless.
+_assets
+
+#Export
+_site
+css
+images
+videos
+js
+
+#Node
+node_modules
