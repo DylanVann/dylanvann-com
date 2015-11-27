@@ -1,10 +1,5 @@
 module.exports = function(grunt) {
 
-  var globalConfig = {
-    src: '',
-    dest: '_site'
-  };
-
   grunt.initConfig({
 
     pkg: grunt.file.readJSON('package.json'),
