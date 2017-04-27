@@ -290,7 +290,7 @@ module.exports = function(grunt) {
   ]);
 
   // Push to S3.
-  grunt.registerTask('push', [
+  grunt.registerTask('deploy', [
     'compile-prod',
     'shell:pushToS3',
   ]);
