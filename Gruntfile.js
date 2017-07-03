@@ -151,7 +151,7 @@ module.exports = function(grunt) {
       pack: {
         entry: "./_js/main.js",
         output: {
-            path: './_site/js/',
+            path: __dirname + '/_site/js/',
             publicPath: '/js/',
             filename: "[name]-bundle.js",
             chunkFilename: "[id]-bundle.js",

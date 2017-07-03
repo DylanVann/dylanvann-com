@@ -1,14 +1,11 @@
-#SASS
+# sass
 /.sass-cache/*
 
-#OS X
+# OS X
 *.DS_Store
 
-#Media, files too large, diffs meaningless.
-_assets
-
-#Export
+# build
 _site
 
-#Node
+# node
 node_modules
