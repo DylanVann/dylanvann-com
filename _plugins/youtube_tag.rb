@@ -20,7 +20,7 @@ class YouTube < Liquid::Tag
   end
 
   def render(context)
-    "<div class=\"video\"><iframe width=\"#{@width}\" height=\"#{@height}\" src=\"http://www.youtube.com/embed/#{@id}?color=white&theme=dark&wmode=opaque&rel=0&showinfo=0\" frameborder=\"0\" wmode=\"Opaque\" allowfullscreen></iframe></div>"
+    "<div class=\"video\"><iframe width=\"#{@width}\" height=\"#{@height}\" src=\"https://www.youtube.com/embed/#{@id}?color=white&theme=dark&wmode=opaque&rel=0&showinfo=0\" frameborder=\"0\" wmode=\"Opaque\" allowfullscreen></iframe></div>"
   end
 
   Liquid::Template.register_tag "youtube", self
@@ -48,7 +48,7 @@ class YouTubeGif < Liquid::Tag
   end
 
   def render(context)
-    "<div class=\"video\"><iframe width=\"#{@width}\" height=\"#{@height}\" src=\"http://www.youtube.com/embed/#{@id}?color=white&theme=dark&rel=0&showinfo=0&autoplay=1&loop=1\" frameborder=\"0\" allowfullscreen></iframe></div>"
+    "<div class=\"video\"><iframe width=\"#{@width}\" height=\"#{@height}\" src=\"https://www.youtube.com/embed/#{@id}?color=white&theme=dark&rel=0&showinfo=0&autoplay=1&loop=1\" frameborder=\"0\" allowfullscreen></iframe></div>"
   end
 
   Liquid::Template.register_tag "youtube_gif", self

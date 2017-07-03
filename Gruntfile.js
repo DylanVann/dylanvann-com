@@ -16,7 +16,13 @@ module.exports = function(grunt) {
 
     concurrent: {
       dev: {
-        tasks: ['watch:jekyllDev', 'watch:sass', 'watch:jsDev'],
+        tasks: [
+          'watch:jekyllDev',
+          'watch:sass',
+          'watch:jsDev',
+          'watch:assets',
+          'watch:videos',
+        ],
         options: {
           logConcurrentOutput: true,
         },
@@ -94,6 +100,22 @@ module.exports = function(grunt) {
           atBegin: true,
         },
       },
+      assets: {
+        files: ['_assets/**/*'],
+        tasks: ['copy'],
+        options: {
+          interupt: true,
+          atBegin: true,
+        },
+      },
+      videos: {
+        files: ['_assets**/*.+(mov|mp4|m4v)'],
+        tasks: ['responsive_videos'],
+        options: {
+          interupt: true,
+          atBegin: true,
+        },
+      },
     },
 
     // Run shell commands.
@@ -166,7 +188,7 @@ module.exports = function(grunt) {
         files: [
           {
             expand: true,
-            src: ['**/*.{mov,mp4,m4v}'],
+            src: ['**/*.+(mov|mp4|m4v)'],
             cwd: '_assets/',
             dest: '_site/assets/',
           },
@@ -268,6 +290,8 @@ module.exports = function(grunt) {
 
   // Production. Compiles with minification.
   grunt.registerTask('compile-prod', [
+    'copy',
+    'responsive_videos',
     'shell:jekyllProd',
     'compile-css-prod',
     'webpack',
