@@ -1,7 +1,5 @@
 module.exports = function(grunt) {
-
   grunt.initConfig({
-
     pkg: grunt.file.readJSON('package.json'),
 
     // Local server.
@@ -15,7 +13,6 @@ module.exports = function(grunt) {
         },
       },
     },
-
 
     concurrent: {
       dev: {
@@ -37,8 +34,8 @@ module.exports = function(grunt) {
       options: {},
       icons: {
         src: '_assets/favicon/favicon.png',
-        dest: '_site/favicon'
-      }
+        dest: '_site/favicon',
+      },
     },
 
     // Watch for changes.
@@ -102,43 +99,31 @@ module.exports = function(grunt) {
     // Run shell commands.
     shell: {
       jsDev: {
-        command: [
-          'grunt webpack',
-          'cp -f -R _js/libs _site/js/',
-        ].join('&&')
+        command: ['grunt webpack', 'cp -f -R _js/libs _site/js/'].join('&&'),
       },
       jsProd: {
-        command: [
-          'grunt webpack',
-          'cp -f -R _js/libs _site/js/',
-        ].join('&&')
+        command: ['grunt webpack', 'cp -f -R _js/libs _site/js/'].join('&&'),
       },
       compassDev: {
-        command: [
-          'grunt compass:dev',
-        ].join('&&')
+        command: ['grunt compass:dev'].join('&&'),
       },
       compassProd: {
-        command: [
-          'grunt compass:prod',
-        ].join('&&')
+        command: ['grunt compass:prod'].join('&&'),
       },
       jekyllDev: {
         command: [
           'export JEKYLL_ENV=development',
           'bundle exec jekyll build',
-        ].join('&&')
+        ].join('&&'),
       },
       jekyllProd: {
         command: [
           'export JEKYLL_ENV=production',
           'bundle exec jekyll build',
-        ].join('&&')
+        ].join('&&'),
       },
       pushToS3: {
-        command: [
-          'bundle exec s3_website push',
-        ].join('&&')
+        command: ['bundle exec s3_website push'].join('&&'),
       },
     },
 
@@ -149,12 +134,12 @@ module.exports = function(grunt) {
     // Webpack
     webpack: {
       pack: {
-        entry: "./_js/main.js",
+        entry: './_js/main.js',
         output: {
-            path: __dirname + '/_site/js/',
-            publicPath: '/js/',
-            filename: "[name]-bundle.js",
-            chunkFilename: "[id]-bundle.js",
+          path: __dirname + '/_site/js/',
+          publicPath: '/js/',
+          filename: '[name]-bundle.js',
+          chunkFilename: '[id]-bundle.js',
         },
       },
     },
@@ -169,12 +154,12 @@ module.exports = function(grunt) {
         options: {
           sizes: [
             {
-            width: 500,
-            poster: true,
+              width: 500,
+              poster: true,
             },
             {
-            width: 750,
-            poster: true,
+              width: 750,
+              poster: true,
             },
           ],
         },
@@ -241,7 +226,7 @@ module.exports = function(grunt) {
         expand: true,
         cwd: '_site/',
         src: '**/*.html',
-        dest: '_site/'
+        dest: '_site/',
       },
     },
 
@@ -253,15 +238,16 @@ module.exports = function(grunt) {
           removeComments: true,
           collapseWhitespace: true,
         },
-        files: [{
-          expand: true,
-          cwd: '_site/',
-          src: '**/*.html',
-          dest: '_site/'
-        }],
+        files: [
+          {
+            expand: true,
+            cwd: '_site/',
+            src: '**/*.html',
+            dest: '_site/',
+          },
+        ],
       },
     },
-
   });
 
   // Load all tasks in packages.json beginning with grunt.
@@ -276,15 +262,9 @@ module.exports = function(grunt) {
   // Copy images to _site.
   grunt.registerTask('images', ['copy:images']);
 
-  grunt.registerTask('dev', [
-    'connect',
-    'concurrent:dev',
-  ]);
+  grunt.registerTask('dev', ['connect', 'concurrent:dev']);
 
-  grunt.registerTask('prod', [
-    'connect',
-    'concurrent:prod',
-  ]);
+  grunt.registerTask('prod', ['connect', 'concurrent:prod']);
 
   // Production. Compiles with minification.
   grunt.registerTask('compile-prod', [
@@ -295,19 +275,10 @@ module.exports = function(grunt) {
     'prettify',
   ]);
 
-  grunt.registerTask('compile-css-dev', [
-    'shell:compassDev',
-    'autoprefixer',
-  ]);
+  grunt.registerTask('compile-css-dev', ['shell:compassDev', 'autoprefixer']);
 
-  grunt.registerTask('compile-css-prod', [
-    'shell:compassProd',
-    'autoprefixer',
-  ]);
+  grunt.registerTask('compile-css-prod', ['shell:compassProd', 'autoprefixer']);
 
   // Push to S3.
-  grunt.registerTask('deploy', [
-    'compile-prod',
-    'shell:pushToS3',
-  ]);
+  grunt.registerTask('deploy', ['compile-prod', 'shell:pushToS3']);
 };
