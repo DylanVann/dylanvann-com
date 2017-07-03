@@ -6,11 +6,7 @@ tags:
 - Web
 ---
 
-<video autoplay loop muted poster="/videos/particlesjs_gif-500.jpg">
-	<source src="/videos/particlesjs_gif-500.mp4" type="video/mp4">
-	<source src="/videos/particlesjs_gif-500.webm" type="video/webm">
-	Your browser does not support the video tag.
-</video>
+{% gif particles_js %}
 
 <p class="caption">The particle system editor.</p>
 

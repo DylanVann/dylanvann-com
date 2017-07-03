@@ -170,20 +170,33 @@ module.exports = function(grunt) {
           sizes: [
             {
             width: 500,
-            poster: true
+            poster: true,
             },
             {
             width: 750,
-            poster: true
+            poster: true,
             },
           ],
         },
         files: [
           {
-          expand: true,
-          src: ['**/*.{mov,mp4,m4v}'],
-          cwd: '_assets/',
-          dest: '_site/_assets/'
+            expand: true,
+            src: ['**/*.{mov,mp4,m4v}'],
+            cwd: '_assets/',
+            dest: '_site/assets/',
+          },
+        ],
+      },
+    },
+
+    copy: {
+      images: {
+        files: [
+          {
+            expand: true,
+            src: ['**/*'],
+            cwd: '_assets/',
+            dest: '_site/assets/',
           },
         ],
       },
@@ -257,8 +270,11 @@ module.exports = function(grunt) {
   // Default task is development.
   grunt.registerTask('default', ['dev']);
 
-  // Export html5 video formats.
+  // Convert videos to HTML5 formats and copy to _site.
   grunt.registerTask('videos', ['responsive_videos']);
+
+  // Copy images to _site.
+  grunt.registerTask('images', ['copy:images']);
 
   grunt.registerTask('dev', [
     'connect',
