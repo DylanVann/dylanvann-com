@@ -8,7 +8,7 @@ header-image-alt: A picture of Dylan Vann.
 **Hi, I'm Dylan Vann.**
 
 - I design and develop software. 
-- I recently graduated as a mechatronics engineer (software + mechanical + electrical).
+- I have a degree in mechatronics engineering.
 - I run on EDM, science fiction, sushi, and coffee.
 
 **You can find me on these sites:**
