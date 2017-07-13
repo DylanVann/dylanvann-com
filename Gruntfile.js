@@ -40,7 +40,7 @@ module.exports = function(grunt) {
       options: {},
       icons: {
         src: '_assets/favicon/favicon.png',
-        dest: '_site/favicon',
+        dest: '_site/',
       },
     },
 
@@ -95,6 +95,14 @@ module.exports = function(grunt) {
       jsProd: {
         files: ['_js/*.js'],
         tasks: ['shell:jsProd'],
+        options: {
+          interupt: true,
+          atBegin: true,
+        },
+      },
+      favicon: {
+        files: ['_assets/favicon/*'],
+        tasks: ['favicon'],
         options: {
           interupt: true,
           atBegin: true,
@@ -196,7 +204,19 @@ module.exports = function(grunt) {
       },
     },
 
+    clean: ['_site/*'],
+
     copy: {
+      js: {
+        files: [
+          {
+            expand: true,
+            src: ['**/*'],
+            cwd: '_js/libs/',
+            dest: '_site/js/libs',
+          },
+        ],
+      },
       images: {
         files: [
           {
@@ -290,13 +310,15 @@ module.exports = function(grunt) {
 
   // Production. Compiles with minification.
   grunt.registerTask('compile-prod', [
-    'copy',
-    'responsive_videos',
+    'clean',
     'shell:jekyllProd',
     'compile-css-prod',
     'webpack',
     'htmlmin',
     'prettify',
+    'copy',
+    'favicons',
+    'responsive_videos',
   ]);
 
   grunt.registerTask('compile-css-dev', ['shell:compassDev', 'autoprefixer']);

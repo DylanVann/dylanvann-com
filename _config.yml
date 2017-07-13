@@ -14,13 +14,14 @@ exclude: [
   node_modules,
   Gemfile,
   s3_website.yml,
-  LICENSE
+  LICENSE,
+  yarn.lock,
 ]
 keep_files: [
   ".git",
   "css",
   "assets",
-  "js"
+  "js",
 ]
 defaults:
   -
