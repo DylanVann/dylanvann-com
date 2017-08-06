@@ -10,6 +10,7 @@
     "build": "grunt compile-prod",
     "deploy": "grunt deploy",
     "start": "grunt dev",
+    "serve": "http-server _site",
     "prettier": "prettier --write --single-quote --trailing-comma all ./Gruntfile.js"
   },
   "devDependencies": {
@@ -39,6 +40,7 @@
     "grunt-responsive-videos": "^0.1.1",
     "grunt-shell": "^2.1.0",
     "grunt-webpack": "^3.0.2",
+    "http-server": "^0.10.0",
     "load-grunt-tasks": "^3.5.2",
     "prettier": "^1.5.2",
     "processing-js": "^1.4.16",

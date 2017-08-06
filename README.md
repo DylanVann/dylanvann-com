@@ -8,7 +8,16 @@
 ## Install Dependencies
 
 ```bash
+# Install bundler if you don't have it already.
+gem install bundler
+
+# Install ruby gems.
 bundle install
+
+# Install yarn if you don't have it already.
+npm install -g yarn
+
+# Install npm modules.
 yarn
 ```
 
