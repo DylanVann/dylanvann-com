@@ -9,3 +9,6 @@ _site
 
 # node
 node_modules
+
+# dotenv
+.env
