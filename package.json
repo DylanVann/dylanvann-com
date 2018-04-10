@@ -12,6 +12,7 @@
     "start": "grunt dev",
     "serve": "http-server _site",
     "test": "exit 0",
+    "surge": "surge",
     "prettier": "prettier --write --single-quote --trailing-comma all ./Gruntfile.js"
   },
   "devDependencies": {
