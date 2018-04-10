@@ -12,6 +12,7 @@ exclude: [
   Gruntfile.js,
   package.json,
   node_modules,
+  gems,
   Gemfile,
   s3_website.yml,
   LICENSE,

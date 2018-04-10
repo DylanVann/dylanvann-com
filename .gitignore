@@ -10,5 +10,8 @@ _site
 # node
 node_modules
 
+# ruby
+gems
+
 # dotenv
 .env
