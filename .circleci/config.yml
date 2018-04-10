@@ -17,5 +17,6 @@ jobs:
             - ./node_modules
             - ./gems
           key: v1-dependencies-{{ checksum "package.json" }}-{{ checksum "Gemfile.lock" }}
+      - run: yarn build
       - run: yarn test
 
