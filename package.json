@@ -47,6 +47,7 @@
     "prettier": "^1.5.2",
     "processing-js": "^1.4.16",
     "scriptjs": "^2.5.7",
+    "surge": "^0.20.1",
     "uglify-loader": "^2.0.0",
     "webpack": "^3.2.0",
     "webpack-dev-server": "^2.5.1"
