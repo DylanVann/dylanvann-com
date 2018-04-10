@@ -19,8 +19,21 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}-{{ checksum "Gemfile.lock" }}
       - run: yarn build
       - run: yarn test
-deployment:
-  production:
-    branch: master
-    commands:
-      - surge --project ./_site --domain dylanvann.surge.sh
+  deploy:
+    machine:
+      enabled: true
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run: surge --project ./_site --domain dylanvann.surge.sh
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master

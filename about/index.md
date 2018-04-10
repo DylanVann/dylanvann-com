@@ -25,4 +25,4 @@ header-image-alt: A picture of Dylan Vann.
 
 **Or contact me at:**
 
-<a href="mailto:dylan.vann@gmail.com"><i class="fa fa-envelope"></i> dylan.vann@gmail.com</a>
+<a href="mailto:dylan@dylanvann.com"><i class="fa fa-envelope"></i> dylan.vann@gmail.com</a>
