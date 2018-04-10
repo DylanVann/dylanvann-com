@@ -20,8 +20,8 @@ jobs:
       - run: yarn build
       - run: yarn test
   deploy:
-    machine:
-      enabled: true
+    docker:
+      - image: circleci/ruby:2.4-node-browsers
     working_directory: ~/repo
     steps:
       - checkout
