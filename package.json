@@ -15,6 +15,7 @@
     "prettier": "prettier --write --single-quote --trailing-comma all ./Gruntfile.js"
   },
   "devDependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.0.13",
     "component-emitter": "^1.2.0",
     "grunt": "^1.0.1",
     "grunt-autoprefixer": "^3.0.4",
