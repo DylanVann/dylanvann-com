@@ -1,4 +1,4 @@
-# [dylanvann.com](https://dylanvann.com)
+# [dylanvann.com](https://dylanvann.com) - [![CircleCI](https://circleci.com/gh/DylanVann/dylanvann-com.svg?style=svg)](https://circleci.com/gh/DylanVann/dylanvann-com)
 
 ⌨️🤖☕️ Dylan Vann's website.
 
