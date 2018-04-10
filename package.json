@@ -11,6 +11,7 @@
     "deploy": "grunt deploy",
     "start": "grunt dev",
     "serve": "http-server _site",
+    "test": "exit 0",
     "prettier": "prettier --write --single-quote --trailing-comma all ./Gruntfile.js"
   },
   "devDependencies": {
