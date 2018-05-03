@@ -1,6 +1,7 @@
 {
   "name": "dylanvann.com",
   "version": "1.0.0",
+  "private": true,
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -8,12 +9,10 @@
   },
   "scripts": {
     "build": "grunt compile-prod",
-    "deploy": "grunt deploy",
+    "format": "prettier --write --list-different ./Gruntfile.js",
+    "serve": "serve _site",
     "start": "grunt dev",
-    "serve": "http-server _site",
-    "test": "exit 0",
-    "surge": "surge",
-    "prettier": "prettier --write --single-quote --trailing-comma all ./Gruntfile.js"
+    "test": "exit 0"
   },
   "devDependencies": {
     "@ffmpeg-installer/ffmpeg": "^1.0.13",
@@ -43,15 +42,13 @@
     "grunt-responsive-videos": "https://github.com/DylanVann/grunt-responsive-videos.git",
     "grunt-shell": "^2.1.0",
     "grunt-webpack": "^3.0.2",
-    "http-server": "^0.10.0",
     "load-grunt-tasks": "^3.5.2",
-    "prettier": "^1.5.2",
+    "prettier": "^1.12.1",
     "processing-js": "^1.4.16",
     "scriptjs": "^2.5.7",
-    "surge": "^0.20.1",
+    "serve": "^6.5.6",
     "uglify-loader": "^2.0.0",
     "webpack": "^3.2.0",
     "webpack-dev-server": "^2.5.1"
-  },
-  "private": true
+  }
 }
