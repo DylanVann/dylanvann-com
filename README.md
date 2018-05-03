@@ -1,11 +1,14 @@
-# [dylanvann.com](https://dylanvann.com) - [![CircleCI](https://circleci.com/gh/DylanVann/dylanvann-com.svg?style=svg)](https://circleci.com/gh/DylanVann/dylanvann-com)
+# dylanvann.com
 
 ⌨️🤖☕️ Dylan Vann's website.
 
-- Using [jekyll](https://jekyllrb.com/).
-- Deployed with [s3-website](https://github.com/klaemo/s3-website).
+[![CircleCI](https://circleci.com/gh/DylanVann/dylanvann-com.svg?style=svg)](https://circleci.com/gh/DylanVann/dylanvann-com)
 
-## Install Dependencies
+## Overview
+
+- Built with [jekyll](https://jekyllrb.com/).
+
+## Installing Dependencies
 
 ```bash
 # Install bundler if you don't have it already.
@@ -35,6 +38,5 @@ yarn build
 
 ## Deploy
 
-```bash
-yarn deploy
-```
+Deployment is done using Netlify.
+When changes are merged into master the site will be deployed.
