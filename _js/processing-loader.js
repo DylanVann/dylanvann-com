@@ -14,7 +14,7 @@ ProcessingLoader.prototype.load = function() {
         canvas.data('processing-status', 'loading');
         require.ensure([], function(require) {
             var $script = require("scriptjs");
-            $script('js/libs/processing.min.js', function() {
+            $script('/js/libs/processing.min.js', function() {
                 Processing.disableInit();
                 var ResponsiveCanvas = require('./responsive-canvas.js').ResponsiveCanvas;
                 var responsiveCanvas = new ResponsiveCanvas(canvas.parent());
