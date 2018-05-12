@@ -1,6 +1,22 @@
-# dylanvann.com
+<h1 align="center">
+  dylanvann.com
+</h1>
 
-⌨️🤖☕️ Dylan Vann's website.
+<p align="center">
+  Dylan Vann's website.
+</p>
+
+<p align="center">
+  <a href="https://circleci.com/gh/DylanVann/dylanvann-com/tree/master">
+    <img src="https://img.shields.io/circleci/project/github/DylanVann/dylanvann-com/master.svg" alt="CircleCI build status">
+  </a>
+  <a href="https:dylanvann.com">
+    <img src="https://img.shields.io/website-up-down-green-red/https/dylanvann.com.svg?label=dylanvann.com" alt="website is up">
+  </a>
+  
+</p>
+
+# dylanvann.com
 
 [![CircleCI](https://circleci.com/gh/DylanVann/dylanvann-com.svg?style=svg)](https://circleci.com/gh/DylanVann/dylanvann-com)
 
