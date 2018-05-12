@@ -10,7 +10,7 @@
   <a href="https://circleci.com/gh/DylanVann/dylanvann-com/tree/master">
     <img src="https://img.shields.io/circleci/project/github/DylanVann/dylanvann-com/master.svg" alt="CircleCI build status">
   </a>
-  <a href="https:dylanvann.com">
+  <a href="https://dylanvann.com">
     <img src="https://img.shields.io/website-up-down-green-red/https/dylanvann.com.svg?label=dylanvann.com" alt="website is up">
   </a>
   
