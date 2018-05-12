@@ -16,10 +16,6 @@
   
 </p>
 
-# dylanvann.com
-
-[![CircleCI](https://circleci.com/gh/DylanVann/dylanvann-com.svg?style=svg)](https://circleci.com/gh/DylanVann/dylanvann-com)
-
 ## Overview
 
 - Built with [jekyll](https://jekyllrb.com/).
