@@ -1,10 +1,10 @@
 {
-  "name": "gatsby-starter-blog",
-  "description": "Starter Gatsby Blog",
+  "name": "dylanvann-com",
+  "description": "Dylan Vann's website.",
   "version": "1.0.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Dylan Vann <dylan@dylanvann.com>",
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby-starter-blog/issues"
+    "url": "https://github.com/dylanvann/dylanvann-com/issues"
   },
   "dependencies": {
     "gatsby": "next",
@@ -27,6 +27,7 @@
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-helmet": "^5.2.0",
+    "react-router-prop-types": "^1.0.4",
     "react-typography": "^0.16.13",
     "typeface-merriweather": "0.0.54",
     "typeface-montserrat": "0.0.54",
@@ -35,11 +36,10 @@
   },
   "devDependencies": {
     "eslint": "^5.1.0",
-    "eslint-plugin-react": "^7.7.0",
-    "gh-pages": "^1.1.0",
+    "eslint-plugin-react": "^7.10.0",
     "prettier": "^1.12.0"
   },
-  "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
+  "homepage": "https://dylanvann.com",
   "keywords": [
     "gatsby"
   ],
@@ -47,16 +47,15 @@
   "main": "n/a",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
+    "url": "git+https://github.com/dylanvann/dylanvann-com.git"
   },
   "scripts": {
     "dev": "gatsby develop",
-    "lint": "./node_modules/.bin/eslint --ext .js,.jsx --ignore-pattern public .",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier --write 'src/**/*.js' 'src/**/*.md' '*.js'",
+    "lint": "eslint '**/*js' '*.js'",
+    "test": "npm run format:test && npm run lint",
+    "format:test": "prettier --list-different '**/*.js' '**/*.md'",
+    "format": "prettier --write '**/*.js' '**/*.md'",
     "develop": "gatsby develop",
-    "build": "gatsby build",
-    "deploy": "gatsby build --prefix-paths && gh-pages -d public",
-    "fix-semi": "eslint --quiet --ignore-pattern node_modules --ignore-pattern public --parser babel-eslint --no-eslintrc --rule '{\"semi\": [2, \"never\"], \"no-extra-semi\": [2]}' --fix gatsby-node.js"
+    "build": "gatsby build"
   }
 }

@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
+import PropTypes from 'prop-types'
+import ReactRouterPropTypes from 'react-router-prop-types'
 
 import { rhythm, scale } from '../utils/typography'
 
@@ -66,6 +68,11 @@ class Template extends React.Component {
       </div>
     )
   }
+}
+
+Template.propTypes = {
+  children: PropTypes.node,
+  location: ReactRouterPropTypes.location.isRequired,
 }
 
 export default Template

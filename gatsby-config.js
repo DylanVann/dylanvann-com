@@ -1,3 +1,4 @@
+/* eslint-env node */
 module.exports = {
   siteMetadata: {
     title: 'Gatsby Starter Blog',

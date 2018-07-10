@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'gatsby'
 import get from 'lodash/get'
 import Helmet from 'react-helmet'
+import ReactRouterPropTypes from 'react-router-prop-types'
 
 import Bio from '../components/Bio'
 import Layout from '../components/layout'
@@ -37,6 +38,10 @@ class BlogIndex extends React.Component {
       </Layout>
     )
   }
+}
+
+BlogIndex.propTypes = {
+  location: ReactRouterPropTypes.location.isRequired,
 }
 
 export default BlogIndex
