@@ -1,10 +1,10 @@
 /* eslint-env node */
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Starter Blog',
-    author: 'Kyle Mathews',
-    description: 'A starter blog demonstrating what Gatsby can do.',
-    siteUrl: 'https://gatsbyjs.github.io/gatsby-starter-blog/',
+    title: 'Dylan Vann',
+    author: 'Dylan Vann',
+    description: "Dylan Vann's website.",
+    siteUrl: 'https://dylanvann.com',
   },
   pathPrefix: '/gatsby-starter-blog',
   plugins: [

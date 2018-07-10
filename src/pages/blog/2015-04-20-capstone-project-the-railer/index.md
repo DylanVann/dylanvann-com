@@ -9,7 +9,7 @@ tags:
 
 {% caption Detecting a stud and nailing the plywood sheet down. %}
 
-The goal of the project was to create a robot that could nail down plywood sheeting on roofs. 
+The goal of the project was to create a robot that could nail down plywood sheeting on roofs.
 
 The final product wasn't very polished. It was easy to think of how everything should work, it was much more difficult to actually build it and work out all the real world details.
 

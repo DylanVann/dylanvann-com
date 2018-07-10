@@ -14,14 +14,14 @@ It follows that if you come across a screw you'd better have a screwdriver, or a
 
 {% quote "I'm never going to use this in real life." "People" %}
 
-- You're probably right. 
-- You're probably going to do a half ass job of learning it. 
+- You're probably right.
+- You're probably going to do a half ass job of learning it.
 - When the day comes where you could solve a problem using this:
   - You might not remember this.
   - You might not realize you should use this.
-  - You might not be skilled enough to use this. 
-  - You might take a more basic approach than using this, resulting in an inferior solution. 
-  - You might just avoid solving the problem altogether. 
+  - You might not be skilled enough to use this.
+  - You might take a more basic approach than using this, resulting in an inferior solution.
+  - You might just avoid solving the problem altogether.
   - You'll probably give up and do something more in line with your knowledge and skill level.
 
 What I'm saying is: Maybe you should have payed more attention during linear algebra class.

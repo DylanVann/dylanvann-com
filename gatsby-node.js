@@ -63,15 +63,29 @@ exports.createPages = async ({ graphql, actions }) => {
   })
 }
 
+const getDate = slug => {
+  const dateRegex = /.*([0-9]{4}-[0-9]{2}-[0-9]{2})-.*/g
+  const match = dateRegex.exec(slug)
+  return match && match[1]
+}
+
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
   if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
+    const slug = createFilePath({ node, getNode })
+    const date = getDate(slug)
     createNodeField({
       name: `slug`,
       node,
-      value,
+      value: slug,
     })
+    if (date) {
+      createNodeField({
+        name: `date`,
+        node,
+        value: date,
+      })
+    }
   }
 }
