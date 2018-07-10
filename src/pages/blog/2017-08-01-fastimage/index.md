@@ -8,5 +8,6 @@ tags:
 github: https://github.com/DylanVann/react-native-fast-image
 ---
 
-![scroll example]({% asset_path scroll.gif %})
-![priority example]({% asset_path priority.gif %})
+![scroll example](./scroll.gif)
+
+![priority example](./priority.gif)

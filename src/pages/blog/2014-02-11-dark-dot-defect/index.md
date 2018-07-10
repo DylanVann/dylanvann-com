@@ -6,4 +6,5 @@ tags:
 - iOS
 ---
 
-{% youtube lZL_ZaLHJwE %}
+<youtube id="lZL_ZaLHJwE" />
+</youtube>

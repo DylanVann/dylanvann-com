@@ -5,4 +5,5 @@ tags:
 - UOIT Engineering
 ---
 
-{% youtube Dt3iSxyHI1A %}
+<youtube id="Dt3iSxyHI1A">
+</youtube>

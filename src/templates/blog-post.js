@@ -7,6 +7,7 @@ import get from 'lodash/get'
 import Bio from '../components/Bio'
 import Layout from '../components/layout'
 import { rhythm, scale } from '../utils/typography'
+import Markdown from '../components/Markdown'
 
 class BlogPostTemplate extends React.Component {
   render() {
@@ -27,9 +28,9 @@ class BlogPostTemplate extends React.Component {
             marginTop: rhythm(-1),
           }}
         >
-          {post.frontmatter.date}
+          {post.fields.date}
         </p>
-        <div dangerouslySetInnerHTML={{ __html: post.html }} />
+        <Markdown ast={post.htmlAst} />
         <hr
           style={{
             marginBottom: rhythm(1),
@@ -83,9 +84,11 @@ export const pageQuery = graphql`
     }
     markdownRemark(fields: { slug: { eq: $slug } }) {
       id
-      html
+      htmlAst
       frontmatter {
         title
+      }
+      fields {
         date(formatString: "MMMM DD, YYYY")
       }
     }

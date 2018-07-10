@@ -6,14 +6,20 @@ tags:
 - Web
 ---
 
-{% gif particles_js %}
+<gif poster="./particles_js-750.jpg" mp4="./particles_js-750.mp4" webm="./particles_js-750.webm" ratio="1">
+</gif>
+<hidden>
+  <img src="./particles_js-750.jpg" />
+  <img src="./particles_js-750.mp4" />
+  <img src="./particles_js-750.webm" />
+</hidden>
 
 <p class="caption">The particle system editor.</p>
 
-This project is... ongoing.
+A particle system and editor I was working on.
 
-It was supposed to be a particle engine using canvas and javascript.
+Neat but not performant enough.
+At high particle counts the kind of OOPish code I wrote it with doesn't work well.
+To get it to work well with thousands of particles the code would have to be re-implemented in shaders.
 
-At the moment it works, but it can't handle enough particles.
-
-The rendering code needs to be changed to WebGL. The particle simulation code needs to be moved into shaders. This will end up making the code fast enough, but much less elegant, so that's unfortunate.
+The code I ~ported this from was Objective-C and it performed great.

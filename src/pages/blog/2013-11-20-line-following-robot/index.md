@@ -5,7 +5,8 @@ tags:
 - UOIT Engineering
 ---
 
-{% youtube 92-BCrEdWko %}
+<youtube id="92-BCrEdWko" />
+</youtube>
 
 - Follow the line using PID.
 - Turn 90 degrees when a corner is sensed.

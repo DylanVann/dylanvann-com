@@ -7,9 +7,13 @@
     "url": "https://github.com/dylanvann/dylanvann-com/issues"
   },
   "dependencies": {
+    "emotion": "^9.2.5",
+    "emotion-server": "^9.2.5",
     "gatsby": "next",
+    "gatsby-plugin-emotion": "^2.0.0-beta.2",
     "gatsby-plugin-feed": "next",
     "gatsby-plugin-google-analytics": "next",
+    "gatsby-plugin-mdx": "^1.0.1",
     "gatsby-plugin-offline": "next",
     "gatsby-plugin-react-helmet": "next",
     "gatsby-plugin-sharp": "next",
@@ -24,20 +28,27 @@
     "gatsby-transformer-sharp": "next",
     "lodash": "^4.17.5",
     "prismjs": "^1.15.0",
+    "processing-js": "^1.6.6",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
+    "react-emotion": "^9.2.5",
     "react-helmet": "^5.2.0",
     "react-router-prop-types": "^1.0.4",
     "react-typography": "^0.16.13",
+    "rehype-react": "^3.0.2",
     "typeface-merriweather": "0.0.54",
     "typeface-montserrat": "0.0.54",
     "typography": "^0.16.17",
     "typography-theme-wordpress-2016": "^0.15.10"
   },
   "devDependencies": {
+    "@mdx-js/loader": "^0.13.1-1",
+    "@mdx-js/mdx": "^0.13.1-1",
     "eslint": "^5.1.0",
     "eslint-plugin-react": "^7.10.0",
-    "prettier": "^1.12.0"
+    "loader-utils": "^1.1.0",
+    "prettier": "^1.12.0",
+    "serve": "^9.2.0"
   },
   "homepage": "https://dylanvann.com",
   "keywords": [
@@ -50,6 +61,7 @@
     "url": "git+https://github.com/dylanvann/dylanvann-com.git"
   },
   "scripts": {
+    "serve": "serve -l 8000 public",
     "dev": "gatsby develop",
     "lint": "eslint '**/*js' '*.js'",
     "test": "npm run format:test && npm run lint",

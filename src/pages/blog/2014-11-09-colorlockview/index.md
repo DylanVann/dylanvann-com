@@ -7,6 +7,8 @@ tags:
 github: https://github.com/DylanVann/DVColorLockView
 ---
 
-![]({% asset_path dvcolorlockview.gif %})
+![](./dvcolorlockview.gif)
 
-{% caption UITableViewCell highlighting does not change the color of DVColorLockViews. %}
+<small>
+UITableViewCell highlighting does not change the color of DVColorLockViews.
+</small>

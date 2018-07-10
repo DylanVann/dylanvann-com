@@ -3,10 +3,11 @@ import { Link } from 'gatsby'
 import get from 'lodash/get'
 import Helmet from 'react-helmet'
 import ReactRouterPropTypes from 'react-router-prop-types'
-
+import { graphql } from 'gatsby'
 import Bio from '../components/Bio'
 import Layout from '../components/layout'
 import { rhythm } from '../utils/typography'
+import Markdown from '../components/Markdown'
 
 class BlogIndex extends React.Component {
   render() {
@@ -31,7 +32,7 @@ class BlogIndex extends React.Component {
                 </Link>
               </h3>
               <small>{node.fields.date}</small>
-              <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />
+              <Markdown ast={node.htmlAst} />
             </div>
           )
         })}
@@ -53,10 +54,10 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(sort: { fields: [fields___date], order: DESC }) {
       edges {
         node {
-          excerpt
+          htmlAst
           fields {
             slug
             date(formatString: "DD MMMM, YYYY")

@@ -7,6 +7,6 @@ tags:
 github: https://github.com/DylanVann/DVDatePickerTableViewCell
 ---
 
-![]({% asset_path dvdatepickertableviewcell.gif %})
+![](./dvdatepickertableviewcell.gif)
 
 {% caption [slow motion] %}

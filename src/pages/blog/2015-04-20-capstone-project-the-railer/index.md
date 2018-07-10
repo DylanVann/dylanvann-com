@@ -5,7 +5,13 @@ tags:
 - UOIT Engineering
 ---
 
-{% gif the_railer %}
+<gif poster="./the_railer-750.jpg" mp4="./the_railer-750.mp4" webm="./the_railer-750.webm" ratio="750:420">
+</gif>
+<hidden>
+  <img src="./the_railer-750.jpg" />
+  <img src="./the_railer-750.mp4" />
+  <img src="./the_railer-750.webm" />
+</hidden>
 
 {% caption Detecting a stud and nailing the plywood sheet down. %}
 
@@ -25,13 +31,19 @@ The final product wasn't very polished. It was easy to think of how everything s
 
 ## Aligning with the Edge of the Roof
 
-{% gif the_railer_aligning %}
+<gif poster="./the_railer_aligning-750.jpg" mp4="./the_railer_aligning-750.mp4" webm="./the_railer_aligning-750.webm" ratio="750:420">
+</gif>
+<hidden>
+  <img src="./the_railer_aligning-750.jpg" />
+  <img src="./the_railer_aligning-750.mp4" />
+  <img src="./the_railer_aligning-750.webm" />
+</hidden>
 
 {% caption Preparing to put in the next row of nails. Turn, forward, turn, align, forward. %}
 
 Using only the encoders to get ready for the next row would have led to an accumulation of error in the robots angle. A routine had to be created to align the robot with the edge.
 
-![Align with edge of roof. State diagram.]({% asset_path align_state_diagram.png %})
+![Align with edge of roof. State diagram.](./align_state_diagram.png)
 
 {% caption Aligning routine states. The black dots are ultrasonic sensors. The line is the edge of  the roof. %}
 

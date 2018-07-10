@@ -7,4 +7,4 @@ tags:
 github: https://github.com/DylanVann/AIRSensor
 ---
 
-![Sharp IR Sensor]({% asset_path sharp_ir_sensor.png %})
+![Sharp IR Sensor](./sharp_ir_sensor.png)
