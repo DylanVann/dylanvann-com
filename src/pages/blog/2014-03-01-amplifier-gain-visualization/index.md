@@ -13,6 +13,4 @@ tags:
   <img src="./amplifier_demo.pde" />
 </hidden>
 
-<small>
-Something I made for a circuit design class. Visualizing how an amplifier can affect a signal.
-</small>
+<image-caption>Something I made for a circuit design class. Visualizing how an amplifier can affect a signal.</image-caption>

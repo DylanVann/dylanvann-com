@@ -7,12 +7,14 @@ tags:
 - Learning
 ---
 
-{% quote "I suppose it is tempting, if the only tool you have is a hammer, to treat everything as if it were a nail." "Abraham Maslow" %}
+<quote quote="I suppose it is tempting, if the only tool you have is a hammer, to treat everything as if it were a nail." cite="Abraham Maslow">
+</quote>
 
-This is refered to as [The Law of the Instrument](http://en.wikipedia.org/wiki/Law_of_the_instrument).
+This is referred to as [The Law of the Instrument](http://en.wikipedia.org/wiki/Law_of_the_instrument).
 It follows that if you come across a screw you'd better have a screwdriver, or at least you should be aware that you should use one.
 
-{% quote "I'm never going to use this in real life." "People" %}
+<quote quote="I'm never going to use this in real life." cite="People">
+</quote>
 
 - You're probably right.
 - You're probably going to do a half ass job of learning it.

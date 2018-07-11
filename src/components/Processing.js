@@ -1,17 +1,42 @@
 import React from 'react'
-import 'processing-js/processing.min.js'
 import PropTypes from 'prop-types'
 
+if (typeof window !== 'undefined') {
+  require('processing-js/processing.min.js')
+}
+
+const listenersMap = new Map()
+
+window.addEventListener(
+  'resize',
+  () => {
+    listenersMap.forEach(cb => cb())
+  },
+  true
+)
+
 class Processing extends React.PureComponent {
-  el = undefined
+  canvas = undefined
+
   componentDidMount() {
     const { source } = this.props
-    window.Processing.loadSketchFromSources(this.canvas, [source])
+    const container = this.canvas.parentNode
+    const resize = () =>
+      this.canvas.setAttribute('width', container.offsetWidth)
+    window.Processing.loadSketchFromSources(this.canvas, [source], () => {
+      resize()
+    })
+    listenersMap.set(this.canvas, resize)
   }
+
+  componentWillUnmount() {
+    listenersMap.delete(this.canvas)
+  }
+
   render() {
     return (
       <div>
-        <canvas width="100" height="100" ref={el => this.canvas = el} />
+        <canvas width="100" height="100" ref={el => (this.canvas = el)} />
       </div>
     )
   }

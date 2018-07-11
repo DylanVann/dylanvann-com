@@ -18,6 +18,7 @@
     "gatsby-plugin-react-helmet": "next",
     "gatsby-plugin-sharp": "next",
     "gatsby-plugin-typography": "next",
+    "gatsby-remark-component": "^1.1.3",
     "gatsby-remark-copy-linked-files": "next",
     "gatsby-remark-images": "next",
     "gatsby-remark-prismjs": "next",
@@ -27,6 +28,8 @@
     "gatsby-transformer-remark": "next",
     "gatsby-transformer-sharp": "next",
     "lodash": "^4.17.5",
+    "polished": "^1.9.3",
+    "prism-themes": "^1.0.1",
     "prismjs": "^1.15.0",
     "processing-js": "^1.6.6",
     "react": "^16.3.2",
@@ -39,6 +42,7 @@
     "typeface-merriweather": "0.0.54",
     "typeface-montserrat": "0.0.54",
     "typography": "^0.16.17",
+    "typography-theme-us-web-design-standards": "^0.16.9",
     "typography-theme-wordpress-2016": "^0.15.10"
   },
   "devDependencies": {

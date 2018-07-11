@@ -9,6 +9,4 @@ github: https://github.com/DylanVann/DVColorLockView
 
 ![](./dvcolorlockview.gif)
 
-<small>
-UITableViewCell highlighting does not change the color of DVColorLockViews.
-</small>
+<image-caption>UITableViewCell highlighting does not change the color of DVColorLockViews.</small>

@@ -9,4 +9,4 @@ github: https://github.com/DylanVann/DVDatePickerTableViewCell
 
 ![](./dvdatepickertableviewcell.gif)
 
-{% caption [slow motion] %}
+<image-caption>[slow motion]</image-caption>

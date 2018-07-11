@@ -1,8 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from 'emotion'
+import { blockStyles } from '../styles'
 
 const containerClass = css`
+  ${blockStyles};
   position: relative;
   padding-bottom: 56.25%;
   height: 0;

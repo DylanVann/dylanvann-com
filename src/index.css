@@ -1,0 +1,12 @@
+code[class*="language-"] {
+    font-size: inherit;
+}
+
+pre[class*="language-"] {
+    margin-bottom: 1.53rem;
+}
+
+body {
+    font-family: "Roboto","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 300;
+}

@@ -31,9 +31,11 @@ module.exports = {
           //     wrapperStyle: `margin-bottom: 1.0725rem`,
           //   },
           // },
+          'gatsby-remark-component',
           'gatsby-remark-prismjs',
+          'gatsby-remark-smartypants',
           {
-            resolve: "gatsby-remark-copy-linked-files",
+            resolve: 'gatsby-remark-copy-linked-files',
             options: {
               // `ignoreFileExtensions` defaults to [`png`, `jpg`, `jpeg`, `bmp`, `tiff`]
               // as we assume you'll use gatsby-remark-images to handle
@@ -46,7 +48,6 @@ module.exports = {
               ignoreFileExtensions: [],
             },
           },
-          'gatsby-remark-smartypants',
         ],
       },
     },
@@ -59,13 +60,13 @@ module.exports = {
         //trackingId: `ADD YOUR TRACKING ID HERE`,
       },
     },
-    `gatsby-plugin-feed`,
+    // `gatsby-plugin-feed`,
     `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: 'gatsby-plugin-typography',
       options: {
-        pathToConfigModule: 'src/utils/typography',
+        pathToConfigModule: 'src/typography',
       },
     },
   ],
