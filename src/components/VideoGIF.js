@@ -4,7 +4,7 @@ import styled from 'react-emotion'
 import { blockStyles } from '../styles'
 
 const renderToString = ({ poster, mp4, webm }) => `
-<video muted autoplay playsinline poster="${poster}">
+<video muted autoplay playsinline loop poster="${poster}">
   <source src="${mp4}" type="video/mp4">
   <source src="${webm}" type="video/webm">
 </video>
