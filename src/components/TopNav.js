@@ -84,7 +84,7 @@ const TopNav = () => (
             <li>
               <a className="nav-link" href="https://github.com/dylanvann">
                 <FontAwesomeIcon icon={faGithub} />
-                <SrOnly>Github</SrOnly>
+                <SrOnly>GitHub</SrOnly>
               </a>
             </li>
             <li>

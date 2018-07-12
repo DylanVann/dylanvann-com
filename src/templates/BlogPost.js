@@ -73,6 +73,7 @@ export const pageQuery = graphql`
     frontmatter {
       title
       subtitle
+      github
     }
   }
   query BlogPostBySlug($slug: String!) {
