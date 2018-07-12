@@ -65,7 +65,6 @@ pre[class*="language-"] {
 }
 
 body {
-    font-family: "Roboto","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 300;
     background-color: #fcfcfc;
 }
