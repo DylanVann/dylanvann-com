@@ -8,7 +8,7 @@ import 'prism-themes/themes/prism-base16-ateliersulphurpool.light.css'
 import 'prismjs'
 import Footer from '../components/Footer'
 import Bio from '../components/Bio'
-import Layout from '../components/layout'
+import Layout from '../components/Layout'
 import Post from '../components/Post'
 import TopNav from '../components/TopNav'
 

@@ -9,7 +9,7 @@ import {
   faInstagram,
 } from '@fortawesome/free-brands-svg-icons'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
-import Layout from '../../components/layout'
+import Layout from '../../components/Layout'
 import styled from 'react-emotion'
 import { css } from 'emotion'
 import Footer from '../../components/Footer'
