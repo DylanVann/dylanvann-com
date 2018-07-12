@@ -11,6 +11,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.1.0",
     "@fortawesome/free-solid-svg-icons": "^5.1.0-11",
     "@fortawesome/react-fontawesome": "^0.1.0-11",
+    "disqus-react": "^1.0.5",
     "emotion": "^9.2.5",
     "emotion-server": "^9.2.5",
     "gatsby": "next",

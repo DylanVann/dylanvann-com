@@ -1,11 +1,6 @@
 import React from 'react'
 import styled from 'react-emotion'
-import {
-  colorTextAccent,
-  colorTextDark,
-  resetButton,
-  topNavHeight,
-} from '../styles'
+import { colorTextAccent, colorTextDark, topNavHeight } from '../styles'
 import Container from './Container'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index.es'
 import { faTwitter, faGithub } from '@fortawesome/free-brands-svg-icons'
@@ -50,22 +45,28 @@ const StyledContainer = styled(Container)`
   line-height: ${topNavHeight}px;
   a {
     text-decoration: none;
-    color: ${colorTextDark};
+    color: ${colorTextDark} !important;
     transition: color 0.2s;
     padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  li {
+    display: flex;
   }
   a:hover {
-    color: ${colorTextAccent};
+    color: ${colorTextAccent} !important;
+  }
+  svg {
+    width: 1rem;
+    height: 1rem;
   }
 `
 
 const Row = styled('div')`
   display: flex;
   margin: 0 -10px;
-`
-
-const Button = styled('button')`
-  ${resetButton};
 `
 
 const TopNav = () => (

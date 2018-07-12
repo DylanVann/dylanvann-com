@@ -23,10 +23,10 @@ class Bio extends React.Component {
         <ProfilePicture src={ProfileImage} alt={`Dylan Vann`} />
         <div>
           <p>
-            I'm <strong>Dylan Vann</strong>. I'm a software developer living and
-            working in Toronto 🇨🇦. Right now I'm mostly focused on{' '}
-            <strong>Node</strong> | <strong>GraphQL</strong> |{' '}
-            <strong>React</strong> | <strong>React Native</strong>.
+            <strong>Dylan Vann</strong> | Software developer living and working
+            in Toronto 🇨🇦. Focused on <strong>Node</strong> |{' '}
+            <strong>GraphQL</strong> | <strong>React</strong> |{' '}
+            <strong>React Native</strong>.
           </p>
           <p>
             <a href="https://twitter.com/atomarranger">

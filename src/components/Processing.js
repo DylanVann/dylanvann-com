@@ -1,24 +1,25 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
-if (typeof window !== 'undefined') {
-  require('processing-js/processing.min.js')
-}
+import { IS_SSR } from '../config'
 
 const listenersMap = new Map()
 
-window.addEventListener(
-  'resize',
-  () => {
-    listenersMap.forEach(cb => cb())
-  },
-  true
-)
+if (!IS_SSR) {
+  require('processing-js/processing.min.js')
+  window.addEventListener(
+    'resize',
+    () => {
+      listenersMap.forEach(cb => cb())
+    },
+    true
+  )
+}
 
 class Processing extends React.PureComponent {
   canvas = undefined
 
   componentDidMount() {
+    if (IS_SSR) return
     const { source } = this.props
     const container = this.canvas.parentNode
     const resize = () =>

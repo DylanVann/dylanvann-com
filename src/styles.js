@@ -1,6 +1,8 @@
 import { css } from 'emotion'
-import { lighten, darken } from 'polished/lib/index'
+import { lighten } from 'polished/lib/index'
 import { injectGlobal } from 'emotion'
+import 'prism-themes/themes/prism-base16-ateliersulphurpool.light.css'
+import 'prismjs'
 import 'typeface-raleway'
 import 'typeface-roboto'
 
@@ -65,6 +67,7 @@ pre[class*="language-"] {
 body {
     font-family: "Roboto","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 300;
+    background-color: #fcfcfc;
 }
 
 #___gatsby {
@@ -77,20 +80,14 @@ body {
     min-height: 100vh;
 }
 
+// Fix for processing.js inserting a random span.
 span[style="position: absolute; left: 0px; opacity: 0; font-family: PjsEmptyFont, fantasy;"] {
     display: none;
 }
 
-a {
-    text-decoration: none;
-    color: ${colorTextAccent}
-}
-a:visited {
-    color: ${darken(0.2, colorTextAccent)}
-}
-
+// Fix for nav covering header when an anchor is clicked.
 h2[id] {
-margin-top: -${topNavHeight}px;
-padding-top: ${topNavHeight}px;
+    margin-top: -${topNavHeight}px;
+    padding-top: ${topNavHeight}px;
 }
 `

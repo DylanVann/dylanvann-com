@@ -13,6 +13,7 @@ import Layout from '../../components/Layout'
 import styled from 'react-emotion'
 import { css } from 'emotion'
 import Footer from '../../components/Footer'
+import { A } from '../../components/Markdown'
 import TopNav from '../../components/TopNav'
 import ProfileImage from './profile_full_width.jpg'
 
@@ -28,12 +29,18 @@ const imageStyle = css`
   margin: 0;
   width: 100%;
   height: 0;
-  background-image: url(${ProfileImage});
   padding-bottom: ${(h / w) * 100}%;
-  background-position: center;
   background-origin: border-box;
   background-size: cover;
-  background-color: #eee;
+  background: #eee url(${ProfileImage}) center;
+`
+
+const StyledA = styled(A)`
+  svg {
+    width: 1.5rem;
+    // *magic*
+    height: 0.78rem;
+  }
 `
 
 const About = props => (
@@ -52,34 +59,34 @@ const About = props => (
       </p>
       <FontAwesomeUL>
         <li>
-          <a href="https://github.com/dylanvann">
+          <StyledA href="https://github.com/dylanvann">
             <FontAwesomeIcon icon={faGithub} /> GitHub
-          </a>
+          </StyledA>
         </li>
         <li>
-          <a href="https://twitter.com/atomarranger">
+          <StyledA href="https://twitter.com/Atomarranger">
             <FontAwesomeIcon icon={faTwitter} /> Twitter
-          </a>
+          </StyledA>
         </li>
         <li>
-          <a href="https://codepen.io/dylanvann">
+          <StyledA href="https://codepen.io/dylanvann">
             <FontAwesomeIcon icon={faCodepen} /> CodePen
-          </a>
+          </StyledA>
         </li>
         <li>
-          <a href="https://www.youtube.com/channel/UCHpbzclAIcvKcfHdtVTnyhA">
+          <StyledA href="https://www.youtube.com/channel/UCHpbzclAIcvKcfHdtVTnyhA">
             <FontAwesomeIcon icon={faYoutube} /> YouTube
-          </a>
+          </StyledA>
         </li>
         <li>
-          <a href="https://stackoverflow.com/users/2669591/dylanvann">
+          <StyledA href="https://stackoverflow.com/users/2669591/dylanvann">
             <FontAwesomeIcon icon={faStackOverflow} /> Stack Overflow
-          </a>
+          </StyledA>
         </li>
         <li>
-          <a href="https://www.instagram.com/atom_arranger">
+          <StyledA href="https://www.instagram.com/Atom_arranger">
             <FontAwesomeIcon icon={faInstagram} /> Instagram
-          </a>
+          </StyledA>
         </li>
       </FontAwesomeUL>
       <p>
@@ -87,9 +94,9 @@ const About = props => (
       </p>
       <FontAwesomeUL>
         <li>
-          <a href="mailto:dylan@dylanvann.com">
+          <StyledA href="mailto:dylan@dylanvann.com">
             <FontAwesomeIcon icon={faEnvelope} /> dylan@dylanvann.com
-          </a>
+          </StyledA>
         </li>
       </FontAwesomeUL>
     </Layout>

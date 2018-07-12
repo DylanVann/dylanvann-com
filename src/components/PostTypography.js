@@ -2,7 +2,6 @@ import styled from 'react-emotion'
 import { colorTextMuted, colorTextTitle, fontRaleway } from '../styles'
 
 export const PostTitle = styled('h1')`
-  //font-size: 2.5rem;
   font-family: ${fontRaleway};
   font-weight: 900;
   margin-top: 0;
@@ -12,7 +11,8 @@ export const PostTitle = styled('h1')`
   &:hover {
     color: black;
   }
-  a {
+  a,
+  a:visited {
     color: inherit;
     text-decoration: none;
     box-shadow: none;
@@ -20,7 +20,6 @@ export const PostTitle = styled('h1')`
 `
 
 export const PostSubTitle = styled('h2')`
-  //font-size: 2rem;
   font-family: ${fontRaleway};
   font-weight: 300;
   margin-top: 0;

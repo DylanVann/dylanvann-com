@@ -8,9 +8,10 @@ import Processing from './Processing'
 import Caption from './Caption'
 import Image from './Image'
 import styled from 'react-emotion'
-import { fontRaleway } from '../styles'
+import { colorTextAccent, fontRaleway } from '../styles'
 import Quote from './Quote'
 import CodePen from './CodePen'
+import { darken } from 'polished/lib/index'
 
 const headers = {}
 for (let i = 1; i <= 6; i++) {
@@ -19,6 +20,14 @@ for (let i = 1; i <= 6; i++) {
     font-family: ${fontRaleway};
   `
 }
+
+export const A = styled(`a`)`
+  text-decoration: none;
+  color: ${colorTextAccent};
+  :visited {
+    color: ${darken(0.2, colorTextAccent)};
+  }
+`
 
 const renderAst = new rehypeReact({
   createElement: React.createElement,
@@ -30,6 +39,7 @@ const renderAst = new rehypeReact({
     processing: Processing,
     hidden: Hidden,
     img: Image,
+    a: A,
     quote: Quote,
     ...headers,
   },
