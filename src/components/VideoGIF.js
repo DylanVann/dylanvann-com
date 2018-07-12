@@ -3,13 +3,18 @@ import PropTypes from 'prop-types'
 import styled from 'react-emotion'
 import { blockStyles } from '../styles'
 
-const VideoGIF = ({ poster, mp4, webm, className }) => (
-  <div className={className}>
-    <video autoPlay loop muted poster={poster}>
-      <source src={mp4} type="video/mp4" />
-      <source src={webm} type="video/webm" />
-    </video>
-  </div>
+const renderToString = ({ poster, mp4, webm }) => `
+<video muted autoplay playsinline poster="${poster}">
+  <source src="${mp4}" type="video/mp4">
+  <source src="${webm}" type="video/webm">
+</video>
+`
+
+const VideoGIF = ({ className, ...props }) => (
+  <div
+    className={className}
+    dangerouslySetInnerHTML={{ __html: renderToString(props) }}
+  />
 )
 
 VideoGIF.propTypes = {
