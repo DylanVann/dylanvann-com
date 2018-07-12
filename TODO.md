@@ -3,3 +3,5 @@
   - needs to fetch markdown AST from the next page
 - convert videos to gifs
 - tags?
+- replace video gifs with GIFs or fix them on mobile.
+- replace Processing sketch with video on main feed.
