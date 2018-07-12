@@ -25,14 +25,23 @@ const FontAwesomeUL = styled('ul')`
 const w = 2560
 const h = 560
 
-const imageStyle = css`
+const imageContainerStyle = css`
+  position: relative;
   margin: 0;
   width: 100%;
   height: 0;
   padding-bottom: ${(h / w) * 100}%;
   background-origin: border-box;
   background-size: cover;
-  background: #eee url(${ProfileImage}) center;
+  background-color: #eee;
+`
+
+const imageStyle = css`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 `
 
 const StyledA = styled(A)`
@@ -46,9 +55,11 @@ const StyledA = styled(A)`
 const About = props => (
   <>
     <TopNav />
-    <img src={ProfileImage} className={imageStyle} />
+    <div className={imageContainerStyle}>
+      <img src={ProfileImage} className={imageStyle} />
+    </div>
     <Layout location={props.location}>
-      <h1>{"Hi, I'm Dylan Vann."}</h1>
+      <h1>{"Hi, I'm Dylan Vann.?"}</h1>
       <ul>
         <li>I design and develop software.</li>
         <li>I have a degree in mechatronics engineering.</li>

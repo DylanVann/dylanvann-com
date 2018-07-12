@@ -39,6 +39,13 @@ const Template = props => (
       <meta name="application-name" content="Dylan" />
       <meta name="msapplication-TileColor" content="#202082" />
       <meta name="theme-color" content="#ffffff" />
+
+      <meta charSet="utf-8" />
+      <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+      />
     </Helmet>
     <Container {...props} />
   </ContainerContainer>

@@ -37,7 +37,7 @@ const Post = props => {
       <PostHeader>
         {title && (
           <PostTitle>
-            <Link to={slug}>{title}</Link>
+            <Link to={`/${slug}`}>{title}</Link>
           </PostTitle>
         )}
         {subtitle && <PostSubTitle>{subtitle}</PostSubTitle>}

@@ -89,4 +89,10 @@ h2[id] {
     margin-top: -${topNavHeight}px;
     padding-top: ${topNavHeight}px;
 }
+
+@media only screen and (max-width: 768px) {
+    html {
+        font-size: 106.25%;
+    }
+}
 `
