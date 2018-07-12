@@ -1,0 +1,6 @@
+/sw.js
+  Cache-Control: no-cache
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+/static/*
+  Cache-Control: public,max-age=31536000,immutable
