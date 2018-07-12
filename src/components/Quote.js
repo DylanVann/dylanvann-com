@@ -1,5 +1,6 @@
 import React from 'react'
 import { css } from 'emotion'
+import PropTypes from 'prop-types'
 
 const style = css`
   border-left: 6px solid #ccc;
@@ -44,11 +45,16 @@ const style = css`
   }
 `
 
-const Quote = ({ quote, cite, className }) => (
+const Quote = ({ quote, cite }) => (
   <blockquote className={style}>
     {quote}
     <cite>{cite}</cite>
   </blockquote>
 )
+
+Quote.propTypes = {
+  quote: PropTypes.string,
+  cite: PropTypes.string,
+}
 
 export default Quote

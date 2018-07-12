@@ -16,6 +16,7 @@ VideoGIF.propTypes = {
   poster: PropTypes.string,
   mp4: PropTypes.string,
   webm: PropTypes.string,
+  className: PropTypes.string,
 }
 
 const getPercent = ({ ratio }) => {

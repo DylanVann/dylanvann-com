@@ -4,6 +4,7 @@ import { PostTitle, PostSubTitle, PostDate } from './PostTypography'
 import { Link } from 'gatsby'
 import Markdown from './Markdown'
 import styled from 'react-emotion'
+import PropTypes from 'prop-types'
 
 const PostHeader = styled('header')`
   display: block;
@@ -30,7 +31,7 @@ const Post = props => {
   const date = get(props, 'fields.date')
   const slug = get(props, 'fields.slug')
   const github = get(props, 'frontmatter.github')
-  const ast = props.htmlAst
+  const ast = get(props, 'htmlAst')
   return (
     <div className={props.className}>
       <PostHeader>
@@ -46,6 +47,10 @@ const Post = props => {
       <Markdown ast={ast} />
     </div>
   )
+}
+
+Post.propTypes = {
+  className: PropTypes.string,
 }
 
 export default styled(Post)`

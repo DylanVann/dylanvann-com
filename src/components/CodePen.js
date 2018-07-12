@@ -1,6 +1,7 @@
 import React from 'react'
 import { blockStyles } from '../styles'
 import styled from 'react-emotion'
+import PropTypes from 'prop-types'
 
 class CodePen extends React.PureComponent {
   componentDidMount() {
@@ -30,6 +31,11 @@ class CodePen extends React.PureComponent {
       </div>
     )
   }
+}
+
+CodePen.propTypes = {
+  id: PropTypes.string.isRequired,
+  className: PropTypes.string,
 }
 
 export default styled(CodePen)`
