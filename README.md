@@ -1,5 +1,5 @@
 <p align="center" >
-  <img src="https://github.com/DylanVann/react-native-com/raw/master/logo.png" title="Logo">
+  <img src="https://github.com/DylanVann/dylanvann-com/raw/master/logo.png" title="Logo" width="200" height="200">
 </p>
 
 <h1 align="center">
