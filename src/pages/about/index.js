@@ -59,7 +59,7 @@ const About = props => (
       <img src={ProfileImage} className={imageStyle} />
     </div>
     <Layout location={props.location}>
-      <h1>{"Hi, I'm Dylan Vann.?"}</h1>
+      <h1>{"Hi, I'm Dylan Vann"}</h1>
       <ul>
         <li>I design and develop software.</li>
         <li>I have a degree in mechatronics engineering.</li>
