@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import styled from 'react-emotion'
 import { blockStyles } from '../styles'
 
+// React does not render the <video> element correctly.
+// https://github.com/facebook/react/issues/6544
 const renderToString = ({ poster, mp4, webm }) => `
 <video muted autoplay playsinline loop poster="${poster}">
   <source src="${mp4}" type="video/mp4">
