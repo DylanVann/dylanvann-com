@@ -1,9 +1,14 @@
+import { fontRalewayArray, fontRobotoArray } from './styles'
 import Typography from 'typography'
 import Theme from 'typography-theme-us-web-design-standards'
+
+delete Theme.googleFonts
 
 const typography = new Typography({
   ...Theme,
   baseFontSize: '20px',
+  headerFontFamily: fontRalewayArray,
+  bodyFontFamily: fontRobotoArray,
 })
 
 // Hot reload typography in development.

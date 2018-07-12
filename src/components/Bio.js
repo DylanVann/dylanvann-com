@@ -1,34 +1,40 @@
 import React from 'react'
-import profilePic from './profile-pic.jpg'
+import ProfileImage from './ProfileImage.jpg'
 import { rhythm } from '../typography'
+import styled from 'react-emotion'
+
+const Container = styled('div')`
+  display: flex;
+  margin-bottom: ${rhythm(2.5)};
+`
+
+const ProfilePicture = styled('img')`
+  margin-right: ${rhythm(1 / 2)};
+  margin-bottom: 0;
+  width: ${rhythm(2)};
+  height: ${rhythm(2)};
+  border-radius: 50%;
+`
 
 class Bio extends React.Component {
   render() {
     return (
-      <div
-        style={{
-          display: 'flex',
-          marginBottom: rhythm(2.5),
-        }}
-      >
-        <img
-          src={profilePic}
-          alt={`Dylan Vann`}
-          style={{
-            marginRight: rhythm(1 / 2),
-            marginBottom: 0,
-            width: rhythm(2),
-            height: rhythm(2),
-          }}
-        />
-        <p>
-          Written by <strong>Dylan Vann</strong> who lives and works in Toronto
-          building useless things.{' '}
-          <a href="https://twitter.com/atomarranger">
-            You should follow him on Twitter
-          </a>
-        </p>
-      </div>
+      <Container>
+        <ProfilePicture src={ProfileImage} alt={`Dylan Vann`} />
+        <div>
+          <p>
+            I'm <strong>Dylan Vann</strong>. I'm a software developer living and
+            working in Toronto 🇨🇦. Right now I'm mostly focused on{' '}
+            <strong>Node</strong> | <strong>GraphQL</strong> |{' '}
+            <strong>React</strong> | <strong>React Native</strong>.
+          </p>
+          <p>
+            <a href="https://twitter.com/atomarranger">
+              Follow me on Twitter for more stuff like this.
+            </a>
+          </p>
+        </div>
+      </Container>
     )
   }
 }

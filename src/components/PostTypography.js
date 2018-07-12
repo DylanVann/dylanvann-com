@@ -13,7 +13,7 @@ export const PostTitle = styled('h1')`
   &:hover {
     color: black;
   }
-  & a {
+  a {
     color: inherit;
     text-decoration: none;
     box-shadow: none;

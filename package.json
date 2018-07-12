@@ -7,6 +7,10 @@
     "url": "https://github.com/dylanvann/dylanvann-com/issues"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.0-14",
+    "@fortawesome/free-brands-svg-icons": "^5.1.0",
+    "@fortawesome/free-solid-svg-icons": "^5.1.0-11",
+    "@fortawesome/react-fontawesome": "^0.1.0-11",
     "emotion": "^9.2.5",
     "emotion-server": "^9.2.5",
     "gatsby": "next",
@@ -18,6 +22,7 @@
     "gatsby-plugin-react-helmet": "next",
     "gatsby-plugin-sharp": "next",
     "gatsby-plugin-typography": "next",
+    "gatsby-remark-autolink-headers": "^1.4.19",
     "gatsby-remark-component": "^1.1.3",
     "gatsby-remark-copy-linked-files": "next",
     "gatsby-remark-images": "next",
@@ -39,11 +44,10 @@
     "react-router-prop-types": "^1.0.4",
     "react-typography": "^0.16.13",
     "rehype-react": "^3.0.2",
-    "typeface-merriweather": "0.0.54",
-    "typeface-montserrat": "0.0.54",
+    "typeface-raleway": "^0.0.54",
+    "typeface-roboto": "^0.0.54",
     "typography": "^0.16.17",
-    "typography-theme-us-web-design-standards": "^0.16.9",
-    "typography-theme-wordpress-2016": "^0.15.10"
+    "typography-theme-us-web-design-standards": "^0.16.9"
   },
   "devDependencies": {
     "@mdx-js/loader": "^0.13.1-1",

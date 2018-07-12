@@ -2,7 +2,7 @@ import React from 'react'
 import { blockStyles } from '../styles'
 import styled from 'react-emotion'
 
-class CodePen extends React.Component {
+class CodePen extends React.PureComponent {
   componentDidMount() {
     const s = document.createElement('script')
     s.type = 'text/javascript'
