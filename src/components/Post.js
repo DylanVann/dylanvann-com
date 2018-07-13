@@ -9,7 +9,6 @@ import PropTypes from 'prop-types'
 const PostHeader = styled('header')`
   display: block;
   margin-bottom: 20px;
-  text-align: center;
 `
 
 const GitHubLink = styled('a')`
@@ -19,6 +18,7 @@ const GitHubLink = styled('a')`
   border: 1px solid #428bca;
   transition-property: all;
   transition-duration: 0.2s;
+  text-decoration: none;
   :hover {
     color: #1f496e !important;
     border-color: #1f496e;

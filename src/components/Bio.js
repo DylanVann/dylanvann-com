@@ -1,4 +1,5 @@
 import React from 'react'
+import { A } from './Markdown'
 import ProfileImage from './ProfileImage.jpg'
 import { rhythm } from '../typography'
 import styled from 'react-emotion'
@@ -29,9 +30,9 @@ class Bio extends React.Component {
             <strong>React Native</strong>.
           </p>
           <p>
-            <a href="https://twitter.com/atomarranger">
+            <A href="https://twitter.com/atomarranger">
               Follow me on Twitter for more stuff like this.
-            </a>
+            </A>
           </p>
         </div>
       </Container>

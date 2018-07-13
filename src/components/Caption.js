@@ -14,7 +14,6 @@ Caption.propTypes = {
 
 export default styled(Caption)`
   display: block;
-  text-align: center;
   color: ${colorTextMuted};
   font-size: inherit;
   margin-bottom: 1.53rem;
