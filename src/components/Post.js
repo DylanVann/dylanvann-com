@@ -9,6 +9,7 @@ import PropTypes from 'prop-types'
 const PostHeader = styled('header')`
   display: block;
   margin-bottom: 20px;
+  text-align: center;
 `
 
 const GitHubLink = styled('a')`

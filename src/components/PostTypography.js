@@ -8,6 +8,7 @@ export const PostTitle = styled('h1')`
   margin-bottom: 10px;
   color: ${colorTextTitle};
   transition: color 0.2s;
+  text-align: center;
   &:hover {
     color: black;
   }

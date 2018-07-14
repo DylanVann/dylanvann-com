@@ -22,7 +22,6 @@ class CodePen extends React.PureComponent {
           data-slug-hash={id}
           data-default-tab="result"
           data-user="dylanvann"
-          className="codepen"
         >
           See the <a href={`http://codepen.io/dylanvann/pen/${id}/`}>Pen</a> by
           Dylan Vann (<a href="http://codepen.io/dylanvann">@dylanvann</a>) on{' '}

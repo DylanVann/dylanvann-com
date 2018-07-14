@@ -67,6 +67,7 @@ const StyledContainer = styled(Container)`
 const Row = styled('div')`
   display: flex;
   margin: 0 -10px;
+  justify-content: space-between;
 `
 
 const TopNav = () => (
@@ -74,28 +75,26 @@ const TopNav = () => (
     <StyledContainer>
       <Row>
         <Link to="/">Dylan Vann</Link>
-        <div className="nav-links">
-          <NavUL>
-            <li>
-              <Link to="/">Posts</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <a className="nav-link" href="https://github.com/dylanvann">
-                <FontAwesomeIcon icon={faGithub} />
-                <SrOnly>GitHub</SrOnly>
-              </a>
-            </li>
-            <li>
-              <a className="nav-link" href="https://twitter.com/atomarranger">
-                <FontAwesomeIcon icon={faTwitter} />
-                <SrOnly>Twitter</SrOnly>
-              </a>
-            </li>
-          </NavUL>
-        </div>
+        <NavUL>
+          <li>
+            <Link to="/">Posts</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+          <li>
+            <a href="https://github.com/dylanvann">
+              <FontAwesomeIcon icon={faGithub} />
+              <SrOnly>GitHub</SrOnly>
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com/atomarranger">
+              <FontAwesomeIcon icon={faTwitter} />
+              <SrOnly>Twitter</SrOnly>
+            </a>
+          </li>
+        </NavUL>
       </Row>
     </StyledContainer>
   </TopNavContainer>

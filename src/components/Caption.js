@@ -17,4 +17,5 @@ export default styled(Caption)`
   color: ${colorTextMuted};
   font-size: inherit;
   margin-bottom: 1.53rem;
+  text-align: center;
 `

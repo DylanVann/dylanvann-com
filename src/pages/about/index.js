@@ -7,6 +7,7 @@ import {
   faYoutube,
   faStackOverflow,
   faInstagram,
+  faLinkedin,
 } from '@fortawesome/free-brands-svg-icons'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import Layout from '../../components/Layout'
@@ -14,6 +15,7 @@ import styled from 'react-emotion'
 import { css } from 'emotion'
 import Footer from '../../components/Footer'
 import { A } from '../../components/Markdown'
+import { PostTitle } from '../../components/PostTypography'
 import TopNav from '../../components/TopNav'
 import ProfileImage from './profile_full_width.jpg'
 
@@ -52,6 +54,10 @@ const StyledA = styled(A)`
   }
 `
 
+const StyledTitle = styled(PostTitle)`
+  margin-bottom: 40px;
+`
+
 const About = props => (
   <>
     <TopNav />
@@ -59,7 +65,7 @@ const About = props => (
       <img src={ProfileImage} className={imageStyle} />
     </div>
     <Layout location={props.location}>
-      <h1>{"Hi, I'm Dylan Vann"}</h1>
+      <StyledTitle>{"Hi, I'm Dylan Vann"}</StyledTitle>
       <ul>
         <li>I design and develop software.</li>
         <li>I have a degree in mechatronics engineering.</li>
@@ -97,6 +103,11 @@ const About = props => (
         <li>
           <StyledA href="https://www.instagram.com/Atom_arranger">
             <FontAwesomeIcon icon={faInstagram} /> Instagram
+          </StyledA>
+        </li>
+        <li>
+          <StyledA href="https://www.linkedin.com/in/dylanvann">
+            <FontAwesomeIcon icon={faLinkedin} /> LinkedIn
           </StyledA>
         </li>
       </FontAwesomeUL>
