@@ -1,5 +1,7 @@
 import React from 'react'
+import Helmet from 'react-helmet'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index.es'
+import { graphql } from 'gatsby'
 import {
   faCodepen,
   faTwitter,
@@ -10,13 +12,12 @@ import {
   faLinkedin,
 } from '@fortawesome/free-brands-svg-icons'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import Container from '../../components/Container'
 import Layout from '../../components/Layout'
 import styled from 'react-emotion'
 import { css } from 'emotion'
-import Footer from '../../components/Footer'
 import { A } from '../../components/Markdown'
 import { PostTitle } from '../../components/PostTypography'
-import TopNav from '../../components/TopNav'
 import ProfileImage from './profile_full_width.jpg'
 
 const FontAwesomeUL = styled('ul')`
@@ -59,12 +60,15 @@ const StyledTitle = styled(PostTitle)`
 `
 
 const About = props => (
-  <>
-    <TopNav />
+  <Layout {...props} title="About">
     <div className={imageContainerStyle}>
-      <img src={ProfileImage} className={imageStyle} />
+      <img
+        src={ProfileImage}
+        className={imageStyle}
+        alt="A picture of Dylan Vann."
+      />
     </div>
-    <Layout location={props.location}>
+    <Container>
       <StyledTitle>{"Hi, I'm Dylan Vann"}</StyledTitle>
       <ul>
         <li>I design and develop software.</li>
@@ -121,9 +125,18 @@ const About = props => (
           </StyledA>
         </li>
       </FontAwesomeUL>
-    </Layout>
-    <Footer />
-  </>
+    </Container>
+  </Layout>
 )
 
+About.defaultProps = {
+  siteTitle: 'Dylan Vann',
+}
+
 export default About
+
+export const pageQuery = graphql`
+  query AboutPage {
+    ...SiteMeta
+  }
+`

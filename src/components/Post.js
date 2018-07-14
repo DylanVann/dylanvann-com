@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 
 const PostHeader = styled('header')`
   display: block;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   text-align: center;
 `
 

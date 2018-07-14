@@ -1,16 +1,25 @@
 import React from 'react'
 import styled from 'react-emotion'
-import Container from './Container'
 import Helmet from 'react-helmet'
 import '../styles'
+import Footer from './Footer'
+import TopNav from './TopNav'
 
 const ContainerContainer = styled('div')`
   flex: 1;
 `
 
-const Template = props => (
-  <ContainerContainer>
-    <Helmet>
+const getSiteTitle = props => props.data.site.siteMetadata.title
+
+const Template = ({ children, ...props }) => (
+  <>
+    <Helmet
+      title={
+        props.title
+          ? `${props.title} | ${getSiteTitle(props)}`
+          : getSiteTitle(props)
+      }
+    >
       <link
         rel="apple-touch-icon"
         sizes="180x180"
@@ -47,8 +56,10 @@ const Template = props => (
         content="width=device-width, initial-scale=1.0, viewport-fit=cover"
       />
     </Helmet>
-    <Container {...props} />
-  </ContainerContainer>
+    <TopNav />
+    <ContainerContainer>{children}</ContainerContainer>
+    <Footer />
+  </>
 )
 
 export default Template
