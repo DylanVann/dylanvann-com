@@ -45,6 +45,7 @@
     "react-router-prop-types": "^1.0.4",
     "react-typography": "^0.16.13",
     "rehype-react": "^3.0.2",
+    "reselect": "^3.0.1",
     "typeface-raleway": "^0.0.54",
     "typeface-roboto": "^0.0.54",
     "typography": "^0.16.17",

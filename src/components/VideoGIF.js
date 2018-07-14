@@ -32,7 +32,8 @@ const getPercent = ({ ratio }) => {
 }
 
 export default styled(VideoGIF)`
-  ${blockStyles} position: relative;
+  ${blockStyles};
+  position: relative;
   padding-bottom: ${p => `${getPercent(p)}%`};
   height: 0;
   overflow: hidden;

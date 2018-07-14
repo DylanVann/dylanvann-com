@@ -11,7 +11,7 @@ const ContainerContainer = styled('div')`
 
 const getSiteTitle = props => props.data.site.siteMetadata.title
 
-const Template = ({ children, ...props }) => (
+const Layout = ({ children, ...props }) => (
   <>
     <Helmet
       title={
@@ -62,4 +62,4 @@ const Template = ({ children, ...props }) => (
   </>
 )
 
-export default Template
+export default Layout

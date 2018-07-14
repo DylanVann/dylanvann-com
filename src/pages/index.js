@@ -1,36 +1,30 @@
 import React from 'react'
 import get from 'lodash/get'
-import ReactRouterPropTypes from 'react-router-prop-types'
 import { graphql } from 'gatsby'
 import Container from '../components/Container'
 import Layout from '../components/Layout'
 import Post from '../components/Post'
 
-class BlogIndex extends React.Component {
-  render() {
-    const posts = get(this, 'props.data.allMarkdownRemark.edges')
-    return (
-      <Layout {...this.props}>
-        <Container>
-          {posts.map(({ node }) => <Post {...node} key={node.fields.slug} />)}
-        </Container>
-      </Layout>
-    )
-  }
-}
+const BlogIndex = ({ posts, ...props }) => (
+  <Layout {...props}>
+    <Container>
+      {posts.map(({ node }) => <Post key={node.fields.slug} {...node} />)}
+    </Container>
+  </Layout>
+)
 
-BlogIndex.propTypes = {
-  location: ReactRouterPropTypes.location.isRequired,
-}
+const getPosts = props => get(props, 'data.allMarkdownRemark.edges') || []
 
-export default BlogIndex
+const Mapped = props => <BlogIndex posts={getPosts(props)} {...props} />
+
+export default Mapped
 
 export const pageQuery = graphql`
   query IndexQuery {
     ...SiteMeta
     allMarkdownRemark(
       sort: { fields: [fields___date], order: DESC }
-      filter: { fileAbsolutePath: { regex: "/.*blog.*/" } }
+      filter: { fileAbsolutePath: { regex: "/.*posts.*/" } }
     ) {
       edges {
         node {

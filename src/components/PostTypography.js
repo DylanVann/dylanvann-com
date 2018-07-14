@@ -26,6 +26,7 @@ export const PostSubTitle = styled('h2')`
   margin-top: 0;
   margin-bottom: 10px;
   color: ${colorTextTitle};
+  text-align: center;
 `
 
 export const PostDate = styled('time')`
@@ -35,4 +36,5 @@ export const PostDate = styled('time')`
   color: ${colorTextMuted};
   font-size: 16px;
   margin-bottom: 10px;
+  text-align: center;
 `

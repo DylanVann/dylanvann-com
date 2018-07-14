@@ -26,32 +26,13 @@ exports.createPages = async ({ graphql, actions }) => {
     throw new Error(result.errors)
   }
 
-  // Create blog posts pages.
   const allEntries = result.data.allMarkdownRemark.edges.map(v => v.node)
-  const posts = allEntries.filter(e => e.fields.slug.startsWith('/blog/'))
-  const pages = allEntries.filter(e => !e.fields.slug.startsWith('/blog/'))
-
-  pages.forEach(page => {
-    createPage({
-      path: page.fields.slug,
-      component: blogPost,
-      context: {
-        slug: page.fields.slug,
-      },
-    })
-  })
-
-  posts.forEach((post, index) => {
-    const previous = index === posts.length - 1 ? null : posts[index + 1].node
-    const next = index === 0 ? null : posts[index - 1].node
-
+  allEntries.forEach(post => {
     createPage({
       path: post.fields.slug,
       component: blogPost,
       context: {
         slug: post.fields.slug,
-        previous,
-        next,
       },
     })
   })
@@ -69,7 +50,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   if (node.internal.type === `MarkdownRemark`) {
     const slugWithDate = createFilePath({ node, getNode })
     const date = getDate(slugWithDate)
-    const slug = slugWithDate.replace(date, '').replace('/blog/-', '')
+    const slug = slugWithDate.replace(date, '').replace('/posts/-', '')
     createNodeField({
       name: `slug`,
       node,

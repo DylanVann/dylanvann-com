@@ -17,27 +17,22 @@ const ProfilePicture = styled('img')`
   border-radius: 50%;
 `
 
-class Bio extends React.Component {
-  render() {
-    return (
-      <Container>
-        <ProfilePicture src={ProfileImage} alt={`Dylan Vann`} />
-        <div>
-          <p>
-            <strong>Dylan Vann</strong> | Software developer living and working
-            in Toronto 🇨🇦. Focused on <strong>Node</strong> |{' '}
-            <strong>GraphQL</strong> | <strong>React</strong> |{' '}
-            <strong>React Native</strong>.
-          </p>
-          <p>
-            <A href="https://twitter.com/atomarranger">
-              Follow me on Twitter for more stuff like this.
-            </A>
-          </p>
-        </div>
-      </Container>
-    )
-  }
-}
+const Bio = () => (
+  <Container>
+    <ProfilePicture src={ProfileImage} alt={`Dylan Vann`} />
+    <div>
+      <p>
+        <strong>Dylan Vann</strong> | Software developer living and working in
+        Toronto 🇨🇦. Focused on <strong>Node</strong> | <strong>GraphQL</strong>{' '}
+        | <strong>React</strong> | <strong>React Native</strong>.
+      </p>
+      <p>
+        <A href="https://twitter.com/atomarranger">
+          Follow me on Twitter for more stuff like this.
+        </A>
+      </p>
+    </div>
+  </Container>
+)
 
 export default Bio
