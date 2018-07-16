@@ -1,8 +1,4 @@
 - RSS
-- Infinite scroll.
-  - Needs to fetch markdown AST from the next page.
-- Use Cloudinary to add HTML5 gifs.
-- Tags?
-- Replace video gifs with GIFs or fix them on mobile.
+- Use Cloudinary for HTML5 gifs.
 - Replace Processing sketch with video on main feed.
-- View source links.
+- View source link.
