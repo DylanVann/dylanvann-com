@@ -6,12 +6,11 @@ tags:
 - Web
 ---
 
-<gif poster="./particles_js-750.jpg" mp4="./particles_js-750.mp4" webm="./particles_js-750.webm" ratio="1:1">
+<gif poster="./particles_js-750.jpg" mp4="./particles_js-750.mp4" ratio="750:750">
 </gif>
 <hidden>
   <img src="./particles_js-750.jpg" />
   <img src="./particles_js-750.mp4" />
-  <img src="./particles_js-750.webm" />
 </hidden>
 
 <image-caption>The particle system editor.</image-caption>

@@ -5,10 +5,9 @@ import { blockStyles } from '../styles'
 
 // React does not render the <video> element correctly.
 // https://github.com/facebook/react/issues/6544
-const renderToString = ({ poster, mp4, webm }) => `
+const renderToString = ({ poster, mp4 }) => `
 <video muted autoplay playsinline loop poster="${poster}">
   <source src="${mp4}" type="video/mp4">
-  <source src="${webm}" type="video/webm">
 </video>
 `
 
@@ -22,28 +21,25 @@ const VideoGIF = ({ className, ...props }) => (
 VideoGIF.propTypes = {
   poster: PropTypes.string,
   mp4: PropTypes.string,
-  webm: PropTypes.string,
   className: PropTypes.string,
 }
 
-const getPercent = ({ ratio }) => {
+const getDimensions = ({ ratio }) => {
   const split = ratio.split(':')
-  return (split[1] / split[0]) * 100
+  return {
+    width: split[0],
+    height: split[1],
+  }
 }
 
+const getWidth = props => getDimensions(props).width
+
 export default styled(VideoGIF)`
-  ${blockStyles};
-  position: relative;
-  padding-bottom: ${p => `${getPercent(p)}%`};
-  height: 0;
-  overflow: hidden;
-  max-width: 100%;
-  background-color: #eee;
   & video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    background-color: #eee;
+    ${blockStyles};
+    max-width: 100%;
+    width: ${p => p.width || getWidth(p)}px;
+    height: auto;
   }
 `
