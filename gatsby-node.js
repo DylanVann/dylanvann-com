@@ -27,7 +27,7 @@ exports.createPages = async ({ graphql, actions }) => {
               fields {
                 slug
                 date(formatString: "MMMM DD, YYYY")
-                datetime: date(formatString: "YYYY-DD-MM")
+                datetime: date(formatString: "YYYY-MM-DD")
                 draft
               }
               frontmatter {
