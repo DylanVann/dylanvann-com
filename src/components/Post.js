@@ -30,6 +30,7 @@ const Post = props => {
   const title = get(props, 'frontmatter.title')
   const subtitle = get(props, 'frontmatter.subtitle')
   const date = get(props, 'fields.date')
+  const datetime = get(props, 'fields.datetime')
   const slug = get(props, 'fields.slug')
   const github = get(props, 'frontmatter.github')
   const ast = get(props, 'htmlAst')
@@ -42,7 +43,7 @@ const Post = props => {
           </PostTitle>
         )}
         {subtitle && <PostSubTitle>{subtitle}</PostSubTitle>}
-        <PostDate dateTime={date}>{date}</PostDate>
+        <PostDate dateTime={datetime}>{date}</PostDate>
         {github && <GitHubLink href={github}>Download on GitHub</GitHubLink>}
       </PostHeader>
       <Markdown ast={ast} />
