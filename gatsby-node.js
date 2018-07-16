@@ -27,6 +27,7 @@ exports.createPages = async ({ graphql, actions }) => {
               fields {
                 slug
                 date(formatString: "MMMM DD, YYYY")
+                draft
               }
               frontmatter {
                 title
@@ -46,12 +47,12 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const allEdges = result.data.allMarkdownRemark.edges
 
-  const showPost = post => {
-    const slug = post.node.fields.slug
+  const showPost = edge => {
+    const draft = edge.node.fields.draft
     if (process.env.NODE_ENV === 'production') {
-      return slug.startsWith('/posts/')
+      return !draft
     } else {
-      return slug.startsWith('/posts/') || slug.startsWith('/drafts/')
+      return true
     }
   }
 
@@ -88,11 +89,19 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   if (node.internal.type === `MarkdownRemark`) {
     const slugWithDate = createFilePath({ node, getNode })
     const date = getDate(slugWithDate)
-    const slug = slugWithDate.replace(date, '').replace('/posts/-', '')
+    const slug = slugWithDate
+      .replace(date, '')
+      .replace('/posts/-', '')
+      .replace('/drafts/-', '')
     createNodeField({
       name: `slug`,
       node,
       value: slug,
+    })
+    createNodeField({
+      name: `draft`,
+      node,
+      value: slugWithDate.startsWith('/drafts/'),
     })
     if (date) {
       createNodeField({
