@@ -1,4 +1,3 @@
 - RSS
 - Use Cloudinary for HTML5 gifs.
 - Replace Processing sketch with video on main feed.
-- View source link.
