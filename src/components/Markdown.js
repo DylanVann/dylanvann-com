@@ -8,10 +8,9 @@ import Processing from './Processing'
 import Caption from './Caption'
 import Image from './Image'
 import styled from 'react-emotion'
-import { colorTextAccent, fontRaleway } from '../styles'
+import { fontRaleway, linkStyles } from '../styles'
 import Quote from './Quote'
 import CodePen from './CodePen'
-import { darken } from 'polished/lib/index'
 
 const headers = {}
 for (let i = 1; i <= 6; i++) {
@@ -22,11 +21,7 @@ for (let i = 1; i <= 6; i++) {
 }
 
 export const A = styled(`a`)`
-  text-decoration: none;
-  color: ${colorTextAccent};
-  :visited {
-    color: ${darken(0.2, colorTextAccent)};
-  }
+  ${linkStyles};
 `
 
 const renderAst = new rehypeReact({

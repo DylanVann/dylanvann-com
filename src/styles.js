@@ -1,10 +1,15 @@
 import { css } from 'emotion'
-import { lighten } from 'polished/lib/index'
+import { lighten, darken } from 'polished/lib/index'
 import { injectGlobal } from 'emotion'
 import 'prism-themes/themes/prism-base16-ateliersulphurpool.light.css'
 import 'prismjs'
 import 'typeface-raleway'
 import 'typeface-roboto'
+
+export const colorTextDark = '#333'
+export const colorTextMuted = '#777'
+export const colorTextTitle = lighten(0.1, colorTextDark)
+export const colorTextAccent = '#428bca'
 
 export const blockStyles = css`
   display: block;
@@ -12,10 +17,13 @@ export const blockStyles = css`
   margin: 1.53rem auto;
 `
 
-export const colorTextDark = '#333'
-export const colorTextMuted = '#777'
-export const colorTextTitle = lighten(0.1, colorTextDark)
-export const colorTextAccent = '#428bca'
+export const linkStyles = css`
+  text-decoration: none;
+  color: ${colorTextAccent};
+  :visited {
+    color: ${darken(0.2, colorTextAccent)};
+  }
+`
 
 export const fontRalewayArray = [
   'Raleway',

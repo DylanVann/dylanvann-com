@@ -9,17 +9,9 @@ const ContainerContainer = styled('div')`
   flex: 1;
 `
 
-const getSiteTitle = props => props.data.site.siteMetadata.title
-
 const Layout = ({ children, ...props }) => (
   <>
-    <Helmet
-      title={
-        props.title
-          ? `${props.title} | ${getSiteTitle(props)}`
-          : getSiteTitle(props)
-      }
-    >
+    <Helmet title={props.title ? `${props.title} | Dylan Vann` : 'Dylan Vann'}>
       <link
         rel="apple-touch-icon"
         sizes="180x180"

@@ -1,5 +1,4 @@
 import React from 'react'
-import Helmet from 'react-helmet'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index.es'
 import { graphql } from 'gatsby'
 import {
