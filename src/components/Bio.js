@@ -17,14 +17,20 @@ const ProfilePicture = styled('img')`
   border-radius: 50%;
 `
 
+export const Focus = () => (
+  <>
+    Focused on <strong>Node</strong> | <strong>GraphQL</strong> |{' '}
+    <strong>React</strong> | <strong>React Native</strong>.
+  </>
+)
+
 const Bio = () => (
   <Container>
     <ProfilePicture src={ProfileImage} alt={`Dylan Vann`} />
     <div>
       <p>
-        <strong>Dylan Vann</strong> | Software developer living and working in
-        Toronto 🇨🇦. Focused on <strong>Node</strong> | <strong>GraphQL</strong>{' '}
-        | <strong>React</strong> | <strong>React Native</strong>.
+        <strong>Dylan Vann</strong> | Software developer living in Toronto 🇨🇦.
+        <Focus />
       </p>
       <p>
         <A href="https://twitter.com/atomarranger">

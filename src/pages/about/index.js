@@ -11,6 +11,7 @@ import {
   faLinkedin,
 } from '@fortawesome/free-brands-svg-icons'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { Focus } from '../../components/Bio'
 import Container from '../../components/Container'
 import Layout from '../../components/Layout'
 import styled from 'react-emotion'
@@ -73,6 +74,9 @@ const About = props => (
         <li>I design and develop software.</li>
         <li>I have a degree in mechatronics engineering.</li>
         <li>I run on EDM, science fiction, sushi, and coffee.</li>
+        <li>
+          <Focus />
+        </li>
       </ul>
       <p>
         <b>You can find me on these sites:</b>
