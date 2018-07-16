@@ -4,6 +4,7 @@ import Helmet from 'react-helmet'
 import '../styles'
 import Footer from './Footer'
 import TopNav from './TopNav'
+import ProfileImage from './ProfileImage.jpg'
 
 const ContainerContainer = styled('div')`
   flex: 1;
@@ -12,6 +13,7 @@ const ContainerContainer = styled('div')`
 const Layout = ({ children, ...props }) => (
   <>
     <Helmet title={props.title ? `${props.title} | Dylan Vann` : 'Dylan Vann'}>
+      <html lang="en" />
       <link
         rel="apple-touch-icon"
         sizes="180x180"
@@ -47,6 +49,16 @@ const Layout = ({ children, ...props }) => (
         name="viewport"
         content="width=device-width, initial-scale=1.0, viewport-fit=cover"
       />
+      <meta name="author" content="Dylan Vann" />
+      <meta name="description" content="Dylan Vann's website." />
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content="Dylan Vann" />
+      <meta property="og:url" content="https://dylanvann.com/" />
+      <meta property="og:description" content="Software developer." />
+      <meta property="og:image" content={ProfileImage} />
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:site" content="@atomarranger" />
+      <meta name="twitter:creator" content="@atomarranger" />
     </Helmet>
     <TopNav />
     <ContainerContainer>{children}</ContainerContainer>

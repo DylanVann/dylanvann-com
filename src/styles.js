@@ -6,8 +6,8 @@ import 'prismjs'
 import 'typeface-raleway'
 import 'typeface-roboto'
 
-export const colorTextDark = '#333'
-export const colorTextMuted = '#777'
+export const colorTextDark = '#333333'
+export const colorTextMuted = '#575757'
 export const colorTextTitle = lighten(0.1, colorTextDark)
 export const colorTextAccent = '#428bca'
 
