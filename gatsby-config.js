@@ -32,6 +32,7 @@ module.exports = {
         ],
       },
     },
+    `@dylanvann/gatsby-transformer-cloudinary`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-emotion`,
