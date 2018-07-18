@@ -10,7 +10,7 @@ tags:
 <quote quote="I suppose it is tempting, if the only tool you have is a hammer, to treat everything as if it were a nail." cite="Abraham Maslow">
 </quote>
 
-This is referred to as [The Law of the Instrument](http://en.wikipedia.org/wiki/Law_of_the_instrument).
+This is referred to as [The Law of the Instrument](https://en.wikipedia.org/wiki/Law_of_the_instrument).
 It follows that if you come across a screw you'd better have a screwdriver, or at least you should be aware that you should use one.
 
 <quote quote="I'm never going to use this in real life." cite="People">
@@ -28,7 +28,7 @@ It follows that if you come across a screw you'd better have a screwdriver, or a
 
 What I'm saying is: Maybe you should have payed more attention during linear algebra class.
 
-Good news, it's not too late: [MIT OCW Linear Algebra](http://ocw.mit.edu/courses/mathematics/18-06sc-linear-algebra-fall-2011/).
+Good news, it's not too late: [MIT OCW Linear Algebra](https://ocw.mit.edu/courses/mathematics/18-06sc-linear-algebra-fall-2011/).
 
 ---
 
