@@ -1,3 +1,6 @@
-- RSS
-- Use Cloudinary for HTML5 gifs.
-- Replace Processing sketch with video on main feed.
+- Add an RSS feed.
+- Process videos in markdown.
+    - Use Cloudinary for HTML5 gifs.
+- Optimize about page image.
+- Better 404 page.
+    - Maybe include a sitemap.
