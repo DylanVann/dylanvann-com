@@ -700,9 +700,9 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
-"@dylanvann/gatsby-transformer-cloudinary@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@dylanvann/gatsby-transformer-cloudinary/-/gatsby-transformer-cloudinary-1.0.3.tgz#751a9be9de024da1d73e140f879c51156acf6a20"
+"@dylanvann/gatsby-transformer-cloudinary@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@dylanvann/gatsby-transformer-cloudinary/-/gatsby-transformer-cloudinary-1.0.4.tgz#c9726ec8ae552bae04d177028ef0b5f364855306"
   dependencies:
     cloudinary "^1.11.0"
     common-tags "^1.8.0"
@@ -711,6 +711,7 @@
     lodash "^4.17.10"
     probe-image-size "^4.0.0"
     sharp-base64 "^1.0.4"
+    url-exists-promise "^1.0.1"
 
 "@emotion/babel-utils@^0.6.4":
   version "0.6.5"
@@ -11169,6 +11170,10 @@ urijs@^1.16.1:
 urix@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/urix/-/urix-0.1.0.tgz#da937f7a62e21fec1fd18d49b35c2935067a6c72"
+
+url-exists-promise@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/url-exists-promise/-/url-exists-promise-1.0.1.tgz#e8b9de70133a4298f1d42e25abe5e7f5eec3da92"
 
 url-join@^4.0.0:
   version "4.0.0"
