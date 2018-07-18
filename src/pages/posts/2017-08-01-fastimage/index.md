@@ -8,16 +8,6 @@ tags:
 github: https://github.com/DylanVann/react-native-fast-image
 ---
 
-<gif poster="./scroll.jpg" mp4="./scroll.mp4" ratio="299:648" width="299">
-</gif>
-<hidden>
-  <img src="./scroll.jpg" />
-  <img src="./scroll.mp4" />
-</hidden>
+![React Native Fast Image Scroll](fast_image_scroll.mp4)
 
-<gif poster="./priority.jpg" mp4="./priority.mp4" ratio="299:648" width="299">
-</gif>
-<hidden>
-  <img src="./priority.jpg" />
-  <img src="./priority.mp4" />
-</hidden>
+![React Native Fast Image Priority](fast_image_priority.mp4)

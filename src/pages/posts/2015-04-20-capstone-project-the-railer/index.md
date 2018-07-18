@@ -5,12 +5,7 @@ tags:
 - UOIT Engineering
 ---
 
-<gif poster="./the_railer-750.jpg" mp4="./the_railer-750.mp4" ratio="750:420">
-</gif>
-<hidden>
-  <img src="./the_railer-750.jpg" />
-  <img src="./the_railer-750.mp4" />
-</hidden>
+![The Railer](the_railer.mp4)
 
 <image-caption>Detecting a stud and nailing the plywood sheet down.</image-caption>
 
@@ -30,12 +25,7 @@ The final product wasn't very polished. It was easy to think of how everything s
 
 ## Aligning with the Edge of the Roof
 
-<gif poster="./the_railer_aligning-750.jpg" mp4="./the_railer_aligning-750.mp4" ratio="750:420">
-</gif>
-<hidden>
-  <img src="./the_railer_aligning-750.jpg" />
-  <img src="./the_railer_aligning-750.mp4" />
-</hidden>
+![The Railer Aligning](the_railer_aligning.mp4)
 
 <image-caption>Preparing to put in the next row of nails. Turn, forward, turn, align, forward.</image-caption>
 
