@@ -13,6 +13,8 @@ export const fetchData = path =>
       if (data.json) {
         resolve(data.json)
       }
+      // Other steps are only needed during development.
+      if (process.env.NODE_ENV === 'production') return
       const pageData = getPageQueryData()
       if (pageData[path]) resolve(pageData[path])
       const handler = () => {
