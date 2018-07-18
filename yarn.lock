@@ -700,9 +700,9 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
-"@dylanvann/gatsby-transformer-cloudinary@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@dylanvann/gatsby-transformer-cloudinary/-/gatsby-transformer-cloudinary-1.0.4.tgz#c9726ec8ae552bae04d177028ef0b5f364855306"
+"@dylanvann/gatsby-transformer-cloudinary@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@dylanvann/gatsby-transformer-cloudinary/-/gatsby-transformer-cloudinary-1.0.5.tgz#8e6a4946d5f0e8e2177aeb8e193f9f7cdbb4a338"
   dependencies:
     cloudinary "^1.11.0"
     common-tags "^1.8.0"
