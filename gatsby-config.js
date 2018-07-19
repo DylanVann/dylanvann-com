@@ -1,6 +1,6 @@
-require('dotenv').config()
-
 /* eslint-env node */
+require('dotenv/config')
+
 module.exports = {
   siteMetadata: {
     title: 'Dylan Vann',
@@ -36,14 +36,13 @@ module.exports = {
         ],
       },
     },
-    `@dylanvann/gatsby-transformer-cloudinary`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-emotion`,
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: `UA-56980425-1`,
+        trackingId: process.env.GOOGLE_ANALYTICS_TRACKING_ID,
       },
     },
     `gatsby-plugin-react-helmet`,
