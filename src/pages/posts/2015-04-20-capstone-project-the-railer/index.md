@@ -31,7 +31,7 @@ The final product wasn't very polished. It was easy to think of how everything s
 
 Using only the encoders to get ready for the next row would have led to an accumulation of error in the robots angle. A routine had to be created to align the robot with the edge.
 
-![Align with edge of roof. State diagram.](./align_state_diagram.png)
+![Align with edge of roof. State diagram.](align_state_diagram.png)
 
 <image-caption>Aligning routine states. The black dots are ultrasonic sensors. The line is the edge of the roof.</image-caption>
 

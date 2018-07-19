@@ -700,9 +700,9 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
-"@dylanvann/gatsby-remark-cloudinary@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@dylanvann/gatsby-remark-cloudinary/-/gatsby-remark-cloudinary-0.0.3.tgz#cd175badca3c77a2c15f82737527918e28f8f035"
+"@dylanvann/gatsby-remark-cloudinary@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@dylanvann/gatsby-remark-cloudinary/-/gatsby-remark-cloudinary-0.0.4.tgz#2a9ce16e505abccd1c7bee486df5fb71033cccbd"
   dependencies:
     "@babel/runtime" "7.0.0-beta.51"
     axios "^0.18.0"

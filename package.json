@@ -7,7 +7,7 @@
     "url": "https://github.com/dylanvann/dylanvann-com/issues"
   },
   "dependencies": {
-    "@dylanvann/gatsby-remark-cloudinary": "^0.0.3",
+    "@dylanvann/gatsby-remark-cloudinary": "^0.0.4",
     "@dylanvann/gatsby-transformer-cloudinary": "^1.0.5",
     "@fortawesome/fontawesome-svg-core": "^1.2.0",
     "@fortawesome/free-brands-svg-icons": "^5.1.0",
