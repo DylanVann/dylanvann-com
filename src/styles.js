@@ -1,8 +1,7 @@
 import { css } from 'emotion'
-import { lighten, darken } from 'polished/lib/index'
+import { lighten, darken } from 'polished'
 import { injectGlobal } from 'emotion'
 import 'prism-themes/themes/prism-base16-ateliersulphurpool.light.css'
-import 'prismjs'
 import 'typeface-raleway'
 import 'typeface-roboto'
 
