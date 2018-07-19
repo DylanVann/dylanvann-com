@@ -1,19 +1,18 @@
 import React from 'react'
 import styled from 'react-emotion'
 import { blockStyles } from '../styles'
+import renderVideoTagString from './renderVideoTagString'
 
 const CloudVideo = ({ className, srcvideo, srcvideoposter }) => (
   <span className={className}>
-    <span>
-      <video
-        muted
-        autoPlay
-        playsInline
-        loop
-        poster={srcvideoposter}
-        src={srcvideo}
-      />
-    </span>
+    <span
+      dangerouslySetInnerHTML={{
+        __html: renderVideoTagString({
+          srcVideo: srcvideo,
+          srcVideoPoster: srcvideoposter,
+        }),
+      }}
+    />
   </span>
 )
 
