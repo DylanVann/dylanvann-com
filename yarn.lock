@@ -9090,6 +9090,10 @@ react-typography@^0.16.13:
   version "0.16.13"
   resolved "https://registry.yarnpkg.com/react-typography/-/react-typography-0.16.13.tgz#94bdd2a9448823bc74d8ebf7465d86c7dbe20dcf"
 
+react-video-tag@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/react-video-tag/-/react-video-tag-0.0.4.tgz#1e6e3af1e93f74452a832744e79ee7a9c49167f9"
+
 react@^15.6.1:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/react/-/react-15.6.2.tgz#dba0434ab439cfe82f108f0f511663908179aa72"

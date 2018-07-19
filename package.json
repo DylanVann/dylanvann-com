@@ -50,6 +50,7 @@
     "react-helmet": "^5.2.0",
     "react-router-prop-types": "^1.0.4",
     "react-typography": "^0.16.13",
+    "react-video-tag": "^0.0.4",
     "rehype-react": "^3.0.2",
     "reselect": "^3.0.1",
     "typeface-raleway": "^0.0.54",
