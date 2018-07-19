@@ -1,6 +1,5 @@
 - Add an RSS feed.
-- Process videos in markdown.
-    - Use Cloudinary for HTML5 gifs.
+- Lazy load images.
 - Optimize about page image.
 - Better 404 page.
-    - Maybe include a sitemap.
+  - Maybe include a sitemap.

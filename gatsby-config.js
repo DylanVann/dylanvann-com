@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 /* eslint-env node */
 module.exports = {
   siteMetadata: {
@@ -24,9 +26,11 @@ module.exports = {
           'gatsby-remark-prismjs',
           'gatsby-remark-smartypants',
           {
-            resolve: 'gatsby-remark-copy-linked-files',
+            resolve: '@dylanvann/gatsby-remark-cloudinary',
             options: {
-              ignoreFileExtensions: [],
+              cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+              apiKey: process.env.CLOUDINARY_API_KEY,
+              apiSecret: process.env.CLOUDINARY_API_SECRET,
             },
           },
         ],

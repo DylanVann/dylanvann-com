@@ -1,5 +1,7 @@
 import React from 'react'
 import rehypeReact from 'rehype-react'
+import CloudVideo from './CloudVideo'
+import CloudImage from './CloudImage'
 import YouTube from './YouTube'
 import PropTypes from 'prop-types'
 import VideoGIF from './VideoGIF'
@@ -29,6 +31,8 @@ const renderAst = new rehypeReact({
   components: {
     'image-caption': Caption,
     'code-pen': CodePen,
+    'cloud-video': CloudVideo,
+    'cloud-image': CloudImage,
     youtube: YouTube,
     gif: VideoGIF,
     processing: Processing,
