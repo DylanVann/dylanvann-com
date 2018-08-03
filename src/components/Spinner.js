@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'react-emotion'
 
 const Spinner = ({ className }) => (
@@ -8,6 +9,10 @@ const Spinner = ({ className }) => (
     <div className="bounce3" />
   </div>
 )
+
+Spinner.propTypes = {
+  className: PropTypes.string,
+}
 
 export default styled(Spinner)`
   margin: 100px auto 0;

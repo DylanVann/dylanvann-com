@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Container from '../components/Container'
 import Layout from '../components/Layout'
 import ListEnd from '../components/ListEnd'
@@ -12,7 +13,9 @@ class BlogIndex extends React.Component {
   loading = false
 
   state = {
+    // eslint-disable-next-line
     index: this.props.pageContext.index,
+    // eslint-disable-next-line
     group: this.props.pageContext.group,
   }
 
@@ -27,6 +30,7 @@ class BlogIndex extends React.Component {
   onScroll = () => {
     const distanceFromBottom =
       document.body.clientHeight - (window.pageYOffset + window.innerHeight)
+    // eslint-disable-next-line
     const hasReachedEnd = this.state.index === this.props.pageContext.pageCount
     if (distanceFromBottom < 200 && !this.loading && !hasReachedEnd) {
       this.onReachedEnd()
@@ -70,10 +74,8 @@ class BlogIndex extends React.Component {
   }
 
   render() {
-    const { pageContext } = this.props
-    const index = this.state.index
-    const { pageCount } = pageContext
-    const { group } = this.state
+    const { pageContext: { pageCount } } = this.props
+    const { group, index } = this.state
     return (
       <Layout>
         <Container>
@@ -85,6 +87,13 @@ class BlogIndex extends React.Component {
       </Layout>
     )
   }
+}
+
+BlogIndex.propTypes = {
+  pageContent: PropTypes.shape({
+    index: PropTypes.number,
+    group: PropTypes.object,
+  })
 }
 
 export default BlogIndex

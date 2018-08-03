@@ -50,10 +50,23 @@ const FastImageTag = ({
     videoPosterSrc={videopostersrc}
     videoPosterWebPSrc={videoposterwebpsrc}
     videoPosterBase64={videoposterbase64}
-    width={width}
-    height={height}
+    width={Number(width)}
+    height={Number(height)}
   />
 )
+
+FastImageTag.propTypes = {
+  imgsrc: PropTypes.string,
+  imgwebpsrc: PropTypes.string,
+  imgsrcset: PropTypes.string,
+  imgwebpsrcset: PropTypes.string,
+  videosrc: PropTypes.string,
+  videopostersrc: PropTypes.string,
+  videoposterwebpsrc: PropTypes.string,
+  videoposterbase64: PropTypes.string,
+  height: PropTypes.number,
+  width: PropTypes.number,
+}
 
 const renderAst = new rehypeReact({
   createElement: React.createElement,
