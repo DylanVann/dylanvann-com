@@ -2,8 +2,8 @@
 title: Particles.js
 subtitle: A WebGL particle engine with a web based particle system editor.
 tags:
-- WebGL
-- Web
+  - WebGL
+  - Web
 ---
 
 ![Particles.js](particles_js.mp4)

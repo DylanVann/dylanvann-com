@@ -1,5 +1,5 @@
 ---
-title: React + SSR + NoScript + CSS in JS Fallbacks 
+title: React + SSR + NoScript + CSS in JS Fallbacks
 subtitle: Custom CSS for users with JS disabled.
 ---
 

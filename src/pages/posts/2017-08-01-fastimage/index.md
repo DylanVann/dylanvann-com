@@ -2,9 +2,9 @@
 title: 🚩 FastImage
 subtitle: Performant React Native image component.
 tags:
-- React
-- React Native
-- Code
+  - React
+  - React Native
+  - Code
 github: https://github.com/DylanVann/react-native-fast-image
 ---
 

@@ -2,8 +2,8 @@
 title: AIRSensor
 subtitle: Improved Arduino IR Sensor Library
 tags:
-- Arduino
-- Code
+  - Arduino
+  - Code
 github: https://github.com/DylanVann/AIRSensor
 ---
 

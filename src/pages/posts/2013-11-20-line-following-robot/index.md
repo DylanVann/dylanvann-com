@@ -2,7 +2,7 @@
 title: Line Following Robot
 subtitle: UOIT Project
 tags:
-- UOIT Engineering
+  - UOIT Engineering
 ---
 
 <youtube-video id="92-BCrEdWko" />

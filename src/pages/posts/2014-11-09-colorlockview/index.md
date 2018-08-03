@@ -1,6 +1,7 @@
 ---
 title: ColorLockView
-subtitle: Stop UITableViewCell from changing your background colors when highlighted/selected.
+subtitle:
+  Stop UITableViewCell from changing your background colors when highlighted/selected.
 tags:
   - iOS
   - Code

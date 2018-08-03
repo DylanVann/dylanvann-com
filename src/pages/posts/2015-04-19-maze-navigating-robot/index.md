@@ -2,8 +2,8 @@
 title: Maze Navigating Robot
 subtitle: UOIT Project
 tags:
-- UOIT Engineering
-- Arduino
+  - UOIT Engineering
+  - Arduino
 ---
 
 <youtube-video id="Y2M-dj2oHoM" />

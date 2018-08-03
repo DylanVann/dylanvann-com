@@ -2,7 +2,7 @@
 title: The Railer
 subtitle: UOIT Capstone Project
 tags:
-- UOIT Engineering
+  - UOIT Engineering
 ---
 
 ![The Railer](the_railer.mp4)
