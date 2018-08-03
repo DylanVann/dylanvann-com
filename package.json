@@ -7,7 +7,7 @@
     "url": "https://github.com/dylanvann/dylanvann-com/issues"
   },
   "dependencies": {
-    "@dylanvann/gatsby-remark-cloudinary": "^0.0.12",
+    "@dylanvann/gatsby-remark-cloudinary": "^0.0.13",
     "@dylanvann/gatsby-transformer-cloudinary": "^1.0.23",
     "@fortawesome/fontawesome-svg-core": "^1.2.2",
     "@fortawesome/free-brands-svg-icons": "^5.2.0",
@@ -61,7 +61,7 @@
     "eslint-plugin-react": "^7.10.0",
     "loader-utils": "^1.1.0",
     "prettier": "^1.12.0",
-    "serve": "^9.2.0"
+    "serve": "^9.4.0"
   },
   "homepage": "https://dylanvann.com",
   "keywords": [
