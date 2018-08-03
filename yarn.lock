@@ -700,32 +700,27 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
-"@dylanvann/gatsby-remark-cloudinary@^0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@dylanvann/gatsby-remark-cloudinary/-/gatsby-remark-cloudinary-0.0.4.tgz#2a9ce16e505abccd1c7bee486df5fb71033cccbd"
+"@dylanvann/gatsby-cloudinary@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@dylanvann/gatsby-cloudinary/-/gatsby-cloudinary-0.0.8.tgz#203ba029ee8c348a357e05539f980934d1748b36"
   dependencies:
-    "@babel/runtime" "7.0.0-beta.51"
     axios "^0.18.0"
-    cheerio "^1.0.0-rc.2"
-    cloudinary-promised "^1.0.1"
-    is-relative-url "^2.0.0"
+    classnames "^2.2.6"
+    cloudinary-promised "^1.0.9"
+    md5-file "^4.0.0"
+    react-fast-image "^0.0.21"
+    react-img-tag "^0.0.2"
+    react-video-tag "^0.0.10"
+
+"@dylanvann/gatsby-remark-cloudinary@^0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@dylanvann/gatsby-remark-cloudinary/-/gatsby-remark-cloudinary-0.0.11.tgz#1e7c24919422d4e9b69a0af5385cff9f7b7bf3d5"
+  dependencies:
+    "@dylanvann/gatsby-cloudinary" "^0.0.8"
     lodash "^4.17.4"
     md5-file "^4.0.0"
-    sharp "^0.20.2"
+    react-fast-image "^0.0.21"
     unist-util-select "^1.5.0"
-
-"@dylanvann/gatsby-transformer-cloudinary@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@dylanvann/gatsby-transformer-cloudinary/-/gatsby-transformer-cloudinary-1.0.5.tgz#8e6a4946d5f0e8e2177aeb8e193f9f7cdbb4a338"
-  dependencies:
-    cloudinary "^1.11.0"
-    common-tags "^1.8.0"
-    fs-extra "^4.0.2"
-    html-parser "^0.11.0"
-    lodash "^4.17.10"
-    probe-image-size "^4.0.0"
-    sharp-base64 "^1.0.4"
-    url-exists-promise "^1.0.1"
 
 "@emotion/babel-utils@^0.6.4":
   version "0.6.5"
@@ -2598,6 +2593,10 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
+classnames@^2.2.6:
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
+
 cli-boxes@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/cli-boxes/-/cli-boxes-1.0.0.tgz#4fa917c3e59c94a004cd61f8ee509da651687143"
@@ -2671,6 +2670,13 @@ cloudinary-promised@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/cloudinary-promised/-/cloudinary-promised-1.0.1.tgz#aa9680c5e8e4627c412ec2cdfe5c2cf224500b2e"
   dependencies:
+    url-exists-promise "^1.0.1"
+
+cloudinary-promised@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/cloudinary-promised/-/cloudinary-promised-1.0.9.tgz#ab757a848640ac445dbcd03c9a43d5d7672b15f1"
+  dependencies:
+    cloudinary "^1.11.0"
     url-exists-promise "^1.0.1"
 
 cloudinary@^1.11.0:
@@ -2797,7 +2803,7 @@ commander@~2.8.1:
   dependencies:
     graceful-readlink ">= 1.0.0"
 
-common-tags@^1.4.0, common-tags@^1.8.0:
+common-tags@^1.4.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/common-tags/-/common-tags-1.8.0.tgz#8e3153e542d4a39e9b10554434afaaf98956a937"
 
@@ -5889,10 +5895,6 @@ html-comment-regex@^1.1.0:
 html-entities@^1.2.0:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/html-entities/-/html-entities-1.2.1.tgz#0df29351f0721163515dfb9e5543e5f6eed5162f"
-
-html-parser@^0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/html-parser/-/html-parser-0.11.0.tgz#99314fd77436824d85a05f4f2f38da12700e4284"
 
 html-tokenize@^2.0.0:
   version "2.0.0"
@@ -9025,6 +9027,22 @@ react-error-overlay@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-3.0.0.tgz#c2bc8f4d91f1375b3dad6d75265d51cd5eeaf655"
 
+react-fast-image@^0.0.21:
+  version "0.0.21"
+  resolved "https://registry.yarnpkg.com/react-fast-image/-/react-fast-image-0.0.21.tgz#8e554e5bb8ed1b21353f7df7e29137d99ff234ab"
+  dependencies:
+    classnames "^2.2.6"
+    react-img-tag "^0.0.2"
+    react-video-tag "^0.0.10"
+
+react-fast-image@^0.0.22:
+  version "0.0.22"
+  resolved "https://registry.yarnpkg.com/react-fast-image/-/react-fast-image-0.0.22.tgz#a9d2ea9b0765d574b7bb810e103a93a2b3fd7232"
+  dependencies:
+    classnames "^2.2.6"
+    react-img-tag "^0.0.2"
+    react-video-tag "^0.0.10"
+
 react-helmet@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/react-helmet/-/react-helmet-5.2.0.tgz#a81811df21313a6d55c5f058c4aeba5d6f3d97a7"
@@ -9044,6 +9062,10 @@ react-hot-loader@^4.1.0:
     prop-types "^15.6.1"
     react-lifecycles-compat "^3.0.4"
     shallowequal "^1.0.2"
+
+react-img-tag@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/react-img-tag/-/react-img-tag-0.0.2.tgz#b666147fe979ccf183d4bccb0d9768166c755c21"
 
 react-lifecycles-compat@^3.0.2, react-lifecycles-compat@^3.0.4:
   version "3.0.4"
@@ -9089,6 +9111,10 @@ react-side-effect@^1.1.0:
 react-typography@^0.16.13:
   version "0.16.13"
   resolved "https://registry.yarnpkg.com/react-typography/-/react-typography-0.16.13.tgz#94bdd2a9448823bc74d8ebf7465d86c7dbe20dcf"
+
+react-video-tag@^0.0.10:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/react-video-tag/-/react-video-tag-0.0.10.tgz#eace2386a77cd17351a9cac7497856aa7d4be25d"
 
 react-video-tag@^0.0.5:
   version "0.0.5"
@@ -9976,14 +10002,7 @@ shallowequal@^1.0.1, shallowequal@^1.0.2:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-1.1.0.tgz#188d521de95b9087404fd4dcb68b13df0ae4e7f8"
 
-sharp-base64@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/sharp-base64/-/sharp-base64-1.0.4.tgz#9c157f056d863aad6495599b8f7c82fa33911695"
-  dependencies:
-    lodash "^4.17.10"
-    sharp "^0.20.5"
-
-sharp@^0.20.2, sharp@^0.20.5:
+sharp@^0.20.2:
   version "0.20.5"
   resolved "https://registry.yarnpkg.com/sharp/-/sharp-0.20.5.tgz#fc19d9639b1c792fa68a21624c75069923e79edd"
   dependencies:

@@ -12,8 +12,8 @@ class BlogIndex extends React.Component {
   loading = false
 
   state = {
-    index: this.props.pathContext.index,
-    group: this.props.pathContext.group,
+    index: this.props.pageContext.index,
+    group: this.props.pageContext.group,
   }
 
   componentDidMount() {
@@ -27,20 +27,20 @@ class BlogIndex extends React.Component {
   onScroll = () => {
     const distanceFromBottom =
       document.body.clientHeight - (window.pageYOffset + window.innerHeight)
-    const hasReachedEnd = this.state.index === this.props.pathContext.pageCount
+    const hasReachedEnd = this.state.index === this.props.pageContext.pageCount
     if (distanceFromBottom < 200 && !this.loading && !hasReachedEnd) {
       this.onReachedEnd()
     }
   }
 
-  // This resets the state if the articles from pathContext change.
+  // This resets the state if the articles from pageContext change.
   static getDerivedStateFromProps(props, state) {
-    const propsSlug = props.pathContext.group[0].node.fields.slug
+    const propsSlug = props.pageContext.group[0].node.fields.slug
     const stateSlug = state.group[0].node.fields.slug
     const pageChanged = propsSlug !== stateSlug
     if (pageChanged) {
-      const index = props.pathContext.index
-      const group = props.pathContext.group
+      const index = props.pageContext.index
+      const group = props.pageContext.group
       return {
         index,
         group,
@@ -51,7 +51,7 @@ class BlogIndex extends React.Component {
 
   onReachedEnd = async () => {
     this.loading = true
-    const pageCount = this.props.pathContext.pageCount
+    const pageCount = this.props.pageContext.pageCount
     const index = this.state.index
     const hasReachedEnd = index === pageCount
     if (hasReachedEnd) return
@@ -70,9 +70,9 @@ class BlogIndex extends React.Component {
   }
 
   render() {
-    const { pathContext } = this.props
+    const { pageContext } = this.props
     const index = this.state.index
-    const { pageCount } = pathContext
+    const { pageCount } = pageContext
     const { group } = this.state
     return (
       <Layout>

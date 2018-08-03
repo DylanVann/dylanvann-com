@@ -8,8 +8,9 @@ module.exports = {
     description: "Dylan Vann's website.",
     siteUrl: 'https://dylanvann.com',
   },
-  pathPrefix: '/gatsby-starter-blog',
   plugins: [
+    `gatsby-plugin-emotion`,
+    `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -28,24 +29,22 @@ module.exports = {
           {
             resolve: '@dylanvann/gatsby-remark-cloudinary',
             options: {
-              cloudName: process.env.CLOUDINARY_CLOUD_NAME,
-              apiKey: process.env.CLOUDINARY_API_KEY,
-              apiSecret: process.env.CLOUDINARY_API_SECRET,
+              config: {
+                cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+                api_key: process.env.CLOUDINARY_API_KEY,
+                api_secret: process.env.CLOUDINARY_API_SECRET,
+              },
             },
           },
         ],
       },
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
-    `gatsby-plugin-emotion`,
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
         trackingId: process.env.GOOGLE_ANALYTICS_TRACKING_ID,
       },
     },
-    `gatsby-plugin-react-helmet`,
     {
       resolve: 'gatsby-plugin-typography',
       options: {

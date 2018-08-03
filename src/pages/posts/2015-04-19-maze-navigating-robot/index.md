@@ -6,8 +6,8 @@ tags:
 - Arduino
 ---
 
-<youtube id="Y2M-dj2oHoM" />
-</youtube>
+<youtube-video id="Y2M-dj2oHoM" />
+</youtube-video
 
 **Components:**
 
