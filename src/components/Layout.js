@@ -5,7 +5,10 @@ import Footer from './Footer'
 import TopNav from './TopNav'
 import ProfileImage from './ProfileImage.jpg'
 import '../styles'
-import 'intersection-observer'
+
+if (typeof window !== 'undefined') {
+  require('intersection-observer')
+}
 
 const ContainerContainer = styled('div')`
   flex: 1;
