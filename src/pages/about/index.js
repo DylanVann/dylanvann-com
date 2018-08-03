@@ -44,7 +44,11 @@ const cssImg = css`
 
 const About = props => (
   <Layout {...props} title="About">
-    <FastImage className={cssImg} {...props.data.file.childImageCloudinary.fluid} sizes="100vw" />
+    <FastImage
+      className={cssImg}
+      {...props.data.file.childImageCloudinary.fluid}
+      sizes="100vw"
+    />
     <Container>
       <StyledTitle>{"Hi, I'm Dylan Vann"}</StyledTitle>
       <ul>
@@ -117,10 +121,10 @@ About.propTypes = {
   data: PropTypes.shape({
     file: PropTypes.shape({
       childImageCloudinary: PropTypes.shape({
-        fluid: PropTypes.object
-      })
-    })
-  })
+        fluid: PropTypes.object,
+      }),
+    }),
+  }),
 }
 
 export default About

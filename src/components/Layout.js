@@ -1,10 +1,11 @@
 import React from 'react'
 import styled from 'react-emotion'
 import Helmet from 'react-helmet'
-import '../styles'
 import Footer from './Footer'
 import TopNav from './TopNav'
 import ProfileImage from './ProfileImage.jpg'
+import '../styles'
+import 'intersection-observer'
 
 const ContainerContainer = styled('div')`
   flex: 1;
