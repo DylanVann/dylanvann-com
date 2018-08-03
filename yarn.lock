@@ -712,15 +712,23 @@
     react-img-tag "^0.0.2"
     react-video-tag "^0.0.10"
 
-"@dylanvann/gatsby-remark-cloudinary@^0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@dylanvann/gatsby-remark-cloudinary/-/gatsby-remark-cloudinary-0.0.11.tgz#1e7c24919422d4e9b69a0af5385cff9f7b7bf3d5"
+"@dylanvann/gatsby-remark-cloudinary@^0.0.12":
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/@dylanvann/gatsby-remark-cloudinary/-/gatsby-remark-cloudinary-0.0.12.tgz#909f0f254c84b6fb237f82184090fb3be63d1c05"
   dependencies:
     "@dylanvann/gatsby-cloudinary" "^0.0.8"
     lodash "^4.17.4"
     md5-file "^4.0.0"
     react-fast-image "^0.0.21"
     unist-util-select "^1.5.0"
+
+"@dylanvann/gatsby-transformer-cloudinary@^1.0.23":
+  version "1.0.23"
+  resolved "https://registry.yarnpkg.com/@dylanvann/gatsby-transformer-cloudinary/-/gatsby-transformer-cloudinary-1.0.23.tgz#8af1345f7c35ebdf693501209e0905d47e958c00"
+  dependencies:
+    "@dylanvann/gatsby-cloudinary" "^0.0.8"
+    common-tags "^1.8.0"
+    react-fast-image "^0.0.18"
 
 "@emotion/babel-utils@^0.6.4":
   version "0.6.5"
@@ -2797,7 +2805,7 @@ commander@~2.8.1:
   dependencies:
     graceful-readlink ">= 1.0.0"
 
-common-tags@^1.4.0:
+common-tags@^1.4.0, common-tags@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/common-tags/-/common-tags-1.8.0.tgz#8e3153e542d4a39e9b10554434afaaf98956a937"
 
@@ -9017,6 +9025,14 @@ react-error-overlay@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-3.0.0.tgz#c2bc8f4d91f1375b3dad6d75265d51cd5eeaf655"
 
+react-fast-image@^0.0.18:
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/react-fast-image/-/react-fast-image-0.0.18.tgz#09034b6272c7747593e87d66147eb108acb805ea"
+  dependencies:
+    classnames "^2.2.6"
+    react-img-tag "^0.0.2"
+    react-video-tag "^0.0.10"
+
 react-fast-image@^0.0.21:
   version "0.0.21"
   resolved "https://registry.yarnpkg.com/react-fast-image/-/react-fast-image-0.0.21.tgz#8e554e5bb8ed1b21353f7df7e29137d99ff234ab"
@@ -9025,9 +9041,9 @@ react-fast-image@^0.0.21:
     react-img-tag "^0.0.2"
     react-video-tag "^0.0.10"
 
-react-fast-image@^0.0.22:
-  version "0.0.22"
-  resolved "https://registry.yarnpkg.com/react-fast-image/-/react-fast-image-0.0.22.tgz#a9d2ea9b0765d574b7bb810e103a93a2b3fd7232"
+react-fast-image@^0.0.23:
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/react-fast-image/-/react-fast-image-0.0.23.tgz#300348ec365ce89d37828fd58760ae06d0e49504"
   dependencies:
     classnames "^2.2.6"
     react-img-tag "^0.0.2"

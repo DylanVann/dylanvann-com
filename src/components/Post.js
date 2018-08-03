@@ -38,11 +38,11 @@ const Post = props => {
     <div className={props.className}>
       <PostHeader>
         {title && (
-          <PostTitle>
+          <PostTitle list={props.list}>
             <Link to={`/${slug}`}>{title}</Link>
           </PostTitle>
         )}
-        {subtitle && <PostSubTitle>{subtitle}</PostSubTitle>}
+        {subtitle && <PostSubTitle list={props.list}>{subtitle}</PostSubTitle>}
         <PostDate dateTime={datetime}>{date}</PostDate>
         {github && <GitHubLink href={github}>Download on GitHub</GitHubLink>}
       </PostHeader>
@@ -53,6 +53,7 @@ const Post = props => {
 
 Post.propTypes = {
   className: PropTypes.string,
+  list: PropTypes.bool,
 }
 
 export default styled(Post)`

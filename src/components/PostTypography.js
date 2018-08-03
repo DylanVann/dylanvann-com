@@ -1,8 +1,9 @@
 import styled from 'react-emotion'
 import { colorTextMuted, colorTextTitle, fontRaleway } from '../styles'
 
-export const PostTitle = styled('h1')`
+export const PostTitle = styled('h1', { shouldForwardProp: p => p !== 'list' })`
   font-family: ${fontRaleway};
+  font-size: ${p => (p.list ? '1.5rem' : '2rem')};
   font-weight: 900;
   margin-top: 0;
   margin-bottom: 10px;
@@ -20,7 +21,10 @@ export const PostTitle = styled('h1')`
   }
 `
 
-export const PostSubTitle = styled('h2')`
+export const PostSubTitle = styled('h2', {
+  shouldForwardProp: p => p !== 'list',
+})`
+  font-size: ${p => (p.list ? '1.25rem' : '1.5rem')};
   font-family: ${fontRaleway};
   font-weight: 300;
   margin-top: 0;

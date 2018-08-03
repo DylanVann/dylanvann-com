@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index.es'
 import { graphql } from 'gatsby'
 import {
@@ -18,33 +19,11 @@ import styled from 'react-emotion'
 import { css } from 'emotion'
 import { A } from '../../components/Markdown'
 import { PostTitle } from '../../components/PostTypography'
-import ProfileImage from './profile_full_width.jpg'
+import { FastImage } from 'react-fast-image'
 
 const FontAwesomeUL = styled('ul')`
   margin-left: 0;
   list-style-type: none;
-`
-
-const w = 2560
-const h = 560
-
-const imageContainerStyle = css`
-  position: relative;
-  margin: 0;
-  width: 100%;
-  height: 0;
-  padding-bottom: ${(h / w) * 100}%;
-  background-origin: border-box;
-  background-size: cover;
-  background-color: #eee;
-`
-
-const imageStyle = css`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
 `
 
 const StyledA = styled(A)`
@@ -59,15 +38,13 @@ const StyledTitle = styled(PostTitle)`
   margin-bottom: 40px;
 `
 
+const cssImg = css`
+  width: 100% !important;
+`
+
 const About = props => (
   <Layout {...props} title="About">
-    <div className={imageContainerStyle}>
-      <img
-        src={ProfileImage}
-        className={imageStyle}
-        alt="A picture of Dylan Vann."
-      />
-    </div>
+    <FastImage className={cssImg} {...props.data.file.childImageCloudinary.fluid} sizes="100vw" />
     <Container>
       <StyledTitle>{"Hi, I'm Dylan Vann"}</StyledTitle>
       <ul>
@@ -136,10 +113,33 @@ About.defaultProps = {
   siteTitle: 'Dylan Vann',
 }
 
+About.propTypes = {
+  data: PropTypes.shape({
+    file: PropTypes.shape({
+      childImageCloudinary: PropTypes.shape({
+        fluid: PropTypes.object
+      })
+    })
+  })
+}
+
 export default About
 
 export const pageQuery = graphql`
   query AboutPage {
     ...SiteMeta
+    file(relativePath: { eq: "about/profile_full_width.jpg" }) {
+      childImageCloudinary {
+        fluid(maxWidth: 1024) {
+          imgSrc
+          imgSrcSet
+          imgWebPSrc
+          imgWebPSrcSet
+          imgBase64
+          height
+          width
+        }
+      }
+    }
   }
 `

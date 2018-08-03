@@ -74,12 +74,16 @@ class BlogIndex extends React.Component {
   }
 
   render() {
-    const { pageContext: { pageCount } } = this.props
+    const {
+      pageContext: { pageCount },
+    } = this.props
     const { group, index } = this.state
     return (
       <Layout>
         <Container>
-          {group.map(({ node }) => <Post key={node.fields.slug} {...node} />)}
+          {group.map(({ node }) => (
+            <Post key={node.fields.slug} list {...node} />
+          ))}
           {IS_SSR && <PageControl page={index} pageCount={pageCount} />}
           {!IS_SSR && index === pageCount && <ListEnd />}
           {!IS_SSR && index !== pageCount && <Spinner />}
@@ -93,7 +97,7 @@ BlogIndex.propTypes = {
   pageContent: PropTypes.shape({
     index: PropTypes.number,
     group: PropTypes.object,
-  })
+  }),
 }
 
 export default BlogIndex
