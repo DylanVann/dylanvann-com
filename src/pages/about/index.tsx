@@ -41,11 +41,21 @@ const cssImg = css`
   width: 100% !important;
 `
 
+interface ImageProps {
+  imgSrc: string;
+  imgSrcSet: string;
+  imgWebPSrc: string;
+  imgWebPSrcSet: string;
+  imgBase64: string;
+  height: number;
+  width: number;
+}
+
 interface AboutProps {
   data: {
     file: {
       childImageCloudinary: {
-        fluid: any
+        fluid: ImageProps;
       }
     }
   }
@@ -56,7 +66,6 @@ const About: SFC<AboutProps> = props => (
     <FastImage
       className={cssImg}
       {...props.data.file.childImageCloudinary.fluid}
-      sizes="100vw"
     />
     <Container>
       <StyledTitle>{"Hi, I'm Dylan Vann"}</StyledTitle>
