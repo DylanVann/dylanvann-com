@@ -45,7 +45,7 @@
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-emotion": "^9.2.6",
-    "react-fast-image": "^0.0.23",
+    "react-fast-image": "^0.0.27",
     "react-helmet": "^5.2.0",
     "react-router-prop-types": "^1.0.4",
     "react-typography": "^0.16.13",
@@ -57,11 +57,12 @@
   },
   "devDependencies": {
     "dotenv": "^6.0.0",
-    "eslint": "^5.2.0",
-    "eslint-plugin-react": "^7.10.0",
+    "eslint": "^5.4.0",
+    "eslint-plugin-react": "^7.11.1",
     "loader-utils": "^1.1.0",
-    "prettier": "^1.14.0",
-    "serve": "^9.4.0"
+    "prettier": "^1.14.2",
+    "prop-types": "^15.6.2",
+    "serve": "^9.6.0"
   },
   "homepage": "https://dylanvann.com",
   "keywords": [
