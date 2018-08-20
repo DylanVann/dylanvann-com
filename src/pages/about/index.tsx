@@ -1,6 +1,5 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index.es'
+import React, { SFC } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { graphql } from 'gatsby'
 import {
   faCodepen,
@@ -42,7 +41,17 @@ const cssImg = css`
   width: 100% !important;
 `
 
-const About = props => (
+interface AboutProps {
+  data: {
+    file: {
+      childImageCloudinary: {
+        fluid: any
+      }
+    }
+  }
+}
+
+const About: SFC<AboutProps> = props => (
   <Layout {...props} title="About">
     <FastImage
       className={cssImg}
@@ -112,20 +121,6 @@ const About = props => (
     </Container>
   </Layout>
 )
-
-About.defaultProps = {
-  siteTitle: 'Dylan Vann',
-}
-
-About.propTypes = {
-  data: PropTypes.shape({
-    file: PropTypes.shape({
-      childImageCloudinary: PropTypes.shape({
-        fluid: PropTypes.object,
-      }),
-    }),
-  }),
-}
 
 export default About
 
