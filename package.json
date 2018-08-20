@@ -8,11 +8,11 @@
   },
   "dependencies": {
     "@dylanvann/gatsby-remark-cloudinary": "^0.0.13",
-    "@dylanvann/gatsby-transformer-cloudinary": "^1.0.23",
+    "@dylanvann/gatsby-transformer-cloudinary": "^1.0.25",
     "@fortawesome/fontawesome-svg-core": "^1.2.2",
     "@fortawesome/free-brands-svg-icons": "^5.2.0",
     "@fortawesome/free-solid-svg-icons": "^5.2.0",
-    "@fortawesome/react-fontawesome": "^0.1.0",
+    "@fortawesome/react-fontawesome": "^0.1.2",
     "disqus-react": "^1.0.5",
     "emotion": "^9.2.6",
     "emotion-server": "^9.2.6",

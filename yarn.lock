@@ -743,6 +743,18 @@
     react-img-tag "^0.0.2"
     react-video-tag "^0.0.10"
 
+"@dylanvann/gatsby-cloudinary@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@dylanvann/gatsby-cloudinary/-/gatsby-cloudinary-0.0.9.tgz#8132db57f9e874c0e1a5b070090cfb4448d09304"
+  dependencies:
+    axios "^0.18.0"
+    classnames "^2.2.6"
+    cloudinary-promised "^1.0.9"
+    md5-file "^4.0.0"
+    react-fast-image "^0.0.21"
+    react-img-tag "^0.0.2"
+    react-video-tag "^0.0.10"
+
 "@dylanvann/gatsby-remark-cloudinary@^0.0.13":
   version "0.0.13"
   resolved "https://registry.yarnpkg.com/@dylanvann/gatsby-remark-cloudinary/-/gatsby-remark-cloudinary-0.0.13.tgz#20896c3c902c4506fa0b229f5309b15c7dbe3ec4"
@@ -753,11 +765,11 @@
     react-fast-image "^0.0.21"
     unist-util-select "^1.5.0"
 
-"@dylanvann/gatsby-transformer-cloudinary@^1.0.23":
-  version "1.0.23"
-  resolved "https://registry.yarnpkg.com/@dylanvann/gatsby-transformer-cloudinary/-/gatsby-transformer-cloudinary-1.0.23.tgz#8af1345f7c35ebdf693501209e0905d47e958c00"
+"@dylanvann/gatsby-transformer-cloudinary@^1.0.25":
+  version "1.0.25"
+  resolved "https://registry.yarnpkg.com/@dylanvann/gatsby-transformer-cloudinary/-/gatsby-transformer-cloudinary-1.0.25.tgz#af749ebcca44e79f402a4dae127c08663520f682"
   dependencies:
-    "@dylanvann/gatsby-cloudinary" "^0.0.8"
+    "@dylanvann/gatsby-cloudinary" "^0.0.9"
     common-tags "^1.8.0"
     react-fast-image "^0.0.18"
 
@@ -829,9 +841,9 @@
   dependencies:
     "@fortawesome/fontawesome-common-types" "^0.2.2"
 
-"@fortawesome/react-fontawesome@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@fortawesome/react-fontawesome/-/react-fontawesome-0.1.0.tgz#1fabf7e02582037cb9ff63d5ced631d43f34886b"
+"@fortawesome/react-fontawesome@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@fortawesome/react-fontawesome/-/react-fontawesome-0.1.2.tgz#baad4a6508867567aea20c1551bf62ff090d8121"
   dependencies:
     humps "^2.0.1"
     prop-types "^15.5.10"
