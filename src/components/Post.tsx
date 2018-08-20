@@ -3,8 +3,7 @@ import get from 'lodash/get'
 import { PostTitle, PostSubTitle, PostDate } from './PostTypography'
 import { Link } from 'gatsby'
 import Markdown from './Markdown'
-import styled from 'react-emotion'
-import PropTypes from 'prop-types'
+import styled from '@emotion/styled'
 
 const PostHeader = styled('header')`
   display: block;
@@ -26,7 +25,12 @@ const GitHubLink = styled('a')`
   }
 `
 
-const Post = props => {
+interface PostProps {
+  className?: string
+  list?: boolean
+}
+
+const Post = (props: PostProps) => {
   const title = get(props, 'frontmatter.title')
   const subtitle = get(props, 'frontmatter.subtitle')
   const date = get(props, 'fields.date')
@@ -49,11 +53,6 @@ const Post = props => {
       <Markdown ast={ast} />
     </div>
   )
-}
-
-Post.propTypes = {
-  className: PropTypes.string,
-  list: PropTypes.bool,
 }
 
 export default styled(Post)`

@@ -1,6 +1,5 @@
-import { css } from 'emotion'
+import { css } from '@emotion/core'
 import { lighten, darken } from 'polished'
-import { injectGlobal } from 'emotion'
 import 'prism-themes/themes/prism-base16-ateliersulphurpool.light.css'
 import 'typeface-raleway'
 import 'typeface-roboto'
@@ -10,13 +9,13 @@ export const colorTextMuted = '#575757'
 export const colorTextTitle = lighten(0.1, colorTextDark)
 export const colorTextAccent = '#428bca'
 
-export const blockStyles = css`
+export const blockStyle = css`
   display: block;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.25);
   margin: 1.53rem auto;
 `
 
-export const linkStyles = css`
+export const linkStyle = css`
   text-decoration: none;
   color: ${colorTextAccent};
   :visited {
@@ -39,67 +38,56 @@ export const fontRobotoArray = [
   'Arial',
   'sans-serif',
 ]
-export const fontRoboto = fontRobotoArray.join(', ')
 
 export const topNavHeight = 50
 
-export const resetButton = css`
-  border: none;
-  margin: 0;
-  padding: 0;
-  width: auto;
-  overflow: visible;
-  background: transparent;
-  color: inherit;
-  font: inherit;
-  line-height: normal;
-  -webkit-font-smoothing: inherit;
-  -moz-osx-font-smoothing: inherit;
-  -webkit-appearance: none;
-`
-
-injectGlobal`
-* {
+export const globalStyle = css`
+  * {
     box-sizing: border-box;
-}
+  }
 
-code[class*="language-"] {
+  code[class*='language-'] {
     font-size: inherit;
-}
+  }
 
-pre[class*="language-"] {
+  pre[class*='language-'] {
     margin-bottom: 1.53rem;
-}
+  }
 
-body {
+  body {
     font-weight: 300;
     background-color: #fcfcfc;
-}
+  }
 
-#___gatsby {
+  #___gatsby {
     padding-top: 50px;
-    display:flex;
-    flex-direction:column;
-    flex-grow:1;
-    flex-shrink:1;
-    flex-basis:100%;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 100%;
     min-height: 100vh;
-}
+  }
 
-// Fix for processing.js inserting a random span.
-span[style="position: absolute; left: 0px; opacity: 0; font-family: PjsEmptyFont, fantasy;"] {
+  // Fix for processing.js inserting a random span.
+  span[style='position: absolute; left: 0px; opacity: 0; font-family: PjsEmptyFont, fantasy;'] {
     display: none;
-}
+  }
 
-// Fix for nav covering header when an anchor is clicked.
-h2[id] {
+  // Fix for nav covering header when an anchor is clicked.
+  h2[id] {
     margin-top: -${topNavHeight}px;
     padding-top: ${topNavHeight}px;
-}
+  }
 
-@media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 768px) {
     html {
-        font-size: 106.25%;
+      font-size: 106.25%;
     }
-}
+  }
+
+  .gatsby-video-aspect-ratio,
+  .gatsby-resp-image-wrapper {
+    ${blockStyle}
+  }
 `

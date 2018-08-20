@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'react-emotion'
+import styled from '@emotion/styled'
 import { colorTextMuted } from '../styles'
 import Container from './Container'
 import { A } from './Markdown'

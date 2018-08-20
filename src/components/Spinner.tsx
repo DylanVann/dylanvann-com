@@ -1,17 +1,18 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import styled from 'react-emotion'
+import styled from '@emotion/styled'
 
-const Spinner = ({ className }) => (
-  <div className={className}>
-    <div className="bounce1" />
-    <div className="bounce2" />
-    <div className="bounce3" />
-  </div>
-)
+interface SpinnerProps {
+  className?: string
+}
 
-Spinner.propTypes = {
-  className: PropTypes.string,
+function Spinner({ className }: SpinnerProps) {
+  return (
+    <div className={className}>
+      <div className="bounce1" />
+      <div className="bounce2" />
+      <div className="bounce3" />
+    </div>
+  )
 }
 
 export default styled(Spinner)`

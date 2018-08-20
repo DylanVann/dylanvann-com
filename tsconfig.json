@@ -1,17 +1,21 @@
 {
-    "include": ["./src/**/*"],
-    "compilerOptions": {
-      "target": "esnext",
-      "module": "commonjs",
-      "lib": ["dom", "es2017"],
-      "allowJs": true,
-      "checkJs": false,
-      "jsx": "react",
-      "strict": true,
-      "esModuleInterop": true,
-      "experimentalDecorators": true,
-      "emitDecoratorMetadata": true,
-      "noEmit": true,
-      "skipLibCheck": true
-    }
+  "include": ["src"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": { "*": ["types/*"] },
+    "target": "esnext",
+    "module": "commonjs",
+    "lib": ["dom", "es2017"],
+    "allowJs": true,
+    "checkJs": false,
+    "jsx": "react",
+    "strict": true,
+    "isolatedModules": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "noEmit": true,
+    "skipLibCheck": true
   }
+}

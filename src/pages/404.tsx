@@ -4,14 +4,16 @@ import Layout from '../components/Layout'
 import { PostSubTitle, PostTitle } from '../components/PostTypography'
 import { graphql } from 'gatsby'
 
-const NotFoundPage = props => (
-  <Layout {...props} title="Not Found">
-    <Container>
-      <PostTitle>NOT FOUND</PostTitle>
-      <PostSubTitle>Nothing exists here. Except this page.</PostSubTitle>
-    </Container>
-  </Layout>
-)
+function NotFoundPage() {
+  return (
+    <Layout title="Not Found">
+      <Container>
+        <PostTitle>NOT FOUND</PostTitle>
+        <PostSubTitle>Nothing exists here. Except this page.</PostSubTitle>
+      </Container>
+    </Layout>
+  )
+}
 
 export default NotFoundPage
 

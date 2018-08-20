@@ -1,17 +1,29 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import Link from './Link'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index.es'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faChevronLeft,
   faChevronRight,
 } from '@fortawesome/free-solid-svg-icons/index'
-import styled from 'react-emotion'
+import styled from '@emotion/styled'
 
-const showPrev = (page, pageCount) => !(page === 1) && pageCount > 1
-const showNext = (page, pageCount) => !(page === pageCount) && pageCount > 1
+const showPrev = (page: number, pageCount: number) =>
+  !(page === 1) && pageCount > 1
 
-export const PageControl = ({ page, pageCount, className }) => (
+const showNext = (page: number, pageCount: number) =>
+  !(page === pageCount) && pageCount > 1
+
+interface PageControlProps {
+  page: number
+  pageCount: number
+  className?: string
+}
+
+export const PageControl = ({
+  page,
+  pageCount,
+  className,
+}: PageControlProps) => (
   <div className={className}>
     <div style={{ flex: 1 }}>
       {showPrev(page, pageCount) && (
@@ -32,12 +44,6 @@ export const PageControl = ({ page, pageCount, className }) => (
     </div>
   </div>
 )
-
-PageControl.propTypes = {
-  page: PropTypes.number,
-  pageCount: PropTypes.number,
-  className: PropTypes.string,
-}
 
 export default styled(PageControl)`
   display: flex;

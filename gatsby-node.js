@@ -5,7 +5,7 @@ const createPaginatedPages = require('gatsby-paginate')
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
-  const blogPost = path.resolve('./src/templates/BlogPost.js')
+  const blogPost = path.resolve('./src/templates/BlogPost.tsx')
 
   // language=GraphQL
   const result = await graphql(
@@ -62,7 +62,7 @@ exports.createPages = async ({ graphql, actions }) => {
   createPaginatedPages({
     edges: postEdges,
     createPage: createPage,
-    pageTemplate: 'src/templates/BlogIndex.js',
+    pageTemplate: 'src/templates/BlogIndex.tsx',
     pageLength: 5,
     context: result.data.site,
   })

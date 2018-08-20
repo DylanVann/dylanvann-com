@@ -1,10 +1,9 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { css } from 'emotion'
-import { blockStyles } from '../styles'
+import { css } from '@emotion/core'
+import { blockStyle } from '../styles'
 
-const containerClass = css`
-  ${blockStyles};
+const containerStyle = css`
+  ${blockStyle};
   position: relative;
   padding-bottom: 56.25%;
   height: 0;
@@ -22,8 +21,13 @@ const containerClass = css`
   }
 `
 
-const YouTube = ({ id }) => (
-  <div className={containerClass}>
+interface YouTubeProps {
+  id: string
+  className?: string
+}
+
+const YouTube = ({ id }: YouTubeProps) => (
+  <div css={containerStyle}>
     <iframe
       width={560}
       height={420}
@@ -33,10 +37,5 @@ const YouTube = ({ id }) => (
     />
   </div>
 )
-
-YouTube.propTypes = {
-  id: PropTypes.string.isRequired,
-  className: PropTypes.string,
-}
 
 export default YouTube

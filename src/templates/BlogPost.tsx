@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactRouterPropTypes from 'react-router-prop-types'
 import get from 'lodash/get'
 import { graphql } from 'gatsby'
 import Bio from '../components/Bio'
@@ -10,7 +9,7 @@ import TopNav from '../components/TopNav'
 import { DiscussionEmbed } from 'disqus-react'
 import { IS_SSR } from '../config'
 
-const BlogPostTemplate = props => {
+const BlogPostTemplate = (props: { location: any }) => {
   const post = get(props, 'data.markdownRemark')
   const title = get(post, 'frontmatter.title')
   const disqusShortname = 'dylanvann'
@@ -39,10 +38,6 @@ const BlogPostTemplate = props => {
   )
 }
 
-BlogPostTemplate.propTypes = {
-  location: ReactRouterPropTypes.location.isRequired,
-}
-
 export default BlogPostTemplate
 
 export const pageQuery = graphql`
@@ -58,7 +53,7 @@ export const pageQuery = graphql`
       github
     }
   }
-  fragment SiteMeta on RootQueryType {
+  fragment SiteMeta on Query {
     site {
       siteMetadata {
         title

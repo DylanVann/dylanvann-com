@@ -1,18 +1,17 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import styled from 'react-emotion'
+import styled from '@emotion/styled'
 import { colorTextMuted } from '../styles'
 
-const ListEnd = ({ className }) => (
+interface ListEndProps {
+  className?: string
+}
+
+const ListEnd = ({ className }: ListEndProps) => (
   <div className={className}>{`That's all!`}</div>
 )
 
-ListEnd.propTypes = {
-  className: PropTypes.string,
-}
-
 export default styled(ListEnd)`
   text-align: center;
-  font-weight: light;
+  font-weight: lighter;
   color: ${colorTextMuted};
 `

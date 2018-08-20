@@ -1,6 +1,0 @@
-- Add an RSS feed.
-- Lazy load all media.
-- Optimize about page image.
-- Add responsive and Webp support to gatsby-remark-cloudinary.
-- Better 404 page.
-  - Maybe include a sitemap.

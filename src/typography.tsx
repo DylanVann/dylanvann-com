@@ -2,6 +2,7 @@ import { fontRalewayArray, fontRobotoArray } from './styles'
 import Typography from 'typography'
 import Theme from 'typography-theme-us-web-design-standards'
 
+// @ts-ignore
 delete Theme.googleFonts
 
 const typography = new Typography({

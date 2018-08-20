@@ -26,7 +26,7 @@ This can be implemented like this:
 ```jsx
 import React from 'react'
 import VisibilitySensor from 'react-visibility-sensor'
-import styled from 'react-emotion'
+import styled from '@emotion/styled'
 import { css } from 'emotion'
 
 const hiddenStyles = css`

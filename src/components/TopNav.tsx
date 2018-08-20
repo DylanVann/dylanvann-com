@@ -1,8 +1,8 @@
 import React from 'react'
-import styled from 'react-emotion'
+import styled from '@emotion/styled'
 import { colorTextAccent, colorTextDark, topNavHeight } from '../styles'
 import Container from './Container'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index.es'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitter, faGithub } from '@fortawesome/free-brands-svg-icons'
 import { Link } from 'gatsby'
 

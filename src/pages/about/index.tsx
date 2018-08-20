@@ -1,4 +1,4 @@
-import React, { SFC } from 'react'
+import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { graphql } from 'gatsby'
 import {
@@ -14,11 +14,11 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { Focus } from '../../components/Bio'
 import Container from '../../components/Container'
 import Layout from '../../components/Layout'
-import styled from 'react-emotion'
-import { css } from 'emotion'
+import styled from '@emotion/styled'
+import { css } from '@emotion/core'
 import { A } from '../../components/Markdown'
 import { PostTitle } from '../../components/PostTypography'
-import { FastImage } from 'react-fast-image'
+import Img from 'gatsby-image'
 
 const FontAwesomeUL = styled('ul')`
   margin-left: 0;
@@ -41,32 +41,19 @@ const cssImg = css`
   width: 100% !important;
 `
 
-interface ImageProps {
-  imgSrc: string;
-  imgSrcSet: string;
-  imgWebPSrc: string;
-  imgWebPSrcSet: string;
-  imgBase64: string;
-  height: number;
-  width: number;
-}
-
 interface AboutProps {
   data: {
     file: {
-      childImageCloudinary: {
-        fluid: ImageProps;
+      childImageSharp: {
+        fluid: any
       }
     }
   }
 }
 
-const About: SFC<AboutProps> = props => (
+const About: React.FC<AboutProps> = (props: AboutProps) => (
   <Layout {...props} title="About">
-    <FastImage
-      className={cssImg}
-      {...props.data.file.childImageCloudinary.fluid}
-    />
+    <Img css={cssImg} fluid={props.data.file.childImageSharp.fluid} />
     <Container>
       <StyledTitle>{"Hi, I'm Dylan Vann"}</StyledTitle>
       <ul>
@@ -137,15 +124,18 @@ export const pageQuery = graphql`
   query AboutPage {
     ...SiteMeta
     file(relativePath: { eq: "about/profile_full_width.jpg" }) {
-      childImageCloudinary {
+      childImageSharp {
         fluid(maxWidth: 1024) {
-          imgSrc
-          imgSrcSet
-          imgWebPSrc
-          imgWebPSrcSet
-          imgBase64
-          height
-          width
+          base64
+          tracedSVG
+          aspectRatio
+          src
+          srcSet
+          srcWebp
+          srcSetWebp
+          sizes
+          originalImg
+          originalName
         }
       }
     }

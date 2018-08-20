@@ -1,8 +1,9 @@
 import React from 'react'
 import { A } from './Markdown'
+// @ts-ignore
 import ProfileImage from './ProfileImage.jpg'
 import { rhythm } from '../typography'
-import styled from 'react-emotion'
+import styled from '@emotion/styled'
 
 const Container = styled('div')`
   display: flex;

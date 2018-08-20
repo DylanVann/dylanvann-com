@@ -1,30 +1,24 @@
 /* eslint-env node */
-require('dotenv/config')
+require(`dotenv/config`)
 
 module.exports = {
   siteMetadata: {
-    title: 'Dylan Vann',
-    author: 'Dylan Vann',
-    description: "Dylan Vann's website.",
-    siteUrl: 'https://dylanvann.com',
+    title: `Dylan Vann`,
+    author: `Dylan Vann`,
+    description: `Dylan Vann's website.`,
+    siteUrl: `https://dylanvann.com`,
   },
   plugins: [
     `gatsby-plugin-emotion`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-typescript`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/src/pages`,
-        name: 'pages',
-      },
-    },
-    {
-      resolve: `@dylanvann/gatsby-transformer-cloudinary`,
-      options: {
-        cloudName: process.env.CLOUDINARY_CLOUD_NAME,
-        apiKey: process.env.CLOUDINARY_API_KEY,
-        apiSecret: process.env.CLOUDINARY_API_SECRET,
+        name: `pages`,
       },
     },
     {
@@ -32,15 +26,31 @@ module.exports = {
       options: {
         plugins: [
           `gatsby-remark-autolink-headers`,
-          'gatsby-remark-component',
-          'gatsby-remark-prismjs',
-          'gatsby-remark-smartypants',
+          `gatsby-remark-component`,
+          `gatsby-remark-prismjs`,
+          `gatsby-remark-smartypants`,
           {
-            resolve: '@dylanvann/gatsby-remark-cloudinary',
+            resolve: `gatsby-remark-videos`,
             options: {
-              cloudName: process.env.CLOUDINARY_CLOUD_NAME,
-              apiKey: process.env.CLOUDINARY_API_KEY,
-              apiSecret: process.env.CLOUDINARY_API_SECRET,
+              pipelines: [
+                {
+                  name: `h264`,
+                  transcode: chain =>
+                    chain
+                      .videoCodec(`libx264`)
+                      .noAudio()
+                      .outputOptions([`-b:v 0`, `-crf 25`]),
+                  maxHeight: 1000,
+                  maxWidth: 750,
+                  fileExtension: `mp4`,
+                },
+              ],
+            },
+          },
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 750,
             },
           },
         ],
@@ -53,9 +63,9 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-typography',
+      resolve: `gatsby-plugin-typography`,
       options: {
-        pathToConfigModule: 'src/typography',
+        pathToConfigModule: `src/typography`,
       },
     },
   ],
