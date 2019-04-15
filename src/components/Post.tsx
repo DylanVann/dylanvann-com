@@ -48,7 +48,7 @@ const Post = (props: PostProps) => {
         )}
         {subtitle && <PostSubTitle list={props.list}>{subtitle}</PostSubTitle>}
         <PostDate dateTime={datetime}>{date}</PostDate>
-        {github && <GitHubLink href={github}>Download on GitHub</GitHubLink>}
+        {github && <GitHubLink href={github}>GitHub</GitHubLink>}
       </PostHeader>
       <Markdown ast={ast} />
     </div>
