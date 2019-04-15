@@ -30,7 +30,10 @@ const Bio = () => (
     <ProfilePicture src={ProfileImage} alt={`Dylan Vann`} />
     <div>
       <p>
-        <strong>Dylan Vann</strong> | Software developer living in Toronto 🇨🇦.
+        <strong>Dylan Vann</strong>
+        <br />
+        Software developer living in Toronto 🇨🇦 (and sometimes NYC 🗽).
+        <br />
         <Focus />
       </p>
       <p>

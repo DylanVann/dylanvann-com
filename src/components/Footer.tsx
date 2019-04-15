@@ -2,7 +2,6 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { colorTextMuted } from '../styles'
 import Container from './Container'
-import { A } from './Markdown'
 
 const BG = styled('div')`
   line-height: 39px;
@@ -22,10 +21,7 @@ const StyledContainer = styled(Container)`
 
 const Footer = () => (
   <BG>
-    <StyledContainer>
-      © 2018 Dylan Vann |{' '}
-      <A href="https://github.com/DylanVann/dylanvann-com">View Source</A>
-    </StyledContainer>
+    <StyledContainer>© 2018 Dylan Vann</StyledContainer>
   </BG>
 )
 
