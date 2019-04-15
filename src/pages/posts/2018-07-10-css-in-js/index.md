@@ -27,14 +27,14 @@ This can be implemented like this:
 import React from 'react'
 import VisibilitySensor from 'react-visibility-sensor'
 import styled from '@emotion/styled'
-import { css } from 'emotion'
+import { css } from '@emotion/core'
 
-const hiddenStyles = css`
+const hiddenStyle = css`
   opacity: 0;
   transform: translate(0px, 60px) scale(1.05, 1.05);
 `
 
-const visibleStyles = css`
+const visibleStyle = css`
   opacity: 1;
   transform: translateX(0px) translateY(0px) translateZ(0px) scaleX(1) scaleY(1)
     scaleZ(1);
@@ -42,8 +42,8 @@ const visibleStyles = css`
 
 const Container = styled('div')`
   transition: width 0.7s ease 0s, opacity 1200ms, transform 1800ms;
-  ${hiddenStyles};
-  ${({ visible }) => visible && visibleStyles};
+  ${hiddenStyle};
+  ${({ visible }) => visible && visibleStyle};
 `
 
 class EnterAnimation extends React.Component {
@@ -123,11 +123,11 @@ To add a `no-js` specific style we'll use `emotion`.
 ```jsx
 const Container = styled('div')`
   transition: width 0.7s ease 0s, opacity 1200ms, transform 1800ms;
-  ${hiddenStyles};
+  ${hiddenStyle};
   html.no-js & {
-    ${visibleStyles};
+    ${visibleStyle};
   }
-  ${({ visible }) => visible && visibleStyles};
+  ${({ visible }) => visible && visibleStyle};
 `
 ```
 
