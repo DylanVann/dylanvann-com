@@ -69,6 +69,12 @@ export const globalStyle = css`
     min-height: 100vh;
   }
 
+  #___gatsby > div {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
   // Fix for processing.js inserting a random span.
   span[style='position: absolute; left: 0px; opacity: 0; font-family: PjsEmptyFont, fantasy;'] {
     display: none;
