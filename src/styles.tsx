@@ -75,6 +75,10 @@ export const globalStyle = css`
     flex: 1;
   }
 
+  #gatsby-noscript {
+    display: none;
+  }
+
   // Fix for processing.js inserting a random span.
   span[style='position: absolute; left: 0px; opacity: 0; font-family: PjsEmptyFont, fantasy;'] {
     display: none;

@@ -11,7 +11,7 @@ if (typeof window !== 'undefined') {
   require('intersection-observer')
 }
 
-const ContainerContainer = styled('div')`
+const Container = styled('div')`
   flex: 1;
 `
 
@@ -25,7 +25,7 @@ const Layout: React.FC<LayoutProps> = (props: LayoutProps) => (
     <Meta title={props.title} />
     <Global styles={globalStyle} />
     <TopNav />
-    <ContainerContainer>{props.children}</ContainerContainer>
+    <Container>{props.children}</Container>
     <Footer />
   </>
 )
