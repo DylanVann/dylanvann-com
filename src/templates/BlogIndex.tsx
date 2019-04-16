@@ -23,30 +23,34 @@ function BlogIndex(props: BlogIndexProps) {
     group: props.pageContext.group,
   })
 
-  const onReachedEnd = React.useCallback(async () => {
-    setState(state => ({ ...state, loading: true }))
-    const pageCount = props.pageContext.pageCount
-    const index = state.index
-    const hasReachedEnd = index === pageCount
-    if (hasReachedEnd) return
-    const newData = await fetchData(`/${index + 1}`)
-    const newGroup = newData.pageContext.group
-    const newGroups = state.group.concat(newGroup)
-    setState(state => ({
-      group: newGroups,
-      index: state.index + 1,
-      loading: false,
-    }))
-  }, [props.pageContext.pageCount, state.group, state.index])
+  React.useEffect(() => {
+    if (!state.loading) return
+    const run = async () => {
+      const pageCount = props.pageContext.pageCount
+      const index = state.index
+      const hasReachedEnd = index === pageCount
+      if (hasReachedEnd) return
+      const newIndex = index + 1
+      const newData = await fetchData(`/${newIndex}`)
+      const newGroup = newData.pageContext.group
+      const newGroups = state.group.concat(newGroup)
+      setState(() => ({
+        group: newGroups,
+        index: newIndex,
+        loading: false,
+      }))
+    }
+    run()
+  }, [props.pageContext.pageCount, state.group, state.index, state.loading])
 
   const onScroll = React.useCallback(() => {
     const distanceFromBottom =
       document.body.clientHeight - (window.pageYOffset + window.innerHeight)
     const hasReachedEnd = state.index === props.pageContext.pageCount
     if (distanceFromBottom < 200 && !state.loading && !hasReachedEnd) {
-      onReachedEnd()
+      setState(state => ({ ...state, loading: true }))
     }
-  }, [onReachedEnd, props.pageContext.pageCount, state.index, state.loading])
+  }, [props.pageContext.pageCount, state.index, state.loading])
 
   React.useEffect(() => {
     document.addEventListener('scroll', onScroll)
