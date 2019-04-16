@@ -92,7 +92,7 @@ export const globalStyle = css`
     }
   }
 
-  .gatsby-video-aspect-ratio,
+  .gatsby-video,
   .gatsby-resp-image-wrapper {
     ${blockStyle}
   }
