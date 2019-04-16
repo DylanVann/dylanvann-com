@@ -7,6 +7,6 @@ tags:
   - Code
 ---
 
-![Ant Design Draggable Modal](ant-design-draggable-modal.gif)
+![Ant Design Draggable Modal](ant-design-draggable-modal.mp4)
 
 <image-caption>Trying something out with React Hooks.</small>
