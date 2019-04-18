@@ -1,10 +1,8 @@
 import React from 'react'
 import Link from './Link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faChevronLeft,
-  faChevronRight,
-} from '@fortawesome/free-solid-svg-icons/index'
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons/faChevronLeft'
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons/faChevronRight'
 import styled from '@emotion/styled'
 
 const showPrev = (page: number, pageCount: number) =>

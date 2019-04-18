@@ -1,16 +1,14 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { graphql } from 'gatsby'
-import {
-  faCodepen,
-  faTwitter,
-  faGithub,
-  faYoutube,
-  faStackOverflow,
-  faInstagram,
-  faLinkedin,
-} from '@fortawesome/free-brands-svg-icons'
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { faCodepen } from '@fortawesome/free-brands-svg-icons/faCodepen'
+import { faTwitter } from '@fortawesome/free-brands-svg-icons/faTwitter'
+import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub'
+import { faYoutube } from '@fortawesome/free-brands-svg-icons/faYoutube'
+import { faStackOverflow } from '@fortawesome/free-brands-svg-icons/faStackOverflow'
+import { faInstagram } from '@fortawesome/free-brands-svg-icons/faInstagram'
+import { faLinkedin } from '@fortawesome/free-brands-svg-icons/faLinkedin'
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons/faEnvelope'
 import { Focus } from '../../components/Bio'
 import Container from '../../components/Container'
 import Layout from '../../components/Layout'

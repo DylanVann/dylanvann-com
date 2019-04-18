@@ -3,7 +3,8 @@ import styled from '@emotion/styled'
 import { colorTextAccent, colorTextDark, topNavHeight } from '../styles'
 import Container from './Container'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTwitter, faGithub } from '@fortawesome/free-brands-svg-icons'
+import { faTwitter } from '@fortawesome/free-brands-svg-icons/faTwitter'
+import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub'
 import { Link } from 'gatsby'
 
 const TopNavContainer = styled('div')`
