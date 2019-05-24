@@ -6,6 +6,7 @@ import Image from './Image'
 import styled from '@emotion/styled'
 import { fontRaleway, linkStyle } from '../styles'
 import Quote from './Quote'
+import Table from './Table'
 import CodePen from './CodePen'
 
 const headers: any = {}
@@ -26,6 +27,7 @@ const renderAst = new rehypeReact({
     'image-caption': Caption,
     'code-pen': CodePen,
     'youtube-video': YouTube,
+    table: Table,
     img: Image,
     a: A,
     quote: Quote,

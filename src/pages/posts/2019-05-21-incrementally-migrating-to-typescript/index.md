@@ -17,17 +17,17 @@ Unfortunately for a project of any sufficient size, you’re going to run into t
 
 So what are your options?
 
-| **Dimensions of Comparison**                   | **Solo Hackathon Over the weekend** | **Organize a team hackathon** | **Enable Linter only on NEW and edited files** | **Add to the checklist of development processes and coach the team** | **Snapshot Test of type errors** |
-| ---------------------------------------------- | ----------------------------------- | ----------------------------- | ---------------------------------------------- | -------------------------------------------------------------------- | -------------------------------- |
-| Fast to-do                                     | ✅                                  | ✅                            | ❌                                             | ❌                                                                   | ❌                               |
-| Produces High quality results                  | ✅                                  | YMMV                          | ✅                                             | ✅                                                                   | ✅                               |
-| Requires Low team-coordination                 | ✅                                  | ❌                            | ✅                                             | ❌                                                                   | ✅                               |
-| Non-breaking for WIP branches (and PRs)        | ❌                                  | ❌                            | ✅                                             | ✅                                                                   | ✅                               |
-| Reliable on larger Repos or severly messy code | ❌                                  | ❌                            | ✅                                             | ✅                                                                   | ✅                               |
-| Can enable strictist rules on day 1            | ❌                                  | ❌                            | ✅                                             | ✅                                                                   | ✅                               |
-| Easy to add stricter lint/checker rules        | ❌                                  | ❌                            | ✅                                             | ✅                                                                   | ✅                               |
-| Will achieve 0 Warnings/Errors                 | ✅                                  | ✅                            | ❌                                             | ✅                                                                   | ✅                               |
-| Easily repeatable for new linters/checkers     | ❌                                  | ❌                            | ❌                                             | ✅                                                                   | ✅                               |
+| **Dimensions of Comparison**        | **Solo Hackathon** | **Team Hackathon** | **Enable on Changed Files** | **Checklist + Coach Team** | **Snapshot Test** |
+| ----------------------------------- | ------------------ | ------------------ | --------------------------- | -------------------------- | ----------------- |
+| Fast                                | ✅                 | ✅                 | ❌                          | ❌                         | ❌                |
+| High Quality Results                | ✅                 | YMMV               | ✅                          | ✅                         | ✅                |
+| Low Team-Coordination               | ✅                 | ❌                 | ✅                          | ❌                         | ✅                |
+| Non-Breaking For Wip                | ❌                 | ❌                 | ✅                          | ✅                         | ✅                |
+| Reliable On Larger Repos/Messy Code | ❌                 | ❌                 | ✅                          | ✅                         | ✅                |
+| Can Enable Strict Rules On Day 1    | ❌                 | ❌                 | ✅                          | ✅                         | ✅                |
+| Easy To Add Stricter Rules          | ❌                 | ❌                 | ✅                          | ✅                         | ✅                |
+| Will Achieve 0 Errors               | ✅                 | ✅                 | ❌                          | ✅                         | ✅                |
+| Easily Repeatable For New Rules     | ❌                 | ❌                 | ❌                          | ✅                         | ✅                |
 
 _Think about it._
 
