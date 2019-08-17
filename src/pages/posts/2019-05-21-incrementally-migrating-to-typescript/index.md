@@ -1,6 +1,6 @@
 ---
 title: How to Incrementally Migrate 100k Lines of Code to Typescript
-subtitle: Using a Snapshot Test
+author: Dylan Vann
 ---
 
 Migrating a large project to TypeScript even with the loosest settings may be insurmountable. The number of errors is overwhelming.
@@ -9,7 +9,7 @@ You may think the best options for fixing this situation is to use a mix of Type
 
 If you run TypeScript on a large project after renaming files you may be faced with something like:
 
-![](https://i.imgur.com/Vft7POh.png)
+![Too many TypeScript errors.](./too-many-errors.png)
 
 _Or there could be a lot more errors, this project started with 15k errors._
 
@@ -74,21 +74,21 @@ subtract('1', 3, 'hello world')
 
 When we convert to TypeScript (changing file extensions and adding a `tsconfig.json` file) this will produce a number of type errors:
 
-![](https://i.imgur.com/EV2toUg.png)
+![Errors after changing file extensions to .ts.](./typescript-errors.png)
 
 At this point you should run the snapshot test and commit the result. The snapshot of the errors will look something like this:
 
-![](https://i.imgur.com/5MZtBUk.png)
+![Snapshot of TypeScript errors.](./error-snapshot.png)
 
 ## What happens when I fix or add type errors?
 
 When you fix type errors you can run `yarn check-ts -u` to update the snapshot, and you will commit something like this:
 
-![](https://i.imgur.com/Agsuu3U.png)
+![Diff after fixing TypeScript errors.](./fixing-errors-snapshot.png)
 
 If you were to add a type error by accident you would see something like this:
 
-![](https://i.imgur.com/NV69pQu.png)
+![Diff after adding TypeScript errors.](./added-errors-snapshot.png)
 
 _So at this point if you are doing PR reviews your reviewer would probably reject this change._
 
