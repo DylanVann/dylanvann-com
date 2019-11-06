@@ -1,0 +1,19 @@
+name: Test
+on:
+    push:
+        branches:
+            - master
+    pull_request:
+
+jobs:
+    test:
+        name: Test
+        runs-on: ubuntu-18.04
+        steps:
+            - uses: actions/checkout@v1
+            - name: Install
+              run: yarn install --frozen-lockfile
+            - name: Test
+              run: yarn run test
+            - name: Build
+              run: yarn build
