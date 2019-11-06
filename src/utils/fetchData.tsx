@@ -9,7 +9,7 @@ export async function fetchData(path: string) {
   const loader = anyWindow.___loader
   const getPageQueryData = anyWindow.___getPageQueryData
   const emitter = anyWindow.___emitter
-  const data = await loader.getResourcesForPathname(path)
+  const data = await loader.loadPage(path)
 
   // If we already have the data.
   if (data.json) {
