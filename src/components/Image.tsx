@@ -8,4 +8,5 @@ const Image = ({ className, ...otherProps }: {className: string}) => (
 
 export default styled(Image)`
   ${blockStyle};
+  margin: 0;
 `
