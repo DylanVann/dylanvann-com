@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { colorTextMuted } from '../styles'
-import Container from './Container'
+import { Container } from './Container'
 
 const BG = styled('div')`
   line-height: 39px;
@@ -19,10 +19,8 @@ const StyledContainer = styled(Container)`
   color: ${colorTextMuted};
 `
 
-const Footer = () => (
+export const Footer = () => (
   <BG>
     <StyledContainer>© 2018 Dylan Vann</StyledContainer>
   </BG>
 )
-
-export default Footer

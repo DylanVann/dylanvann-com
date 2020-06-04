@@ -1,12 +1,12 @@
 import React from 'react'
-import Container from '../components/Container'
-import Layout from '../components/Layout'
-import ListEnd from '../components/ListEnd'
-import Post from '../components/Post'
-import Spinner from '../components/Spinner'
+import { Container } from '../components/Container'
+import { Layout } from '../components/Layout'
+import { ListEnd } from '../components/ListEnd'
+import { Post } from '../components/Post'
+import { Spinner } from '../components/Spinner'
 import { IS_SSR } from '../config'
 import { fetchData } from '../utils/fetchData'
-import PageControl from '../components/PageControl'
+import { PageControl } from '../components/PageControl'
 
 interface BlogIndexProps {
   pageContext: {
@@ -16,7 +16,7 @@ interface BlogIndexProps {
   }
 }
 
-function BlogIndex(props: BlogIndexProps) {
+export default function BlogIndex(props: BlogIndexProps) {
   const [state, setState] = React.useState({
     loading: false,
     index: props.pageContext.index,
@@ -72,5 +72,3 @@ function BlogIndex(props: BlogIndexProps) {
     </Layout>
   )
 }
-
-export default BlogIndex

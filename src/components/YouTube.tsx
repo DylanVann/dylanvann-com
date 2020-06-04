@@ -26,7 +26,7 @@ interface YouTubeProps {
   className?: string
 }
 
-const YouTube = ({ id }: YouTubeProps) => (
+export const YouTube = ({ id }: YouTubeProps) => (
   <div css={containerStyle}>
     <iframe
       width={560}
@@ -37,5 +37,3 @@ const YouTube = ({ id }: YouTubeProps) => (
     />
   </div>
 )
-
-export default YouTube

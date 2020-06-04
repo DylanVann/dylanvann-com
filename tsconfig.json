@@ -11,7 +11,7 @@
     "jsx": "react",
     "strict": true,
     "isolatedModules": true,
-    "incremental": true,
+    "incremental": false,
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,

@@ -19,12 +19,11 @@
   "scripts": {
     "build": "gatsby build",
     "clean": "gatsby clean",
-    "format": "prettier --write '**/*.js' '**/*.md'",
-    "format:test": "prettier --list-different '**/*.js' '**/*.md'",
-    "lint": "eslint '**/*.tsx' '*.js'",
     "serve": "gatsby serve",
-    "start": "gatsby develop",
-    "test": "yarn run format:test && yarn run lint"
+    "start": "gatsby develop"
+  },
+  "resolutions": {
+    "gatsby": "npm:@dylanvann/gatsby"
   },
   "dependencies": {
     "@emotion/core": "^10.0.28",
@@ -87,8 +86,5 @@
     "gatsby-plugin-typescript": "^2.4.4",
     "prettier": "^2.0.5",
     "typescript": "^3.9.3"
-  },
-  "resolutions": {
-    "gatsby": "npm:@dylanvann/gatsby"
   }
 }

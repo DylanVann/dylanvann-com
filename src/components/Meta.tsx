@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet'
 import ProfileImage from './ProfileImage.jpg'
 import '../styles'
 
-const Meta = (props: { title?: string }) => (
+export const Meta = (props: { title?: string }) => (
   <Helmet>
     <title>{props.title ? `${props.title} | Dylan Vann` : 'Dylan Vann'}</title>
     <html lang="en" />
@@ -55,5 +55,3 @@ const Meta = (props: { title?: string }) => (
     <meta name="twitter:creator" content="@atomarranger" />
   </Helmet>
 )
-
-export default React.memo(Meta)

@@ -1,6 +1,6 @@
 import React from 'react'
-import Container from '../components/Container'
-import Layout from '../components/Layout'
+import { Container } from '../components/Container'
+import { Layout } from '../components/Layout'
 import { PostSubTitle, PostTitle } from '../components/PostTypography'
 import { graphql } from 'gatsby'
 

@@ -49,7 +49,7 @@ interface QuoteProps {
   cite?: string
 }
 
-function Quote({ quote, cite }: QuoteProps) {
+export function Quote({ quote, cite }: QuoteProps) {
   return (
     <blockquote css={style}>
       {quote}
@@ -57,5 +57,3 @@ function Quote({ quote, cite }: QuoteProps) {
     </blockquote>
   )
 }
-
-export default Quote
