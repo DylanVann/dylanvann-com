@@ -1,9 +1,9 @@
 import React from 'react'
 import get from 'lodash/get'
-import { PostTitle, PostSubTitle, PostDate } from './PostTypography'
 import { Link } from 'gatsby'
-import Markdown from './Markdown'
 import styled from '@emotion/styled'
+import { PostTitle, PostSubTitle, PostDate } from './PostTypography'
+import { Markdown } from './Markdown'
 
 const PostHeader = styled('header')`
   display: block;
@@ -30,7 +30,7 @@ interface PostProps {
   list?: boolean
 }
 
-const Post = (props: PostProps) => {
+const PostBase = (props: PostProps) => {
   const title = get(props, 'frontmatter.title')
   const subtitle = get(props, 'frontmatter.subtitle')
   const date = get(props, 'fields.date')
@@ -55,6 +55,6 @@ const Post = (props: PostProps) => {
   )
 }
 
-export default styled(Post)`
+export const Post = styled(PostBase)`
   margin-bottom: 200px;
 `

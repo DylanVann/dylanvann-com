@@ -1,9 +1,9 @@
 import React from 'react'
-import Link from './Link'
+import styled from '@emotion/styled'
+import { Link } from './Link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons/faChevronLeft'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons/faChevronRight'
-import styled from '@emotion/styled'
 
 const showPrev = (page: number, pageCount: number) =>
   !(page === 1) && pageCount > 1
@@ -17,7 +17,7 @@ interface PageControlProps {
   className?: string
 }
 
-export const PageControl = ({
+export const PageControlBase = ({
   page,
   pageCount,
   className,
@@ -43,7 +43,7 @@ export const PageControl = ({
   </div>
 )
 
-export default styled(PageControl)`
+export const PageControl = styled(PageControlBase)`
   display: flex;
   align-items: center;
   justify-content: center;

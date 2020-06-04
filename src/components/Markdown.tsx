@@ -1,13 +1,13 @@
 import React from 'react'
 import rehypeReact from 'rehype-react'
-import YouTube from './YouTube'
-import Caption from './Caption'
-import Image from './Image'
 import styled from '@emotion/styled'
 import { fontRaleway, linkStyle } from '../styles'
-import Quote from './Quote'
-import Table from './Table'
-import CodePen from './CodePen'
+import { YouTube } from './YouTube'
+import { Caption } from './Caption'
+import { Image } from './Image'
+import { Quote } from './Quote'
+import { Table } from './Table'
+import { CodePen } from './CodePen'
 
 const headers: any = {}
 for (let i = 1; i <= 6; i++) {
@@ -35,6 +35,4 @@ const renderAst = new rehypeReact({
   },
 }).Compiler
 
-const Markdown = ({ ast }: { ast: any }) => renderAst(ast)
-
-export default Markdown
+export const Markdown = ({ ast }: { ast: any }) => renderAst(ast)

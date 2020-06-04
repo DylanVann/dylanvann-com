@@ -26,6 +26,9 @@
     "start": "gatsby develop",
     "test": "yarn run format:test && yarn run lint"
   },
+  "resolutions": {
+    "gatsby": "npm:@dylanvann/gatsby"
+  },
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
@@ -87,8 +90,5 @@
     "gatsby-plugin-typescript": "^2.4.4",
     "prettier": "^2.0.5",
     "typescript": "^3.9.3"
-  },
-  "resolutions": {
-    "gatsby": "npm:@dylanvann/gatsby"
   }
 }

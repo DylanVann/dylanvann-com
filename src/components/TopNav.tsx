@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { colorTextAccent, colorTextDark, topNavHeight } from '../styles'
-import Container from './Container'
+import { Container } from './Container'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons/faTwitter'
 import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub'
@@ -71,7 +71,7 @@ const Row = styled('div')`
   justify-content: space-between;
 `
 
-const TopNav = () => (
+export const TopNav = () => (
   <TopNavContainer>
     <StyledContainer>
       <Row>
@@ -100,5 +100,3 @@ const TopNav = () => (
     </StyledContainer>
   </TopNavContainer>
 )
-
-export default TopNav

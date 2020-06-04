@@ -9,7 +9,7 @@ interface CodePenProps {
   className?: string
 }
 
-export default function CodePen(props: CodePenProps) {
+export function CodePen(props: CodePenProps) {
   React.useEffect(() => {
     const s = document.createElement('script')
     s.type = 'text/javascript'

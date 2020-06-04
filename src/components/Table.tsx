@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Table(props: { children: React.ReactNode }) {
+export function Table(props: { children: React.ReactNode }) {
   return (
     <div css={{ overflowX: 'auto', marginBottom: '1.53rem' }}>
       <table

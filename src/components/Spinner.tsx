@@ -5,7 +5,7 @@ interface SpinnerProps {
   className?: string
 }
 
-function Spinner({ className }: SpinnerProps) {
+function SpinnerBase({ className }: SpinnerProps) {
   return (
     <div className={className}>
       <div className="bounce1" />
@@ -15,7 +15,7 @@ function Spinner({ className }: SpinnerProps) {
   )
 }
 
-export default styled(Spinner)`
+export const Spinner = styled(SpinnerBase)`
   margin: 100px auto 0;
   width: 100%;
   text-align: center;

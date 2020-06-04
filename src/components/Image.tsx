@@ -2,11 +2,11 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { blockStyle } from '../styles'
 
-const Image = ({ className, ...otherProps }: { className: string }) => (
+const ImageBase = ({ className, ...otherProps }: { className: string }) => (
   <img className={className} {...otherProps} />
 )
 
-export default styled(Image)`
+export const Image = styled(ImageBase)`
   ${blockStyle};
   margin: 0;
 `

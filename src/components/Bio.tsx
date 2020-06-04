@@ -25,7 +25,7 @@ export const Focus = () => (
   </>
 )
 
-const Bio = () => (
+export const Bio = () => (
   <Container>
     <ProfilePicture src={ProfileImage} alt={`Dylan Vann`} />
     <div>
@@ -44,5 +44,3 @@ const Bio = () => (
     </div>
   </Container>
 )
-
-export default Bio

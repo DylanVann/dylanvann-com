@@ -6,11 +6,11 @@ interface ListEndProps {
   className?: string
 }
 
-const ListEnd = ({ className }: ListEndProps) => (
+const ListEndBase = ({ className }: ListEndProps) => (
   <div className={className}>{`That's all!`}</div>
 )
 
-export default styled(ListEnd)`
+export const ListEnd = styled(ListEndBase)`
   text-align: center;
   font-weight: lighter;
   color: ${colorTextMuted};
