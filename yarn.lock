@@ -8311,6 +8311,18 @@ hast-to-hyperscript@^7.0.0:
     unist-util-is "^3.0.0"
     web-namespaces "^1.1.2"
 
+hast-to-hyperscript@^8.0.0:
+  version "8.1.1"
+  resolved "https://registry.yarnpkg.com/hast-to-hyperscript/-/hast-to-hyperscript-8.1.1.tgz#081e5a98d961ab46277a844f97dfe8dae05a8479"
+  integrity sha512-IsVTowDrvX4n+Nt+zP0VLQmh/ddVtnFSLUv1gb/706ovL2VgFdnE5ior2fDHSp1Bc0E5GidF2ax+PMjd+TW7gA==
+  dependencies:
+    comma-separated-tokens "^1.0.0"
+    property-information "^5.3.0"
+    space-separated-tokens "^1.0.0"
+    style-to-object "^0.3.0"
+    unist-util-is "^4.0.0"
+    web-namespaces "^1.0.0"
+
 hast-util-from-parse5@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/hast-util-from-parse5/-/hast-util-from-parse5-4.0.2.tgz#b7164a7ffc88da4f751dc7c2f801ff8d7c143bab"
@@ -13023,13 +13035,13 @@ regjsparser@^0.6.4:
   dependencies:
     jsesc "~0.5.0"
 
-rehype-react@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/rehype-react/-/rehype-react-4.0.1.tgz#fcb79e99b49ee056cfc266c4992ecfae939e8efa"
-  integrity sha512-xg6PZHqWJLTBQM6ECvzWEZhVqRpbxrx8eAPaWQAoRK7v9lkAuBelBym3AVUvGRzlQsZky9MdKrDzyYTTm1cejQ==
+rehype-react@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/rehype-react/-/rehype-react-5.0.1.tgz#6934c90101a140328fffe22b9569b86cdeac1d73"
+  integrity sha512-vv/uqHROopaPimIw6Ip4Mx5+YySLClC7pSFJSW3QkwVYvguqbm5N+Cu4yJgt6nvDmOsP66GnQtDlU+tI6bhigQ==
   dependencies:
     "@mapbox/hast-util-table-cell-style" "^0.1.3"
-    hast-to-hyperscript "^7.0.0"
+    hast-to-hyperscript "^8.0.0"
 
 relay-compiler@9.1.0:
   version "9.1.0"
