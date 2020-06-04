@@ -1,11 +1,12 @@
 import React from 'react'
-import Helmet from 'react-helmet'
+import { Helmet } from 'react-helmet'
 // @ts-ignore
 import ProfileImage from './ProfileImage.jpg'
 import '../styles'
 
 const Meta = (props: { title?: string }) => (
-  <Helmet title={props.title ? `${props.title} | Dylan Vann` : 'Dylan Vann'}>
+  <Helmet>
+    <title>{props.title ? `${props.title} | Dylan Vann` : 'Dylan Vann'}</title>
     <html lang="en" />
     <link
       rel="apple-touch-icon"
