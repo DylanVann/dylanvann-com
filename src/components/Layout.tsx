@@ -13,12 +13,13 @@ const Container = styled('div')`
 
 interface LayoutProps {
   title?: string
+  description?: string
   children: React.ReactNode
 }
 
 export const Layout: React.FC<LayoutProps> = (props: LayoutProps) => (
   <>
-    <Meta title={props.title} />
+    <Meta title={props.title} description={props.description} />
     <Global styles={globalStyle} />
     <TopNav />
     <Container>{props.children}</Container>

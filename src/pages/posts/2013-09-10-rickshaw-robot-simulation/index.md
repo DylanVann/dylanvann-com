@@ -1,6 +1,7 @@
 ---
 title: Rickshaw Robot NX Simulation
 subtitle: UOIT Project
+description: A school project.
 tags:
   - UOIT Engineering
 ---

@@ -50,7 +50,7 @@ interface AboutProps {
 }
 
 const About: React.FC<AboutProps> = (props: AboutProps) => (
-  <Layout {...props} title="About">
+  <Layout {...props} title="About" description="About Dylan Vann.">
     <Img css={cssImg} fluid={props.data.file.childImageSharp.fluid} />
     <Container>
       <StyledTitle>{"Hi, I'm Dylan Vann"}</StyledTitle>

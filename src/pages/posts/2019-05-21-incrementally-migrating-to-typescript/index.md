@@ -1,6 +1,7 @@
 ---
 title: How to Incrementally Migrate 100k Lines of Code to Typescript
 author: Dylan Vann
+description: How to Incrementally Migrate 100k Lines of Code to Typescript
 ---
 
 Migrating a large project to TypeScript even with the loosest settings may be insurmountable. The number of errors is overwhelming.
