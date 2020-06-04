@@ -7,10 +7,6 @@ import Meta from './Meta'
 import '../styles'
 import { globalStyle } from '../styles'
 
-if (typeof window !== 'undefined') {
-  require('intersection-observer')
-}
-
 const Container = styled('div')`
   flex: 1;
 `
