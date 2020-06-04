@@ -58,7 +58,6 @@
     "gatsby-source-filesystem": "^2.0.29",
     "gatsby-transformer-remark": "^2.3.8",
     "gatsby-transformer-sharp": "^2.1.18",
-    "intersection-observer": "^0.7.0",
     "lodash": "^4.17.11",
     "polished": "^3.6.4",
     "prism-themes": "^1.4.0",
