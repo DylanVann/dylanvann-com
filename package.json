@@ -19,12 +19,8 @@
   "scripts": {
     "build": "gatsby build",
     "clean": "gatsby clean",
-    "format": "prettier --write 'src/**/*.js' 'src/**/*.md'",
-    "format:test": "prettier --list-different 'src/**/*.js' 'src/**/*.md'",
-    "lint": "eslint 'src/**/*.tsx' '*.js'",
     "serve": "gatsby serve",
-    "start": "gatsby develop",
-    "test": "yarn run format:test && yarn run lint"
+    "start": "gatsby develop"
   },
   "resolutions": {
     "gatsby": "npm:@dylanvann/gatsby"
