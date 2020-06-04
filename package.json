@@ -65,7 +65,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-emotion": "^10.0.0",
-    "react-helmet": "^5.2.0",
+    "react-helmet": "^6.0.0",
     "react-router-prop-types": "^1.0.4",
     "react-typography": "^0.16.19",
     "rehype-react": "^4.0.1",
