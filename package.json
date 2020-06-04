@@ -27,8 +27,8 @@
     "test": "yarn run format:test && yarn run lint"
   },
   "dependencies": {
-    "@emotion/core": "^10.0.10",
-    "@emotion/styled": "^10.0.10",
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
     "@fortawesome/fontawesome-svg-core": "^1.2.17",
     "@fortawesome/free-brands-svg-icons": "^5.8.1",
     "@fortawesome/free-solid-svg-icons": "^5.8.1",
@@ -60,11 +60,11 @@
     "gatsby-transformer-sharp": "^2.1.18",
     "intersection-observer": "^0.7.0",
     "lodash": "^4.17.11",
-    "polished": "^3.2.0",
-    "prism-themes": "^1.1.0",
-    "prismjs": "^1.16.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "polished": "^3.6.4",
+    "prism-themes": "^1.4.0",
+    "prismjs": "^1.20.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-emotion": "^10.0.0",
     "react-helmet": "^5.2.0",
     "react-router-prop-types": "^1.0.4",
@@ -76,19 +76,19 @@
     "typography-theme-us-web-design-standards": "^0.16.19"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.3",
-    "@types/lodash": "^4.14.123",
-    "@types/react-helmet": "^5.0.8",
+    "@babel/core": "^7.10.2",
+    "@types/lodash": "^4.14.155",
+    "@types/react-helmet": "^6.0.0",
     "@types/typography": "^0.16.2",
-    "@typescript-eslint/parser": "^2.6.1",
+    "@typescript-eslint/parser": "^3.1.0",
     "dotenv": "^8.2.0",
-    "eslint": "^6.6.0",
-    "eslint-plugin-react": "^7.12.4",
-    "eslint-plugin-react-hooks": "^2.2.0",
-    "gatsby-plugin-typescript": "^2.0.12",
+    "eslint": "^7.1.0",
+    "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-react-hooks": "^4.0.4",
+    "gatsby-plugin-typescript": "^2.4.4",
     "loader-utils": "^1.2.3",
     "prettier": "^1.17.0",
-    "typescript": "^3.4.4"
+    "typescript": "^3.9.3"
   },
   "resolutions": {
     "gatsby": "npm:@dylanvann/gatsby"
