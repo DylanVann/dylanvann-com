@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import { colorTextMuted, colorTextTitle, fontRaleway } from '../styles'
 
 export const PostTitle = styled<'h1', { list?: boolean }>('h1', {
-  shouldForwardProp: p => p !== 'list',
+  shouldForwardProp: (p) => p !== 'list',
 })`
   font-family: ${fontRaleway};
   font-size: ${(p: { list?: boolean }) => (p.list ? '1.5rem' : '2rem')};
@@ -28,9 +28,9 @@ interface PostSubTitleProps {
 }
 
 export const PostSubTitle = styled<'h2', PostSubTitleProps>('h2', {
-  shouldForwardProp: p => p !== 'list',
+  shouldForwardProp: (p) => p !== 'list',
 })`
-  font-size: ${p => (p.list ? '1.25rem' : '1.5rem')};
+  font-size: ${(p) => (p.list ? '1.25rem' : '1.5rem')};
   font-family: ${fontRaleway};
   font-weight: 300;
   margin-top: 0;

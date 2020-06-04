@@ -51,7 +51,7 @@ class EnterAnimation extends React.Component {
     visible: false,
   }
 
-  onChange = visible => {
+  onChange = (visible) => {
     if (visible && !this.state.visible) {
       this.setState({ visible: true })
     }

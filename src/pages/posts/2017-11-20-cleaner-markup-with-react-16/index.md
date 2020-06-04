@@ -19,14 +19,11 @@ import compose from './compose'
 import withLabel from './withLabel'
 import withError from './withError'
 
-const TextArea = props => <textarea className="input" {...props} />
+const TextArea = (props) => <textarea className="input" {...props} />
 
 TextArea.displayName = 'Text'
 
-export default compose(
-  withLabel,
-  withError
-)(TextArea)
+export default compose(withLabel, withError)(TextArea)
 ```
 
 The `withLabel` component looks like:
@@ -35,8 +32,8 @@ The `withLabel` component looks like:
 // withLabel.js
 import React from 'react'
 
-export default Base => {
-  const WithLabel = props => (
+export default (Base) => {
+  const WithLabel = (props) => (
     <div>
       {!!props.label && (
         <label key="label" className="label" htmlFor={props.id}>
@@ -59,10 +56,10 @@ The error component looks like:
 // withError.js
 import React from 'react'
 
-const errorId = id => `${id}-error`
+const errorId = (id) => `${id}-error`
 
-export default Base => {
-  const WithError = props => (
+export default (Base) => {
+  const WithError = (props) => (
     <div>
       <Base
         aria-describedby={!!props.error ? errorId(props.id) : null}
@@ -112,8 +109,8 @@ Our HOC will now look like:
 // withLabel.js
 import React from 'react'
 
-export default Base => {
-  const WithLabel = props => (
+export default (Base) => {
+  const WithLabel = (props) => (
     <>
       {!!props.label && (
         <label className="label" htmlFor={props.id}>

@@ -35,7 +35,7 @@ module.exports = {
               pipelines: [
                 {
                   name: `h264`,
-                  transcode: chain =>
+                  transcode: (chain) =>
                     chain
                       .videoCodec(`libx264`)
                       .noAudio()
