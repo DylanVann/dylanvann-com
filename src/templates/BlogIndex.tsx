@@ -48,7 +48,7 @@ function BlogIndex(props: BlogIndexProps) {
       document.body.clientHeight - (window.pageYOffset + window.innerHeight)
     const hasReachedEnd = state.index === props.pageContext.pageCount
     if (distanceFromBottom < 200 && !state.loading && !hasReachedEnd) {
-      setState(state => ({ ...state, loading: true }))
+      setState((state) => ({ ...state, loading: true }))
     }
   }, [props.pageContext.pageCount, state.index, state.loading])
 

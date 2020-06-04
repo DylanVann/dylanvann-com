@@ -48,7 +48,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const allEdges = result.data.allMarkdownRemark.edges
 
-  const showPost = edge => {
+  const showPost = (edge) => {
     const draft = edge.node.fields.draft
     if (process.env.NODE_ENV === 'production') {
       return !draft
@@ -78,7 +78,7 @@ exports.createPages = async ({ graphql, actions }) => {
   })
 }
 
-const getDate = slug => {
+const getDate = (slug) => {
   const dateRegex = /.*([0-9]{4}-[0-9]{2}-[0-9]{2})-.*/g
   const match = dateRegex.exec(slug)
   return match && match[1]

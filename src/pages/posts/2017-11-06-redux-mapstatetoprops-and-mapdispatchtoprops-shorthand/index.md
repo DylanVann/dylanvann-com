@@ -22,16 +22,13 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onNameChanged: name => dispatch({ type: 'NAME_CHANGED', payload: name }),
-    onEmailChanged: email =>
+    onNameChanged: (name) => dispatch({ type: 'NAME_CHANGED', payload: name }),
+    onEmailChanged: (email) =>
       dispatch({ type: 'EMAIL_CHANGED', payload: email }),
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MyComponent)
+export default connect(mapStateToProps, mapDispatchToProps)(MyComponent)
 ```
 
 This is how you can use shorthand and reselect to reduce the amount of code it takes (**less code less problems**):
