@@ -9,9 +9,10 @@ import { TopNav } from '../components/TopNav'
 import { DiscussionEmbed } from 'disqus-react'
 import { IS_SSR } from '../config'
 
-const BlogPostTemplate = (props: { location: any }) => {
+const BlogPostTemplate = (props: { location: any; description?: string }) => {
   const post = get(props, 'data.markdownRemark')
   const title = get(post, 'frontmatter.title')
+  const description = get(post, 'frontmatter.description')
   const disqusShortname = 'dylanvann'
   const url =
     !IS_SSR &&
@@ -25,7 +26,7 @@ const BlogPostTemplate = (props: { location: any }) => {
     title,
   }
   return (
-    <Layout {...props} title={title}>
+    <Layout {...props} title={title} description={description}>
       <Container>
         <TopNav />
         <Post {...post} />
@@ -49,6 +50,7 @@ export const pageQuery = graphql`
     }
     frontmatter {
       title
+      description
       subtitle
       github
     }
