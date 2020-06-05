@@ -30,7 +30,7 @@ export const Focus = () => (
   </React.Fragment>
 )
 
-const SignUpForm = () => {
+export const SignUpForm = () => {
   const [name, setName] = React.useState('')
   const [email, setEmail] = React.useState('')
   const [subscribed, setSubscribed] = React.useState(false)

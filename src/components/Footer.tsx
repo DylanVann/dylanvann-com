@@ -19,8 +19,11 @@ const StyledContainer = styled(Container)`
   color: ${colorTextMuted};
 `
 
-export const Footer = () => (
-  <BG>
-    <StyledContainer>© 2018 Dylan Vann</StyledContainer>
-  </BG>
-)
+export const Footer = () => {
+  const year = new Date().getFullYear()
+  return (
+    <BG>
+      <StyledContainer>{`© ${year} Dylan Vann`}</StyledContainer>
+    </BG>
+  )
+}

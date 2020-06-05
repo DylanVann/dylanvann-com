@@ -9,7 +9,7 @@ import { faStackOverflow } from '@fortawesome/free-brands-svg-icons/faStackOverf
 import { faInstagram } from '@fortawesome/free-brands-svg-icons/faInstagram'
 import { faLinkedin } from '@fortawesome/free-brands-svg-icons/faLinkedin'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons/faEnvelope'
-import { Focus } from '../../components/Bio'
+import { Focus, SignUpForm } from '../../components/Bio'
 import { Container } from '../../components/Container'
 import { Layout } from '../../components/Layout'
 import styled from '@emotion/styled'
@@ -112,6 +112,8 @@ const About: React.FC<AboutProps> = (props: AboutProps) => (
           </StyledA>
         </li>
       </FontAwesomeUL>
+      <hr />
+      <SignUpForm />
     </Container>
   </Layout>
 )
