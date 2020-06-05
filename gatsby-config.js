@@ -9,6 +9,7 @@ module.exports = {
     siteUrl: `https://dylanvann.com`,
   },
   plugins: [
+    `gatsby-plugin-theme-ui`,
     `gatsby-plugin-emotion`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-typescript`,

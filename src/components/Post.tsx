@@ -4,25 +4,12 @@ import { Link } from 'gatsby'
 import styled from '@emotion/styled'
 import { PostTitle, PostSubTitle, PostDate } from './PostTypography'
 import { Markdown } from './Markdown'
+import { GitHubLink } from './GitHubLink'
 
 const PostHeader = styled('header')`
   display: block;
   margin-bottom: 40px;
   text-align: center;
-`
-
-const GitHubLink = styled('a')`
-  padding: 6px 12px;
-  display: inline-block;
-  color: #428bca !important;
-  border: 1px solid #428bca;
-  transition-property: all;
-  transition-duration: 0.2s;
-  text-decoration: none;
-  :hover {
-    color: #1f496e !important;
-    border-color: #1f496e;
-  }
 `
 
 interface PostProps {
@@ -56,5 +43,5 @@ const PostBase = (props: PostProps) => {
 }
 
 export const Post = styled(PostBase)`
-  margin-bottom: 200px;
+  margin-bottom: 40px;
 `
