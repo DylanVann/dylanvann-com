@@ -9,8 +9,8 @@ description: Everything you need to know.
 
 <!-- prettier-ignore-start -->
 ```tsx
-const withOutASemi = 'possibly unfinished'
-const withASemi = 'clearly terminated';
+const semicolon = 'clearly terminated';
+const noSemicolon = 'possibly unfinished'
 ```
 <!-- prettier-ignore-end -->
 
@@ -22,7 +22,7 @@ _It goes without saying you'll also get to read slightly more._
 
 This attribute of semicolons will help you keep code reviewers on their toes.
 
-### Harder to Read Diffs When Adding a Chained Method
+### Harder to Read Diffs When Removing a Chained Method
 
 <table style="width: 100%;">
 <tr>
