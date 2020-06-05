@@ -97,12 +97,12 @@ This change now shows as affecting two lines, when it really only affects one.
 <tr>
 <td>
 
-![Semi](semi.mp4)
+![Semi](semi-small.mp4)
 
 </td>
 <td>
 
-![No Semi](no-semi.mp4)
+![No Semi](no-semi-small.mp4)
 
 </td>
 </tr>
