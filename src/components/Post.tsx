@@ -43,5 +43,5 @@ const PostBase = (props: PostProps) => {
 }
 
 export const Post = styled(PostBase)`
-  margin-bottom: 80px;
+  margin-bottom: 40px;
 `

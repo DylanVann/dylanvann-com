@@ -47,9 +47,11 @@ const SignUpForm = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            flexDirection: 'column'
           }}
         >
-          Subscribed!
+          <strong sx={{ mb: 20 }}>Subscribed!</strong>
+          You should recieve an email with a confirmation link!
         </div>
       )}
       <form
@@ -72,6 +74,7 @@ const SignUpForm = () => {
         }}
         sx={{
           opacity: subscribed ? 0 : 1,
+          visibility: subscribed ? 'hidden' : 'visible',
           display: 'grid',
           gap: 1,
           marginLeft: '5%',
