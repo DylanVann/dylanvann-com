@@ -1,6 +1,7 @@
 import { css } from '@emotion/core'
 import { lighten, darken } from 'polished'
 import 'prism-themes/themes/prism-base16-ateliersulphurpool.light.css'
+import 'prismjs/plugins/diff-highlight/prism-diff-highlight.css'
 import 'typeface-raleway'
 import 'typeface-roboto'
 
@@ -44,6 +45,14 @@ export const topNavHeight = 50
 export const globalStyle = css`
   * {
     box-sizing: border-box;
+  }
+
+  .token.inserted {
+    border-bottom: none !important;
+  }
+
+  .token.deleted {
+    text-decoration: none !important;
   }
 
   code[class*='language-'] {
@@ -99,5 +108,9 @@ export const globalStyle = css`
   .gatsby-video,
   .gatsby-resp-image-wrapper {
     ${blockStyle}
+  }
+
+  .anchor.before {
+    top: 50px;
   }
 `

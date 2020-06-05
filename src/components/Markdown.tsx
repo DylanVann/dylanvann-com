@@ -13,6 +13,8 @@ const headers: any = {}
 for (let i = 1; i <= 6; i++) {
   const el: any = `h${i}`
   headers[el] = styled(el)`
+    margin-top: -50px !important;
+    padding-top: 50px !important;
     font-family: ${fontRaleway};
   `
 }
@@ -20,6 +22,20 @@ for (let i = 1; i <= 6; i++) {
 export const A = styled(`a`)`
   ${linkStyle};
 `
+
+const Pre = (p: any) => {
+  console.log(p.className)
+  return (
+    <pre
+      {...p}
+      className={
+        p.className === 'language-diff'
+          ? 'language-diff diff-highlight'
+          : p.className
+      }
+    />
+  )
+}
 
 const renderAst = new rehypeReact({
   createElement: React.createElement,
@@ -30,6 +46,7 @@ const renderAst = new rehypeReact({
     table: Table,
     img: Image,
     a: A,
+    pre: Pre,
     quote: Quote,
     ...headers,
   },
