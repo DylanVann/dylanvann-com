@@ -47,7 +47,7 @@ const SignUpForm = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            flexDirection: 'column'
+            flexDirection: 'column',
           }}
         >
           <strong sx={{ mb: 20 }}>Subscribed!</strong>
