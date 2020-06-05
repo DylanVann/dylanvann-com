@@ -30,6 +30,7 @@ const BlogPostTemplate = (props: { location: any; description?: string }) => {
       <Container>
         <TopNav />
         <Post {...post} />
+        <hr/>
         <Bio />
         {!IS_SSR && (
           <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />

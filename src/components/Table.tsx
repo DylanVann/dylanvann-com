@@ -10,9 +10,8 @@ export function Table(props: { children: React.ReactNode }) {
           whiteSpace: 'nowrap',
           marginBottom: 0,
         }}
-      >
-        {props.children}
-      </table>
+        {...props}
+      />
     </div>
   )
 }

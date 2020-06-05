@@ -21,6 +21,18 @@ export const A = styled(`a`)`
   ${linkStyle};
 `
 
+const Pre = (p: any) => {
+  console.log(p.className)
+  return (
+    <pre
+      {...p}
+      className={
+        p.className === 'language-diff' ? 'language-diff diff-highlight' : p.className
+      }
+    />
+  )
+}
+
 const renderAst = new rehypeReact({
   createElement: React.createElement,
   components: {
@@ -30,6 +42,7 @@ const renderAst = new rehypeReact({
     table: Table,
     img: Image,
     a: A,
+    pre: Pre,
     quote: Quote,
     ...headers,
   },
