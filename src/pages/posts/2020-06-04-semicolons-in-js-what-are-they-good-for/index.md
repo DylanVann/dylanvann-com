@@ -45,7 +45,7 @@ This attribute of semicolons will help you keep code reviewers on their toes.
 ```diff
   const thing = another
     .map(v => v * 2)
--   .filter(v => v / 5);
+-   .filter(v => v / 5)
 ```
 
 </td>
@@ -78,7 +78,7 @@ I bet our reviewer didn't see that one coming when they spent time scanning both
 ```diff
   const thing = another
     .map(v => v * 2)
-+   .filter(v => v / 5);
++   .filter(v => v / 5)
 ```
 
 </td>
