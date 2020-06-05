@@ -1,8 +1,15 @@
 import React from 'react'
 
-export function Table(props: { children: React.ReactNode }) {
+export function Table(props: { children: React.ReactNode; style: any }) {
+  // Fix for semi article tables.
+  const overflowX = props.style ? undefined : 'auto'
   return (
-    <div css={{ overflowX: 'auto', marginBottom: '1.53rem' }}>
+    <div
+      css={{
+        overflowX,
+        marginBottom: '1.53rem',
+      }}
+    >
       <table
         css={{
           width: 'auto',
