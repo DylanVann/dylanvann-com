@@ -109,4 +109,8 @@ export const globalStyle = css`
   .gatsby-resp-image-wrapper {
     ${blockStyle}
   }
+
+  .anchor.before {
+    top: 50px;
+  }
 `
