@@ -9,7 +9,7 @@ Things you should never have in your JavaScript code:
 
 1. Lines starting with `[`.
 2. Lines starting with `(`.
-3. Newlines after `return`.
+3. Newlines directly after `return`s.
 4. Semicolons - `;`.
 
-For more info see [Semicolons in JavaScript, what are they good for?]().
+For more info see [Semicolons in JavaScript, what are they good for?](/semicolons-in-js-what-are-they-good-for).
