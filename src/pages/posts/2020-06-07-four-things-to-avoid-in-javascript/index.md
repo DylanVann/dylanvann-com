@@ -1,5 +1,5 @@
 ---
-title: Four Things to Avoid in JavaCcript
+title: Four Things to Avoid in JavaScript
 subtitle: Common code issues when writing JavaScript.
 author: Dylan Vann
 description: Common code issues when writing JavaScript.
