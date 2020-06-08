@@ -24,7 +24,6 @@ export const A = styled(`a`)`
 `
 
 const Pre = (p: any) => {
-  console.log(p.className)
   return (
     <pre
       {...p}
