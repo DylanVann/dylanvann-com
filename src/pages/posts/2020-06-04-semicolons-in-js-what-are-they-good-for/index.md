@@ -132,3 +132,5 @@ Do you write code like this? If you do you'll love semicolons.
 ## Conclusion
 
 If you like making it needlessly more difficult to type out, modify, and code review, your code, then you should use semicolons in JavaScript.
+
+For more info see [Four Things to Avoid in JavaScript](/four-things-to-avoid-in-javascript).

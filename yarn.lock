@@ -7203,6 +7203,14 @@ gatsby-paginate@^1.0.17:
   dependencies:
     path "^0.12.7"
 
+gatsby-plugin-catch-links@^2.3.4:
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-catch-links/-/gatsby-plugin-catch-links-2.3.4.tgz#e834c8ba59a77d5af372cc17b76fb5a44e1e8425"
+  integrity sha512-O0zPqfz8qmfn9/LgSMVpvPqgWrckTFha46hMH9grPQ4GVNKmaaDm7RzE9pI/qTxxD0b8EkKHDaF2JM2BeDkVcw==
+  dependencies:
+    "@babel/runtime" "^7.10.2"
+    escape-string-regexp "^1.0.5"
+
 gatsby-plugin-emotion@^4.3.3:
   version "4.3.3"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-emotion/-/gatsby-plugin-emotion-4.3.3.tgz#61f20d63ddca46b7349ef1405cd13dbe49640043"
