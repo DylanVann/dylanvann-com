@@ -17,10 +17,7 @@ exports.createPages = async ({ graphql, actions }) => {
             author
           }
         }
-        allMdx(
-          limit: 1000
-          sort: { fields: [fields___date], order: DESC }
-        ) {
+        allMdx(limit: 1000, sort: { fields: [fields___date], order: DESC }) {
           edges {
             node {
               body
