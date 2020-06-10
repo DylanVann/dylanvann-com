@@ -48,7 +48,7 @@ export default connect(
   {
     onEmailChanged,
     onNameChanged,
-  }
+  },
 )(MyComponent)
 ```
 

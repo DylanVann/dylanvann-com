@@ -18,7 +18,7 @@ const BlogPostTemplate = (props: { location: any; description?: string }) => {
     !IS_SSR &&
     window.location.href.replace(
       'http://localhost:8000',
-      'https://dylanvann.com'
+      'https://dylanvann.com',
     )
   const disqusConfig = {
     url,
@@ -30,7 +30,7 @@ const BlogPostTemplate = (props: { location: any; description?: string }) => {
       <Container>
         <TopNav />
         <Post {...post} />
-        <hr/>
+        <hr />
         <Bio />
         {!IS_SSR && (
           <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />

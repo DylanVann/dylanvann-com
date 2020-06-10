@@ -23,7 +23,7 @@ export const Meta = ({
           }
         }
       }
-    `
+    `,
   )
 
   const metaDescription = description || site.siteMetadata.description
