@@ -1,5 +1,4 @@
 import React from 'react'
-import rehypeReact from 'rehype-react'
 import styled from '@emotion/styled'
 import { fontRaleway, linkStyle } from '../styles'
 import { YouTube } from './YouTube'
@@ -8,6 +7,8 @@ import { Image } from './Image'
 import { Quote } from './Quote'
 import { Table } from './Table'
 import { CodePen } from './CodePen'
+import { MDXProvider } from '@mdx-js/react'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
 
 const headers: any = {}
 for (let i = 1; i <= 6; i++) {
@@ -36,19 +37,20 @@ const Pre = (p: any) => {
   )
 }
 
-const renderAst = new rehypeReact({
-  createElement: React.createElement,
-  components: {
-    'image-caption': Caption,
-    'code-pen': CodePen,
-    'youtube-video': YouTube,
-    table: Table,
-    img: Image,
-    a: A,
-    pre: Pre,
-    quote: Quote,
-    ...headers,
-  },
-}).Compiler
+const components = {
+  Caption,
+  CodePen,
+  YouTube,
+  // img: Image,
+  table: Table,
+  a: A,
+  pre: Pre,
+  quote: Quote,
+  ...headers,
+}
 
-export const Markdown = ({ ast }: { ast: any }) => renderAst(ast)
+export const Markdown: React.FC<{ children: string }> = (props) => (
+  <MDXProvider components={components}>
+    <MDXRenderer>{props.children}</MDXRenderer>
+  </MDXProvider>
+)

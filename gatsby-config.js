@@ -1,6 +1,38 @@
 /* eslint-env node */
 require(`dotenv/config`)
 
+const remarkPlugins = [
+  `gatsby-remark-autolink-headers`,
+  `gatsby-remark-component`,
+  `gatsby-remark-prismjs`,
+  `gatsby-remark-smartypants`,
+  {
+    resolve: `gatsby-remark-videos`,
+    options: {
+      pipelines: [
+        {
+          name: `h264`,
+          transcode: (chain) =>
+            chain
+              .videoCodec(`libx264`)
+              .noAudio()
+              .outputOptions([`-b:v 0`, `-crf 25`]),
+          maxHeight: 1000,
+          maxWidth: 750,
+          fileExtension: `mp4`,
+        },
+      ],
+    },
+  },
+  {
+    resolve: `gatsby-remark-images`,
+    options: {
+      maxWidth: 750,
+    },
+  },
+  `gatsby-remark-copy-linked-files`,
+]
+
 module.exports = {
   siteMetadata: {
     title: `Dylan Vann`,
@@ -24,41 +56,12 @@ module.exports = {
         name: `pages`,
       },
     },
+    ...remarkPlugins,
+    `gatsby-remark-images`,
     {
-      resolve: `gatsby-transformer-remark`,
-      options: {
-        plugins: [
-          `gatsby-remark-autolink-headers`,
-          `gatsby-remark-component`,
-          `gatsby-remark-prismjs`,
-          `gatsby-remark-smartypants`,
-          {
-            resolve: `gatsby-remark-videos`,
-            options: {
-              pipelines: [
-                {
-                  name: `h264`,
-                  transcode: (chain) =>
-                    chain
-                      .videoCodec(`libx264`)
-                      .noAudio()
-                      .outputOptions([`-b:v 0`, `-crf 25`]),
-                  maxHeight: 1000,
-                  maxWidth: 750,
-                  fileExtension: `mp4`,
-                },
-              ],
-            },
-          },
-          {
-            resolve: `gatsby-remark-images`,
-            options: {
-              maxWidth: 750,
-            },
-          },
-          `gatsby-remark-copy-linked-files`,
-        ],
-      },
+      resolve: `gatsby-plugin-mdx`,
+      extensions: ['.mdx', '.md'],
+      gatsbyRemarkPlugins: remarkPlugins,
     },
     {
       resolve: `gatsby-plugin-google-analytics`,
