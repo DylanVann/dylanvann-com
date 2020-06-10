@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
 import React from 'react'
-import { A } from './Markdown'
+import { A } from './A'
 // @ts-ignore
 import ProfileImage from './ProfileImage.jpg'
 import { rhythm } from '../typography'
