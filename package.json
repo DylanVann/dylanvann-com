@@ -22,6 +22,11 @@
     "serve": "gatsby serve",
     "start": "gatsby develop"
   },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
   "resolutions": {
     "gatsby": "npm:@dylanvann/gatsby"
   },
