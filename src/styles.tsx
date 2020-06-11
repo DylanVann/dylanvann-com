@@ -110,7 +110,29 @@ export const globalStyle = css`
     ${blockStyle}
   }
 
-  .anchor.before {
+  .anchor {
+    position: absolute;
+    left: 0;
     top: 50px;
+    bottom: 0;
+    transform: translateX(-100%);
+    padding-right: 4px;
+  }
+
+  .anchor .autolink-header-svg {
+    visibility: hidden;
+  }
+
+  .anchor:hover .autolink-header-svg {
+    visibility: visible;
+  }
+
+  h1:hover .autolink-header-svg,
+  h2:hover .autolink-header-svg,
+  h3:hover .autolink-header-svg,
+  h4:hover .autolink-header-svg,
+  h5:hover .autolink-header-svg,
+  h6:hover .autolink-header-svg {
+    visibility: visible;
   }
 `
