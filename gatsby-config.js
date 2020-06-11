@@ -9,14 +9,6 @@ module.exports = {
     siteUrl: `https://dylanvann.com`,
   },
   plugins: [
-    `gatsby-plugin-theme-ui`,
-    `gatsby-plugin-emotion`,
-    `gatsby-plugin-sitemap`,
-    `gatsby-plugin-catch-links`,
-    `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-typescript`,
-    `gatsby-plugin-sharp`,
-    `gatsby-transformer-sharp`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -24,14 +16,20 @@ module.exports = {
         name: `pages`,
       },
     },
+    `gatsby-plugin-theme-ui`,
+    `gatsby-plugin-emotion`,
+    `gatsby-plugin-sitemap`,
+    `gatsby-plugin-catch-links`,
+    `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-typescript`,
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: `gatsby-plugin-mdx`,
       options: {
-        plugins: [
-          `gatsby-remark-autolink-headers`,
-          `gatsby-remark-component`,
-          `gatsby-remark-prismjs`,
-          `gatsby-remark-smartypants`,
+        extensions: ['.mdx', '.md'],
+        // a workaround to solve mdx-remark plugin compat issue
+        // https://github.com/gatsbyjs/gatsby/issues/15486
+        plugins: [`gatsby-remark-images`],
+        gatsbyRemarkPlugins: [
           {
             resolve: `gatsby-remark-videos`,
             options: {
@@ -56,10 +54,24 @@ module.exports = {
               maxWidth: 750,
             },
           },
-          `gatsby-remark-copy-linked-files`,
+          {
+            resolve: `gatsby-remark-copy-linked-files`,
+          },
+
+          {
+            resolve: `gatsby-remark-smartypants`,
+          },
+          {
+            resolve: `gatsby-remark-autolink-headers`,
+          },
+          {
+            resolve: `gatsby-remark-prismjs`,
+          },
         ],
       },
     },
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {

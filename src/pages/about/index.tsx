@@ -14,7 +14,7 @@ import { Container } from '../../components/Container'
 import { Layout } from '../../components/Layout'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
-import { A } from '../../components/Markdown'
+import { A } from '../../components/A'
 import { PostTitle } from '../../components/PostTypography'
 import Img from 'gatsby-image'
 

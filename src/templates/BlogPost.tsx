@@ -10,7 +10,7 @@ import { DiscussionEmbed } from 'disqus-react'
 import { IS_SSR } from '../config'
 
 const BlogPostTemplate = (props: { location: any; description?: string }) => {
-  const post = get(props, 'data.markdownRemark')
+  const post = get(props, 'data.mdx')
   const title = get(post, 'frontmatter.title')
   const description = get(post, 'frontmatter.description')
   const disqusShortname = 'dylanvann'
@@ -43,8 +43,8 @@ const BlogPostTemplate = (props: { location: any; description?: string }) => {
 export default BlogPostTemplate
 
 export const pageQuery = graphql`
-  fragment BlogPost on MarkdownRemark {
-    htmlAst
+  fragment BlogPost on Mdx {
+    body
     fields {
       slug
       date(formatString: "MMMM DD, YYYY")
@@ -66,7 +66,7 @@ export const pageQuery = graphql`
   }
   query BlogPostBySlug($slug: String!) {
     ...SiteMeta
-    markdownRemark(fields: { slug: { eq: $slug } }) {
+    mdx(fields: { slug: { eq: $slug } }) {
       ...BlogPost
     }
   }

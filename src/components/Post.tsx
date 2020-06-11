@@ -13,20 +13,20 @@ const PostHeader = styled('header')`
 `
 
 interface PostProps {
+  body: any
   className?: string
   list?: boolean
 }
 
-const PostBase = (props: PostProps) => {
+export const Post = (props: PostProps) => {
   const title = get(props, 'frontmatter.title')
   const subtitle = get(props, 'frontmatter.subtitle')
   const date = get(props, 'fields.date')
   const datetime = get(props, 'fields.datetime')
   const slug = get(props, 'fields.slug')
   const github = get(props, 'frontmatter.github')
-  const ast = get(props, 'htmlAst')
   return (
-    <div className={props.className}>
+    <div className={props.className} style={{ marginBottom: 80 }}>
       <PostHeader>
         {title && (
           <PostTitle list={props.list}>
@@ -37,11 +37,7 @@ const PostBase = (props: PostProps) => {
         <PostDate dateTime={datetime}>{date}</PostDate>
         {github && <GitHubLink href={github}>GitHub</GitHubLink>}
       </PostHeader>
-      <Markdown ast={ast} />
+      <Markdown>{props.body}</Markdown>
     </div>
   )
 }
-
-export const Post = styled(PostBase)`
-  margin-bottom: 80px;
-`

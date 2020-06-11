@@ -17,13 +17,10 @@ exports.createPages = async ({ graphql, actions }) => {
             author
           }
         }
-        allMarkdownRemark(
-          limit: 1000
-          sort: { fields: [fields___date], order: DESC }
-        ) {
+        allMdx(limit: 1000, sort: { fields: [fields___date], order: DESC }) {
           edges {
             node {
-              htmlAst
+              body
               fields {
                 slug
                 date(formatString: "MMMM DD, YYYY")
@@ -46,7 +43,7 @@ exports.createPages = async ({ graphql, actions }) => {
     throw new Error(result.errors)
   }
 
-  const allEdges = result.data.allMarkdownRemark.edges
+  const allEdges = result.data.allMdx.edges
 
   const showPost = (edge) => {
     const draft = edge.node.fields.draft
@@ -87,7 +84,7 @@ const getDate = (slug) => {
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
-  if (node.internal.type === `MarkdownRemark`) {
+  if (node.internal.type === `Mdx`) {
     const slugWithDate = createFilePath({ node, getNode })
     const date = getDate(slugWithDate)
     const slug = slugWithDate
@@ -112,4 +109,16 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       })
     }
   }
+}
+
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions
+  createTypes(`
+    type Mdx implements Node {
+      frontmatter: MdxFrontmatter!
+    }
+    type MdxFrontmatter {
+      github: String
+    }
+  `)
 }
