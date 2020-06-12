@@ -1013,7 +1013,7 @@
     lodash "^4.17.15"
     progress "^1.1.8"
 
-"@dylanvann/gatsby-remark-videos@1.0.0":
+"@dylanvann/gatsby-remark-videos@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@dylanvann/gatsby-remark-videos/-/gatsby-remark-videos-1.0.0.tgz#84c1b567378b8b7a65b39fcc770b5e93fb60f378"
   integrity sha512-cZzFJ17oprKwqFdhVGUvZXCDJyZ4cM9QKsJ07kQHnHg9Q291jk9IgJ9FO7ZxykyhF79sys8wwKPpx2u78TPB2w==
