@@ -31,7 +31,7 @@ module.exports = {
         plugins: [`gatsby-remark-images`],
         gatsbyRemarkPlugins: [
           {
-            resolve: `gatsby-remark-videos`,
+            resolve: `@dylanvann/gatsby-remark-videos`,
             options: {
               pipelines: [
                 {
