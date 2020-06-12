@@ -1014,9 +1014,9 @@
     progress "^1.1.8"
 
 "@dylanvann/gatsby-remark-videos@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@dylanvann/gatsby-remark-videos/-/gatsby-remark-videos-1.0.0.tgz#84c1b567378b8b7a65b39fcc770b5e93fb60f378"
-  integrity sha512-cZzFJ17oprKwqFdhVGUvZXCDJyZ4cM9QKsJ07kQHnHg9Q291jk9IgJ9FO7ZxykyhF79sys8wwKPpx2u78TPB2w==
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@dylanvann/gatsby-remark-videos/-/gatsby-remark-videos-1.0.1.tgz#5a081ad89a5e84d942fdf1b947254b3592cbc2c2"
+  integrity sha512-Wfs15Ltt1Uz9AkYUQIiDD+F8fNNg+IGm1mtCeKthqouQOdQSYO9s4yGRqqlDTgRT0Wulm8J0/cVB+UM3xuXrlA==
   dependencies:
     "@babel/runtime" "7.10.2"
     "@dylanvann/gatsby-plugin-ffmpeg" "^1.0.0"
@@ -5750,9 +5750,9 @@ ee-first@1.1.1:
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
 electron-to-chromium@^1.3.413:
-  version "1.3.467"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.467.tgz#84eeb332134d49f0e49b88588824e56b20af9e27"
-  integrity sha512-U+QgsL8TZDU/n+rDnYDa3hY5uy3C4iry9mrJS0PNBBGwnocuQ+aHSfgY44mdlaK9744X5YqrrGUvD9PxCLY1HA==
+  version "1.3.468"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.468.tgz#7ff3e162e4ca91fd972c67dd51b00e7e421ceba2"
+  integrity sha512-+KAppdklzPd5v8nLOvtDiD/S67mCT9gFRAvngYe8zuFy9azHhT9vWWH6WEPPCcyjQ1JMYVgqbN29yZ0paqxsEw==
 
 elliptic@^6.0.0, elliptic@^6.5.2:
   version "6.5.2"
