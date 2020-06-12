@@ -999,10 +999,10 @@
     http-response-object "^3.0.1"
     parse-cache-control "^1.0.1"
 
-"@dylanvann/gatsby-plugin-ffmpeg@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@dylanvann/gatsby-plugin-ffmpeg/-/gatsby-plugin-ffmpeg-0.0.9.tgz#474dbb0192536892927ba3f619cfd54e7f7fabc8"
-  integrity sha512-P26zTQL4Ts2Kbz+Sf01M0GhboG+T8PLNK95hvy3Ioesyq1IpKbh3jxHPFx6AwX2F22QiDaHlCURn1+yNe1eTxA==
+"@dylanvann/gatsby-plugin-ffmpeg@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@dylanvann/gatsby-plugin-ffmpeg/-/gatsby-plugin-ffmpeg-1.0.0.tgz#94e58430558c19129eef4200df50240bbd6ee410"
+  integrity sha512-YcqhOzMdTbs6iVhv3MpVu+1DKkrv27iYi85r7PBgASWgJeBnLnV7dfe+zLszFf9Z0NL2g2qCabfYyFQIdwi/7Q==
   dependencies:
     async "^2.6.2"
     ffmpeg-static "^4.2.2"
@@ -1012,6 +1012,18 @@
     fs-extra "^9.0.1"
     lodash "^4.17.15"
     progress "^1.1.8"
+
+"@dylanvann/gatsby-remark-videos@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@dylanvann/gatsby-remark-videos/-/gatsby-remark-videos-1.0.0.tgz#84c1b567378b8b7a65b39fcc770b5e93fb60f378"
+  integrity sha512-cZzFJ17oprKwqFdhVGUvZXCDJyZ4cM9QKsJ07kQHnHg9Q291jk9IgJ9FO7ZxykyhF79sys8wwKPpx2u78TPB2w==
+  dependencies:
+    "@babel/runtime" "7.10.2"
+    "@dylanvann/gatsby-plugin-ffmpeg" "^1.0.0"
+    is-relative-url "^2.0.0"
+    lodash "^4.17.15"
+    slash "^3.0.0"
+    unist-util-select "^1.5.0"
 
 "@emotion/babel-plugin-jsx-pragmatic@^0.1.5":
   version "0.1.5"
@@ -7467,18 +7479,6 @@ gatsby-remark-smartypants@^2.3.4:
     retext "^5.0.0"
     retext-smartypants "^3.0.3"
     unist-util-visit "^1.4.1"
-
-"gatsby-remark-videos@npm:@dylanvann/gatsby-remark-videos":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@dylanvann/gatsby-remark-videos/-/gatsby-remark-videos-0.0.8.tgz#1e59ab2bb6f7c44202d192c6936b4efb656f9f76"
-  integrity sha512-diZPXJ6ZwU7zGRdSuqHfntB5ufwi8XS2PEhfsFCFM6agA6sGEaTCCgeOEsId8pOXLkPcTY0IpcqCPD74k0I4BQ==
-  dependencies:
-    "@babel/runtime" "7.10.2"
-    "@dylanvann/gatsby-plugin-ffmpeg" "^0.0.9"
-    is-relative-url "^2.0.0"
-    lodash "^4.17.15"
-    slash "^3.0.0"
-    unist-util-select "^1.5.0"
 
 gatsby-source-filesystem@^2.3.11:
   version "2.3.11"
