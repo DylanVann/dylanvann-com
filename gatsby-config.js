@@ -20,7 +20,7 @@ module.exports = {
     `gatsby-plugin-emotion`,
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-catch-links`,
-    `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-react-helmet-async`,
     `gatsby-plugin-typescript`,
     {
       resolve: `gatsby-plugin-mdx`,

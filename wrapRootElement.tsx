@@ -23,5 +23,7 @@ const components = {
 }
 
 export const wrapRootElement = ({ element }) => (
-  <MDXProvider components={components}>{element}</MDXProvider>
+  <React.StrictMode>
+    <MDXProvider components={components}>{element}</MDXProvider>
+  </React.StrictMode>
 )
