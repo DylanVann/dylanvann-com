@@ -88,17 +88,6 @@ export const globalStyle = css`
     display: none;
   }
 
-  // Fix for processing.js inserting a random span.
-  span[style='position: absolute; left: 0px; opacity: 0; font-family: PjsEmptyFont, fantasy;'] {
-    display: none;
-  }
-
-  // Fix for nav covering header when an anchor is clicked.
-  h2[id] {
-    margin-top: -${topNavHeight}px;
-    padding-top: ${topNavHeight}px;
-  }
-
   @media only screen and (max-width: 768px) {
     html {
       font-size: 106.25%;
@@ -134,5 +123,11 @@ export const globalStyle = css`
   h5:hover .autolink-header-svg,
   h6:hover .autolink-header-svg {
     visibility: visible;
+  }
+
+  // Fixes videos inside tables.
+  td > p {
+    margin: 0;
+    padding: 0;
   }
 `
