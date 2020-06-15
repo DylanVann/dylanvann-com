@@ -29,6 +29,7 @@ export const fontRalewayArray = [
   'CenturyGothic',
   'sans-serif',
 ]
+
 export const fontRaleway = fontRalewayArray.join(', ')
 
 export const fontRobotoArray = [
