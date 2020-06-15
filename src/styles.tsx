@@ -13,7 +13,6 @@ export const colorTextAccent = '#428bca'
 export const blockStyle = css`
   display: block;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.25);
-  margin: 1.53rem auto;
 `
 
 export const linkStyle = css`
