@@ -1,0 +1,89 @@
+---
+title: A Svelte Version of useEffect
+subtitle: Using Custom Stores and Reactive Statements
+author: Dylan Vann
+description: How to port useEffect like code to Svelte using stores and reactive statements.
+tags:
+  - Svelte
+  - JavaScript
+  - Web
+---
+
+I've been playing around with Svelte lately, trying to port some React code to it as an experiment.
+
+A challenge I came across is that I could not find a Svelte equivalent of `useEffect`.
+
+Svelte has support for turning a listener based API into a custom store that can also be reactive.
+This replaces some usages of `useEffect`.
+
+However, for cases where we want to perform reactive effects that only trigger side effects I was unsure how to port the code to Svelte though.
+
+The React code to port:
+
+```js
+import { useEffect } from 'react'
+
+const MyComp = ({ track }) => {
+  useEffect(() => {
+    let onStop = () => track.stopAllTracks()
+    track.on('stop', onStop)
+    return () => {
+      track.off('stop', onStop)
+    }
+  }, [track])
+  return null
+}
+```
+
+The behavior we want is:
+
+- We want to add a listener to the `stop` event on `track`.
+- That listener will call a `stopAllTracks()` method on the track (don't think too hard about it, it's just an example of some kind of side effect).
+- When the component is unmounted we will remove the listener on the track.
+- When the `track` prop changes (replaced with a new track) we remove the listener from the previous track and add one on the new track.
+  - This is very important, otherwise our component would be in an invalid state with respect to its props.
+  - Not handling the track prop changing could be considered a bug, and it could be difficult to diagnose.
+  - Hooks are intended to help prevent this sort of bug in React.
+  - You can read about this in [Dan Abromov's article, React as a UI Runtime](https://overreacted.io/react-as-a-ui-runtime/).
+
+This is what I've come up with for Svelte (please let me know if you know a better way):
+
+The implementation of `useEffect` is very simple:
+
+```js
+const useEffect = (subscribe) => ({ subscribe })
+```
+
+Our `useEffect` function returns a custom store. Stores in Svelte should implement a `subscribe` method.
+The `subscribe` method is passed an `onChange` function to alert Svelte about new data, and it can return a cleanup function.
+Since we're only interested in side effects we don't use the `onChange` function in our use case.
+
+Svelte has support for creating stores reactively. Svelte also has support for auto subscribing to a store using `$`.
+
+So we can use this custom store creating function like so:
+
+```svelte
+<script>
+  import { useEffect } from './useEffect'
+
+  export let track
+
+  let effect
+  $: effect = useEffect(() => {
+    const onStop = () => track.stopAll()
+    track.on('stop', onStop)
+    return () => {
+      track.off('stop', onStop)
+    }
+  })
+  $: $effect
+</script>
+```
+
+`effect` is assigned using a reactive declaration, so a new store is created whenever `track` is changed.
+The Svelte compiler does the dependency tracking work for us, so there's no dependency array like in React.
+Using another reactive statement with `$effect` we have Svelte automatically handle subscribing and unsubscribing to the store, without this statement the store will not do anything.
+With this we have replicated the most important behaviors of `useEffect`.
+
+This implementation isn't too bad compared to the React version.
+I'd still be interested in Svelte making things easier so I've opened a feature request for [Reactive statement cleanup functions](https://github.com/sveltejs/svelte/issues/5283).

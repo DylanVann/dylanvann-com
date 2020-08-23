@@ -2,6 +2,9 @@
 const path = require('path')
 const { createFilePath } = require('gatsby-source-filesystem')
 const createPaginatedPages = require('gatsby-paginate')
+// eslint-disable-next-line no-unused-vars
+const Prism = require('prismjs');
+require('prism-svelte');
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
