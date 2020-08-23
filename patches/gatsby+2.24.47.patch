@@ -1,0 +1,13 @@
+diff --git a/node_modules/gatsby/cache-dir/socketIo.js b/node_modules/gatsby/cache-dir/socketIo.js
+index c7089f6..34c8d70 100644
+--- a/node_modules/gatsby/cache-dir/socketIo.js
++++ b/node_modules/gatsby/cache-dir/socketIo.js
+@@ -11,6 +11,8 @@ export const getStaticQueryData = () => staticQueryData
+ export const getPageQueryData = () => pageQueryData
+ export const getIsInitialized = () => isInitialized
+ 
++window.___getPageQueryData = getPageQueryData
++
+ export default function socketIo() {
+   if (process.env.NODE_ENV !== `production`) {
+     if (!socket) {
