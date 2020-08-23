@@ -18,6 +18,7 @@
   "main": "n/a",
   "scripts": {
     "build": "gatsby build",
+    "check-spelling": "cspell 'src/pages/**/*.mdx'",
     "clean": "gatsby clean",
     "serve": "gatsby serve",
     "start": "gatsby develop"
@@ -44,6 +45,7 @@
     "@types/lodash": "^4.14.155",
     "@types/mdx-js__react": "^1.5.2",
     "@types/typography": "^0.16.2",
+    "cspell": "^4.1.0",
     "disqus-react": "^1.0.8",
     "dotenv": "^8.2.0",
     "emotion": "^10.0.27",
