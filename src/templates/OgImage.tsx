@@ -44,7 +44,7 @@ export default function OgImage(props: any) {
     <div css={{ ...size, background: '#1e257d', display: 'flex' }}>
       <div
         css={{
-          margin: 20,
+          margin: 40,
           flex: 1,
           display: 'flex',
           flexDirection: 'column',
