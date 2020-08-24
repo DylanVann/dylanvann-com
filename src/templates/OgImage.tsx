@@ -44,13 +44,11 @@ export default function OgImage(props: any) {
     <div css={{ ...size, background: '#1e257d', display: 'flex' }}>
       <div
         css={{
-          border: '10px solid white',
-          margin: 10,
-          padding: 20,
+          margin: 20,
           flex: 1,
           display: 'flex',
           flexDirection: 'column',
-          gap: 20,
+          gap: 40,
           color: 'white !important',
         }}
       >
@@ -62,6 +60,7 @@ export default function OgImage(props: any) {
               capHeight: 59,
               lineGap: 21,
             }),
+            textDecoration: 'underline',
           }}
         >
           <TwoLines>{title}</TwoLines>
