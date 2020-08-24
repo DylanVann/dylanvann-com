@@ -17,7 +17,7 @@
   "author": "Dylan Vann <dylan@dylanvann.com>",
   "main": "n/a",
   "scripts": {
-    "build": "gatsby build",
+    "build": "AWS_LAMBDA_FUNCTION_NAME=trickpuppeteer gatsby build",
     "check-spelling": "cspell 'src/pages/**/*.mdx'",
     "clean": "gatsby clean",
     "postinstall": "patch-package",
@@ -28,6 +28,9 @@
     "semi": false,
     "singleQuote": true,
     "trailingComma": "all"
+  },
+  "resolutions": {
+    "puppeteer": "5.2.1"
   },
   "dependencies": {
     "@babel/core": "^7.10.2",
@@ -43,6 +46,7 @@
     "@types/lodash": "^4.14.155",
     "@types/mdx-js__react": "^1.5.2",
     "@types/typography": "^0.16.2",
+    "chrome-aws-lambda": "^5.2.1",
     "cspell": "^4.1.0",
     "disqus-react": "^1.0.8",
     "dotenv": "^8.2.0",
@@ -54,8 +58,10 @@
     "gatsby-paginate": "^1.0.17",
     "gatsby-plugin-catch-links": "^2.3.5",
     "gatsby-plugin-emotion": "^4.3.4",
+    "gatsby-plugin-env-variables": "^2.0.0",
     "gatsby-plugin-google-analytics": "^2.3.4",
     "gatsby-plugin-mdx": "^1.2.15",
+    "gatsby-plugin-open-graph-images": "^0.1.6",
     "gatsby-plugin-react-helmet-async": "^1.0.17-0",
     "gatsby-plugin-sharp": "^2.6.11",
     "gatsby-plugin-sitemap": "^2.4.5",
@@ -79,6 +85,8 @@
     "prism-svelte": "^0.4.7",
     "prism-themes": "^1.4.0",
     "prismjs": "^1.20.0",
+    "puppeteer": "^5.2.1",
+    "puppeteer-core": "^5.2.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-emotion": "^10.0.0",

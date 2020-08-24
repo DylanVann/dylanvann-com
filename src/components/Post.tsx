@@ -5,6 +5,7 @@ import styled from '@emotion/styled'
 import { PostTitle, PostSubTitle, PostDate } from './PostTypography'
 import { Markdown } from './Markdown'
 import { GitHubLink } from './GitHubLink'
+import { Helmet } from 'react-helmet-async'
 
 const PostHeader = styled('header')`
   display: block;
@@ -27,6 +28,12 @@ export const Post = (props: PostProps) => {
   const github = get(props, 'frontmatter.github')
   return (
     <div className={props.className} style={{ marginBottom: 80 }}>
+      <Helmet>
+        <meta
+          property="og:image"
+          content={`${process.env.DEPLOY_URL}/${slug}og-image.png`}
+        />
+      </Helmet>
       <PostHeader>
         {title && (
           <PostTitle list={props.list}>

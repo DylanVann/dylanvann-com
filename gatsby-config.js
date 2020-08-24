@@ -10,6 +10,12 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: `gatsby-plugin-env-variables`,
+      options: {
+        allowList: ['DEPLOY_URL'],
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/src/pages`,
@@ -18,7 +24,13 @@ module.exports = {
     },
     `gatsby-plugin-theme-ui`,
     `gatsby-plugin-emotion`,
-    `gatsby-plugin-sitemap`,
+    `gatsby-plugin-open-graph-images`,
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        exclude: [`/__generated/*`],
+      },
+    },
     `gatsby-plugin-catch-links`,
     `gatsby-plugin-react-helmet-async`,
     `gatsby-plugin-typescript`,
