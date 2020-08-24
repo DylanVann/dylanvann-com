@@ -46,6 +46,7 @@
     "@types/lodash": "^4.14.155",
     "@types/mdx-js__react": "^1.5.2",
     "@types/typography": "^0.16.2",
+    "capsize": "^1.1.0",
     "chrome-aws-lambda": "^5.2.1",
     "cspell": "^4.1.0",
     "disqus-react": "^1.0.8",

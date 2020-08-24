@@ -1,14 +1,35 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+import { jsx } from '@emotion/core'
 import { PostTitle } from '../components/PostTypography'
 import { PostSubTitle } from '../components/PostTypography'
+import capsize from 'capsize'
 
-const twoLines = css`
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-`
+const fontMetrics = {
+  capHeight: 710,
+  ascent: 940,
+  descent: -234,
+  lineGap: 0,
+  unitsPerEm: 1000,
+}
+
+const textStyle = {
+  color: 'white !important',
+  textAlign: 'left',
+  margin: 0,
+} as const
+
+// Needed to prevent descenders getting cut off.
+const TwoLines = (props: any) => (
+  <span
+    css={{
+      display: '-webkit-box',
+      WebkitLineClamp: 2,
+      WebkitBoxOrient: 'vertical',
+      overflow: 'hidden',
+    }}
+    {...props}
+  />
+)
 
 export default function OgImage(props: any) {
   const {
@@ -20,42 +41,56 @@ export default function OgImage(props: any) {
     },
   } = props
   return (
-    <div style={{ ...size, background: '#1e257d', display: 'flex' }}>
+    <div css={{ ...size, background: '#1e257d', display: 'flex' }}>
       <div
-        style={{
+        css={{
           border: '10px solid white',
           margin: 10,
           padding: 20,
           flex: 1,
           display: 'flex',
           flexDirection: 'column',
+          gap: 20,
           color: 'white !important',
         }}
       >
         <PostTitle
-          style={{
-            color: 'white',
-            fontSize: 81,
-            lineHeight: 1.5,
-            textAlign: 'left',
+          css={{
+            ...textStyle,
+            ...capsize({
+              fontMetrics,
+              capHeight: 59,
+              lineGap: 21,
+            }),
           }}
-          css={twoLines}
         >
-          {title}
+          <TwoLines>{title}</TwoLines>
         </PostTitle>
         <PostSubTitle
-          style={{
-            color: 'white',
-            fontSize: 54,
-            lineHeight: 1.5,
-            textAlign: 'left',
+          css={{
+            ...textStyle,
+            ...capsize({
+              fontMetrics,
+              capHeight: 41,
+              lineGap: 13,
+            }),
           }}
-          css={twoLines}
         >
-          {subtitle}
+          <TwoLines>{subtitle}</TwoLines>
         </PostSubTitle>
-        <div style={{ flex: 1 }} />
-        <span style={{ fontSize: 36 }}>Dylan Vann - {date}</span>
+        <div css={{ flex: 1 }} />
+        <span
+          css={{
+            ...textStyle,
+            ...capsize({
+              fontMetrics,
+              capHeight: 26,
+              lineGap: 12,
+            }),
+          }}
+        >
+          Dylan Vann - {date}
+        </span>
       </div>
     </div>
   )
