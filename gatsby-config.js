@@ -12,7 +12,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-env-variables`,
       options: {
-        allowList: ['DEPLOY_URL'],
+        allowList: ['DEPLOY_URL', 'CONTEXT', 'URL'],
       },
     },
     {

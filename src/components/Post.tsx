@@ -31,7 +31,11 @@ export const Post = (props: PostProps) => {
       <Helmet>
         <meta
           property="og:image"
-          content={`${process.env.DEPLOY_URL}/${slug}og-image.png`}
+          content={
+            process.env.CONTEXT === 'production'
+              ? `${process.env.URL}/${slug}og-image.png`
+              : `${process.env.DEPLOY_URL}/${slug}og-image.png`
+          }
         />
       </Helmet>
       <PostHeader>
