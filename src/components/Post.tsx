@@ -26,17 +26,16 @@ export const Post = (props: PostProps) => {
   const datetime = get(props, 'fields.datetime')
   const slug = get(props, 'fields.slug')
   const github = get(props, 'frontmatter.github')
+  const ogImageUrl =
+    process.env.CONTEXT === 'production'
+      ? `${process.env.URL}/${slug}og-image.png`
+      : `${process.env.DEPLOY_URL}/${slug}og-image.png`
   return (
     <div className={props.className} style={{ marginBottom: 80 }}>
       <Helmet>
-        <meta
-          property="og:image"
-          content={
-            process.env.CONTEXT === 'production'
-              ? `${process.env.URL}/${slug}og-image.png`
-              : `${process.env.DEPLOY_URL}/${slug}og-image.png`
-          }
-        />
+        <meta property="og:image" content={ogImageUrl} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content={ogImageUrl} />
       </Helmet>
       <PostHeader>
         {title && (
