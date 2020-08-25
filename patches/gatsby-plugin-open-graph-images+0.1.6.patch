@@ -1,0 +1,59 @@
+diff --git a/node_modules/gatsby-plugin-open-graph-images/index.js b/node_modules/gatsby-plugin-open-graph-images/index.js
+index e9647d5..e7a4664 100644
+--- a/node_modules/gatsby-plugin-open-graph-images/index.js
++++ b/node_modules/gatsby-plugin-open-graph-images/index.js
+@@ -2,6 +2,7 @@ const { join } = require("path");
+ const { config } = require("./src/config");
+ 
+ exports.createOpenGraphImage = (createPage, options) => {
++  config.init(options)
+   const { defaultSize, componentGenerationDir } = config.getConfig();
+   const { path, component, context } = options;
+ 
+diff --git a/node_modules/gatsby-plugin-open-graph-images/src/generator.js b/node_modules/gatsby-plugin-open-graph-images/src/generator.js
+index 1ffd5ca..58a8253 100644
+--- a/node_modules/gatsby-plugin-open-graph-images/src/generator.js
++++ b/node_modules/gatsby-plugin-open-graph-images/src/generator.js
+@@ -1,26 +1,28 @@
+-const puppeteer = require("puppeteer");
++const chromium = require("chrome-aws-lambda");
+ const express = require("express");
+ const fs = require("fs");
+ const http = require("http");
+-const { join, dirname } = require("path");
++const { dirname } = require("path");
+ 
+ exports.generateOgImages = async (imageGenerationJobs) => {
+   const servingUrl = await getServingUrl();
+-  const browser = await puppeteer.launch();
++  const browser = await chromium.puppeteer.launch({
++    args: chromium.args,
++    executablePath: await chromium.executablePath,
++    headless: chromium.headless,
++  });
+   const page = await browser.newPage();
+ 
+   for (const imageGenerationJob of imageGenerationJobs) {
+     const { componentPath, imgPath, size } = imageGenerationJob;
+     const componentUrl = `${servingUrl}/${componentPath}`;
+ 
+-    await page.goto(componentUrl);
+     await page.setViewport(size);
++    await page.goto(componentUrl, { waitUntil: "networkidle2" });
+ 
+     ensureThatImageDirExists(imgPath);
+     await page.screenshot({ path: imgPath, clip: { x: 0, y: 0, ...size } });
+ 
+-    fs.unlinkSync(join("public", componentPath, "index.html"));
+-
+     const printPath = `${imgPath.replace("public", "")} ${size.width}x${size.height}`;
+     console.log(`🖼  created Image: ${printPath}`);
+   }
+@@ -34,7 +36,6 @@ const getServingUrl = async () => {
+   const server = http.createServer(app);
+   await server.listen(0);
+   return `http://0.0.0.0:${server.address().port}/`;
+-
+ };
+ 
+ const ensureThatImageDirExists = (path) => {

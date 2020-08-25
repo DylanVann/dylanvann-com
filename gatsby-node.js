@@ -1,14 +1,19 @@
 /* eslint-env node */
 const path = require('path')
 const { createFilePath } = require('gatsby-source-filesystem')
+const { createOpenGraphImage } = require('gatsby-plugin-open-graph-images')
 const createPaginatedPages = require('gatsby-paginate')
+
 // eslint-disable-next-line no-unused-vars
-const Prism = require('prismjs');
-require('prism-svelte');
+const Prism = require('prismjs')
+require('prism-svelte')
+
+const BlogIndexPath = path.resolve('src/templates/BlogIndex.tsx')
+const BlogPostPath = path.resolve('./src/templates/BlogPost.tsx')
+const OgImagePath = path.resolve(`./src/templates/OgImage.tsx`)
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
-  const blogPost = path.resolve('./src/templates/BlogPost.tsx')
 
   // language=GraphQL
   const result = await graphql(
@@ -62,17 +67,27 @@ exports.createPages = async ({ graphql, actions }) => {
   createPaginatedPages({
     edges: postEdges,
     createPage: createPage,
-    pageTemplate: 'src/templates/BlogIndex.tsx',
+    pageTemplate: BlogIndexPath,
     pageLength: 5,
     context: result.data.site,
   })
 
   postEdges.forEach(({ node }) => {
+    const ogImagePath = `/${node.fields.slug}/og-image.png`
     createPage({
       path: node.fields.slug,
-      component: blogPost,
+      component: BlogPostPath,
       context: {
         slug: node.fields.slug,
+        ogImage: createOpenGraphImage(createPage, {
+          path: ogImagePath,
+          component: OgImagePath,
+          context: {
+            title: node.frontmatter.title,
+            subtitle: node.frontmatter.subtitle,
+            date: node.fields.date,
+          },
+        }),
       },
     })
   })
