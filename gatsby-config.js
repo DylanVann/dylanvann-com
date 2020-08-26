@@ -24,7 +24,12 @@ module.exports = {
     },
     `gatsby-plugin-theme-ui`,
     `gatsby-plugin-emotion`,
-    `gatsby-plugin-open-graph-images`,
+    {
+      resolve: `gatsby-plugin-open-graph-images`,
+      options: {
+        defaultSize: { width: 1200, height: 630 },
+      },
+    },
     {
       resolve: `gatsby-plugin-sitemap`,
       options: {
