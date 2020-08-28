@@ -51,7 +51,7 @@ export const SignUpForm = () => {
           }}
         >
           <strong sx={{ mb: 20 }}>Subscribed!</strong>
-          You should recieve an email with a confirmation link!
+          You should receive an email with a confirmation link!
         </div>
       )}
       <form
