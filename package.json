@@ -18,7 +18,7 @@
   "main": "n/a",
   "scripts": {
     "build": "gatsby build",
-    "check-spelling": "cspell 'src/pages/**/*.mdx'",
+    "check-spelling": "cspell 'posts/**/*.mdx'",
     "clean": "gatsby clean",
     "postinstall": "patch-package",
     "prettier:check": "prettier --check 'src/**/*' --ignore-unknown",
