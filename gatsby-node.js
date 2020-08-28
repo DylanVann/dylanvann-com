@@ -73,12 +73,13 @@ exports.createPages = async ({ graphql, actions }) => {
   })
 
   postEdges.forEach(({ node }) => {
+    const slug = node.fields.slug
     const ogImagePath = `/${node.fields.slug}/og-image.png`
     createPage({
-      path: node.fields.slug,
+      path: slug,
       component: BlogPostPath,
       context: {
-        slug: node.fields.slug,
+        slug,
         ogImage: createOpenGraphImage(createPage, {
           path: ogImagePath,
           component: OgImagePath,
@@ -101,23 +102,20 @@ const getDate = (slug) => {
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
-
   if (node.internal.type === `Mdx`) {
     const slugWithDate = createFilePath({ node, getNode })
     const date = getDate(slugWithDate)
-    const slug = slugWithDate
-      .replace(date, '')
-      .replace('/posts/-', '')
-      .replace('/drafts/-', '')
+    const slug = /\/\d\d\d\d-\d\d-\d\d-(.*)\//.exec(slugWithDate)[1]
     createNodeField({
       name: `slug`,
       node,
       value: slug,
     })
+    const isDraft = slugWithDate.startsWith('/drafts/')
     createNodeField({
       name: `draft`,
       node,
-      value: slugWithDate.startsWith('/drafts/'),
+      value: isDraft,
     })
     if (date) {
       createNodeField({
@@ -127,16 +125,4 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       })
     }
   }
-}
-
-exports.createSchemaCustomization = ({ actions }) => {
-  const { createTypes } = actions
-  createTypes(`
-    type Mdx implements Node {
-      frontmatter: MdxFrontmatter!
-    }
-    type MdxFrontmatter {
-      github: String
-    }
-  `)
 }

@@ -23,6 +23,13 @@ module.exports = {
         name: `pages`,
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/posts`,
+        name: `posts`,
+      },
+    },
     `gatsby-plugin-theme-ui`,
     `gatsby-plugin-emotion`,
     {
