@@ -1,5 +1,6 @@
 /* eslint-env node */
 require(`dotenv/config`)
+const isCI = require('is-ci')
 
 module.exports = {
   siteMetadata: {
@@ -92,7 +93,7 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    {
+    isCI && {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
         trackingId: process.env.GOOGLE_ANALYTICS_TRACKING_ID,
@@ -105,5 +106,5 @@ module.exports = {
         omitGoogleFont: true,
       },
     },
-  ],
+  ].filter(Boolean),
 }

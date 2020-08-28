@@ -11,7 +11,7 @@ index e9647d5..e7a4664 100644
    const { path, component, context } = options;
  
 diff --git a/node_modules/gatsby-plugin-open-graph-images/src/generator.js b/node_modules/gatsby-plugin-open-graph-images/src/generator.js
-index 1ffd5ca..58a8253 100644
+index 1ffd5ca..d6c701e 100644
 --- a/node_modules/gatsby-plugin-open-graph-images/src/generator.js
 +++ b/node_modules/gatsby-plugin-open-graph-images/src/generator.js
 @@ -1,26 +1,28 @@
@@ -29,7 +29,7 @@ index 1ffd5ca..58a8253 100644
 +  const browser = await chromium.puppeteer.launch({
 +    args: chromium.args,
 +    executablePath: await chromium.executablePath,
-+    headless: chromium.headless,
++    headless: true,
 +  });
    const page = await browser.newPage();
  

@@ -1,0 +1,23 @@
+diff --git a/node_modules/chrome-aws-lambda/source/index.js b/node_modules/chrome-aws-lambda/source/index.js
+index 5e06665..91a9b54 100644
+--- a/node_modules/chrome-aws-lambda/source/index.js
++++ b/node_modules/chrome-aws-lambda/source/index.js
+@@ -2,6 +2,7 @@ const { createWriteStream, existsSync, mkdirSync, readdirSync, symlink, unlinkSy
+ const { inflate } = require('lambdafs');
+ const { join } = require('path');
+ const { URL } = require('url');
++const isCI = require('is-ci')
+ 
+ if (['AWS_Lambda_nodejs10.x', 'AWS_Lambda_nodejs12.x'].includes(process.env.AWS_EXECUTION_ENV) === true) {
+   if (process.env.FONTCONFIG_PATH === undefined) {
+@@ -180,6 +181,10 @@ class Chromium {
+    * Returns false if Serverless environment variable `IS_LOCAL` is set.
+    */
+   static get headless() {
++    if (isCI) {
++      return true;
++    }
++
+     if (process.env.IS_LOCAL !== undefined) {
+       return false;
+     }

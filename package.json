@@ -17,7 +17,7 @@
   "author": "Dylan Vann <dylan@dylanvann.com>",
   "main": "n/a",
   "scripts": {
-    "build": "AWS_LAMBDA_FUNCTION_NAME=trickpuppeteer gatsby build",
+    "build": "gatsby build",
     "check-spelling": "cspell 'src/pages/**/*.mdx'",
     "clean": "gatsby clean",
     "postinstall": "patch-package",
@@ -78,6 +78,7 @@
     "gatsby-source-filesystem": "^2.3.11",
     "gatsby-transformer-remark": "^2.8.15",
     "gatsby-transformer-sharp": "^2.5.5",
+    "is-ci": "^2.0.0",
     "lodash": "^4.17.11",
     "patch-package": "^6.2.2",
     "polished": "^3.6.4",
