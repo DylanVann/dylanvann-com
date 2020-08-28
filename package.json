@@ -47,6 +47,7 @@
     "@mdx-js/react": "^1.6.5",
     "@types/lodash": "^4.14.160",
     "@types/mdx-js__react": "^1.5.2",
+    "@types/theme-ui": "^0.3.6",
     "@types/typography": "^0.16.2",
     "capsize": "^1.1.0",
     "chrome-aws-lambda": "^5.2.1",
