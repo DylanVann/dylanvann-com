@@ -101,7 +101,7 @@
     "theme-ui": "^0.3.1",
     "typeface-raleway": "^0.0.75",
     "typeface-roboto": "^0.0.75",
-    "typescript": "^3.9.5",
+    "typescript": "^4.0.2",
     "typography": "^0.16.19",
     "typography-theme-us-web-design-standards": "^0.16.19"
   }
