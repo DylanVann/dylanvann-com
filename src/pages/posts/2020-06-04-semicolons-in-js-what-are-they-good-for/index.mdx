@@ -35,6 +35,7 @@ This attribute of semicolons will help you keep code reviewers on their toes.
 <tr>
 <td>
 
+
 ```diff
   const thing = another
 -   .map(v => v * 2)
@@ -44,6 +45,7 @@ This attribute of semicolons will help you keep code reviewers on their toes.
 
 </td>
 <td>
+
 
 ```diff
   const thing = another
@@ -55,6 +57,7 @@ This attribute of semicolons will help you keep code reviewers on their toes.
 </tr>
 </tbody>
 </table>
+
 
 This change now shows as affecting two lines, when it really only affects one.
 I bet our reviewer didn't see that one coming when they spent time scanning both lines for changes ;).
@@ -72,6 +75,7 @@ I bet our reviewer didn't see that one coming when they spent time scanning both
 <tr>
 <td>
 
+
 ```diff
   const thing = another
 -   .map(v => v * 2);
@@ -81,6 +85,7 @@ I bet our reviewer didn't see that one coming when they spent time scanning both
 
 </td>
 <td>
+
 
 ```diff
   const thing = another
@@ -92,6 +97,7 @@ I bet our reviewer didn't see that one coming when they spent time scanning both
 </tr>
 </tbody>
 </table>
+
 
 This change now shows as affecting two lines, when it really only affects one.
 
@@ -108,10 +114,12 @@ This change now shows as affecting two lines, when it really only affects one.
 <tr>
 <td>
 
+
 ![Semi](semi-small.mp4)
 
 </td>
 <td>
+
 
 ![No Semi](no-semi-small.mp4)
 
@@ -119,6 +127,7 @@ This change now shows as affecting two lines, when it really only affects one.
 </tr>
 </tbody>
 </table>
+
 
 Shuffling lines is easy, especially if you use vim.
 If you'd like to swap the last and second last chained methods you need to manually fix the semicolon.

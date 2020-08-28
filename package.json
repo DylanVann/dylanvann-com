@@ -21,6 +21,8 @@
     "check-spelling": "cspell 'src/pages/**/*.mdx'",
     "clean": "gatsby clean",
     "postinstall": "patch-package",
+    "prettier:check": "prettier --check 'src/**/*' --ignore-unknown",
+    "prettier:write": "prettier --write 'src/**/*' --ignore-unknown",
     "serve": "gatsby serve",
     "start": "gatsby develop"
   },
