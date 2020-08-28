@@ -11,6 +11,25 @@ tags:
 
 **Disclaimer: I'm new to Svelte so this isn't so much a recommendation as it is a "I guess this is a way to do it 🤷‍♂️".**
 
+<Playground>
+
+```js playground filename=index.js
+import { helloWorld } from './helloWorld.js'
+
+document.body.appendChild(document.createTextNode(helloWorld))
+```
+
+```js playground filename=helloWorld.js
+import { world } from './world.js'
+export const helloWorld = 'hello world'
+```
+
+```js playground filename=world.js
+export const world = 'world'
+```
+
+</Playground>
+
 I've been playing around with Svelte lately, trying to port some React code to it as an experiment.
 
 A challenge I came across is that I could not find a Svelte equivalent of `useEffect`.
