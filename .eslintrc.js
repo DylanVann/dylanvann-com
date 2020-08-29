@@ -1,12 +1,16 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
-  extends: ['eslint:recommended', 'plugin:react/recommended'],
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
+  ],
   env: {
     browser: true,
     es6: true,
     commonjs: true,
   },
-  plugins: ['react', 'react-hooks'],
+  plugins: ['react-hooks'],
   globals: {
     graphql: false,
     process: true,
@@ -20,13 +24,17 @@ module.exports = {
     },
   },
   rules: {
+    '@typescript-eslint/ban-ts-ignore': 'off',
+    '@typescript-eslint/member-delimiter-style': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
     'react/prop-types': 'off',
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'error',
   },
   settings: {
     react: {
-      version: 'detect', // React version. "detect" automatically picks the version you have installed.
+      version: 'detect',
     },
   },
 }

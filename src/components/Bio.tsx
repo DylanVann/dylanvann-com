@@ -64,9 +64,12 @@ export const SignUpForm = () => {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
+              // eslint-disable-next-line @typescript-eslint/camelcase
               api_key: '2jnVrugk1S7PzsMPVIhMVg',
+              // eslint-disable-next-line @typescript-eslint/camelcase
               first_name: name,
               email,
+              // eslint-disable-next-line @typescript-eslint/camelcase
               email_address: email,
             }),
           })

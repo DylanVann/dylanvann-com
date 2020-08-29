@@ -2,7 +2,7 @@ import React from 'react'
 import { blockStyle } from '../styles'
 import { IS_SSR } from '../config'
 
-let added = false
+const added = false
 
 interface CodePenProps {
   id: string
