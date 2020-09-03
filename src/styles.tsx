@@ -59,10 +59,6 @@ export const globalStyle = css`
     font-size: inherit;
   }
 
-  pre[class*='language-'] {
-    margin-bottom: 1.53rem;
-  }
-
   body {
     font-weight: 300;
     background-color: #fcfcfc;
@@ -125,9 +121,7 @@ export const globalStyle = css`
     visibility: visible;
   }
 
-  // Fixes videos inside tables.
-  td > p {
-    margin: 0;
-    padding: 0;
+  .gatsby-highlight {
+    margin-bottom: 1.53rem;
   }
 `

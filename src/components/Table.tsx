@@ -1,4 +1,5 @@
-import React from 'react'
+/** @jsx jsx */
+import { jsx } from 'theme-ui'
 
 export function Table(props: { children: React.ReactNode; style: any }) {
   // Fix for semi article tables.
@@ -8,6 +9,12 @@ export function Table(props: { children: React.ReactNode; style: any }) {
       css={{
         overflowX,
         marginBottom: '1.53rem',
+        '& td > :first-child': {
+          marginTop: 0,
+        },
+        '& td > :last-child': {
+          marginBottom: 0,
+        }
       }}
     >
       <table
