@@ -1,12 +1,7 @@
 import React from 'react'
 import Highlight from 'prism-react-renderer'
 import type { Language } from 'prism-react-renderer'
-import { PlaygroundFileIdk } from './Playground/Playground'
-
-const Prism = require('prismjs')
-;(typeof global !== 'undefined' ? global : (window as any)).Prism = Prism
-require('prism-svelte')
-require('prismjs/components/prism-jsx.min')
+import { Prism } from './Prism'
 
 export interface CodeProps {
   children: string
@@ -18,25 +13,13 @@ export interface CodeProps {
 export const Code = (props: CodeProps) => {
   const { children, className } = props
   const code = children.trim()
-  const attributes = (props.metastring || '').split(' ')
-  const isPlaygroundFile = attributes.includes('playground')
   const firstClassName = className.split(' ')[0]
   const language: Language = firstClassName.replace(/language-/, '') as Language
-  if (isPlaygroundFile) {
-    const filename = attributes
-      .find((v) => v.startsWith('filename='))
-      ?.replace('filename=', '')
-    if (!filename) {
-      throw new Error('Needs a filename.')
-    }
-    console.log('rendering idk', filename)
-    return <PlaygroundFileIdk code={code} filename={filename} />
-  }
   return (
     <Highlight
-      Prism={Prism}
+      Prism={Prism as any}
       theme={{ plain: {}, styles: [] }}
-      code={children.trim()}
+      code={code}
       language={language}
     >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (

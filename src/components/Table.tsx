@@ -14,7 +14,7 @@ export function Table(props: { children: React.ReactNode; style: any }) {
         },
         '& td > :last-child': {
           marginBottom: 0,
-        }
+        },
       }}
     >
       <table

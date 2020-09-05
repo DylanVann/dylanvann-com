@@ -1,19 +1,21 @@
 {
-  "words": [
-    "vann",
-    "abromov's",
-    "tbody",
-    "thead",
-    "draggable",
-    "UOIT",
-    "Appathon",
-    "performant",
-    "Maslow",
-    "pigpio",
-    "describedby",
-    "divs",
-    "typeof",
-    "hackathon",
-    "repos"
-  ]
+    "version": "0.1",
+    "words": [
+        "abromov's",
+        "Appathon",
+        "describedby",
+        "divs",
+        "draggable",
+        "hackathon",
+        "Maslow",
+        "performant",
+        "pigpio",
+        "prismjs",
+        "repos",
+        "tbody",
+        "thead",
+        "typeof",
+        "UOIT",
+        "vann"
+    ]
 }

@@ -1,7 +1,5 @@
 import { css } from '@emotion/core'
 import { lighten, darken } from 'polished'
-import 'prism-themes/themes/prism-base16-ateliersulphurpool.light.css'
-import 'prismjs/plugins/diff-highlight/prism-diff-highlight.css'
 import 'typeface-raleway'
 import 'typeface-roboto'
 
@@ -39,6 +37,8 @@ export const fontRobotoArray = [
   'Arial',
   'sans-serif',
 ]
+
+export const fontRoboto = fontRobotoArray.join(', ')
 
 export const topNavHeight = 50
 

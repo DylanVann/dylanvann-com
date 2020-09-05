@@ -1,5 +1,13 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
+  overrides: [
+    {
+      files: '*.js',
+      rules: {
+        '@typescript-eslint/no-var-requires': 'off',
+      }
+    }
+  ]
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',

@@ -1,16 +1,33 @@
+/** @jsx jsx */
+import { jsx } from 'theme-ui'
 import React, {
   useContext,
   useCallback,
   Fragment,
   useState,
   useMemo,
-  useLayoutEffect,
 } from 'react'
 import Editor from 'react-simple-code-editor'
 import Highlight from 'prism-react-renderer'
 import camelCase from 'lodash.camelcase'
 import memoizeOne from 'memoize-one'
 import Prism from 'prismjs'
+import { fontRoboto } from '../../styles'
+import capsize from 'capsize'
+
+const fontMetrics = {
+  capHeight: 1456,
+  ascent: 1900,
+  descent: -500,
+  lineGap: 0,
+  unitsPerEm: 2048,
+}
+
+const fontStyle = capsize({
+  fontMetrics,
+  capHeight: 10,
+  lineGap: 0,
+})
 
 if (!String.prototype.replaceAll) {
   String.prototype.replaceAll = function (find: string | RegExp, replace: any) {
@@ -27,19 +44,15 @@ export interface PlaygroundFile {
    *
    * A transform can change this name when returning, e.g. the TypeScript transform will change `example.ts` to `example.js`.
    */
-  name: string
+  filename: string
   /**
    * The file contents.
    *
    * A transform can change this in any way.
    */
-  content: string
+  code: string
   isMain: boolean
 }
-
-export type PlaygroundFileMap = { [key: string]: PlaygroundFile }
-
-type ValueOrPromise<ValueType> = ValueType | Promise<ValueType>
 
 /**
  * Transform a single file.
@@ -74,8 +87,8 @@ const unescape = (v: string) => v.replaceAll('\\`', '`').replaceAll('\\$', '$')
 export const transformImports: PlaygroundTransform = (
   file: PlaygroundFile,
 ): PlaygroundFile => {
-  const camelName = camelCase(file.name)
-  let output = file.content
+  const camelName = camelCase(file.filename)
+  let output = file.code
   output = escape(output)
   output = output.replaceAll(/from '(.*)'/g, (fullMatch, importPath) => {
     return `from '$\{${camelCase(importPath)}()}'`
@@ -86,7 +99,7 @@ export const transformImports: PlaygroundTransform = (
   }
   return {
     ...file,
-    content: output,
+    code: output,
   }
 }
 
@@ -112,12 +125,12 @@ export const transformImports: PlaygroundTransform = (
 export const transformBareImportsToSkypack: PlaygroundTransform = (v) => v
 
 /**
- * A mapping of filename to file contents.
+ * A mapping of file id to file contents.
  *
  * @defaultValue {"index.js": "console.log('hello world')"}
  */
 type PlaygroundFiles = {
-  [filename: string]: string
+  [id: string]: PlaygroundFile
 }
 
 type PlaygroundTransformMap = {
@@ -265,19 +278,20 @@ const getExtension = (filename: string): string | undefined =>
   filename.split('.').pop()
 
 const sortFiles = (
-  files: PlaygroundFileMap,
+  files: PlaygroundFiles,
 ): {
-  css: PlaygroundFileMap
-  js: PlaygroundFileMap
+  css: PlaygroundFiles
+  js: PlaygroundFiles
   html?: PlaygroundFile
 } => {
   const sortedFiles: {
-    css: PlaygroundFileMap
-    js: PlaygroundFileMap
+    css: PlaygroundFiles
+    js: PlaygroundFiles
     html?: PlaygroundFile
   } = { css: {}, js: {}, html: undefined }
   const filesEntries = Object.entries(files)
   filesEntries.forEach(([filename, content]) => {
+    console.log(filename, content)
     const extension = getExtension(filename)
     if (extension === 'js') {
       sortedFiles.js[filename] = content
@@ -301,7 +315,7 @@ const sortFiles = (
  * Constructs snippet from individual html, css and js code.
  */
 export function constructSnippet(
-  { files }: { files: PlaygroundFileMap },
+  { files }: { files: PlaygroundFiles },
   id: string | number,
 ) {
   const sortedFiles = sortFiles(files)
@@ -314,11 +328,11 @@ export function constructSnippet(
 <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
 <title>Document</title>
 ${Object.values(sortedFiles.css)
-  .map((css) => `<style>${css.content}</style>`)
+  .map((css) => `<style>${css.code}</style>`)
   .join('\n')}
 </head>
 <body>
-${sortedFiles.html ? sortedFiles.html.content : ''}
+${sortedFiles.html ? sortedFiles.html.code : ''}
 <script>
 var unescape = (v) => v.replaceAll('\\\\\`', '\`').replaceAll('\\\\$', '$')
 var esm = ({ raw }, ...vals) => {
@@ -338,7 +352,7 @@ ${Object.values(sortedFiles.js)
     }
     return 0
   })
-  .map((js) => `${js.content}`)
+  .map((js) => `${js.code}`)
   .join('\n\n')}
 </script>
 </body>
@@ -353,10 +367,7 @@ function PlaygroundEditor() {
       <Highlight
         Prism={Prism as any}
         code={code}
-        theme={undefined}
-        // theme={{
-        //   ...theme,
-        // }}
+        theme={theme}
         language={'javascript'}
       >
         {({ tokens, getLineProps, getTokenProps }) => (
@@ -376,9 +387,17 @@ function PlaygroundEditor() {
     ),
     [],
   )
-  const value = files[selectedFile]
+  const file = files[selectedFile]
+  const value = file.code
   const onValueChange = useCallback(
-    (newCode) => filesOnChange({ ...files, [selectedFile]: newCode }),
+    (newCode) =>
+      filesOnChange({
+        ...files,
+        [selectedFile]: {
+          ...file,
+          code: newCode,
+        },
+      }),
     [selectedFile, filesOnChange, files],
   )
   const baseTheme = theme && typeof theme.plain === 'object' ? theme.plain : {}
@@ -388,6 +407,11 @@ function PlaygroundEditor() {
       onValueChange={onValueChange}
       padding={20}
       highlight={highlightCode}
+      css={{
+        textarea: {
+          outline: 'none',
+        },
+      }}
       style={{
         whiteSpace: 'pre',
         fontFamily: 'monospace',
@@ -400,22 +424,23 @@ function PlaygroundEditor() {
 }
 
 function PlaygroundError(props: any) {
-  return (
-    <div style={{ border: '1px solid red', background: '#f5f7ff' }}>
-      The error.
-    </div>
-  )
+  return null
+  // return (
+  //   <div style={{ border: '1px solid red', background: '#f5f7ff' }}>
+  //     The error.
+  //   </div>
+  // )
 }
 
 const applyTransform = (
-  name: string,
-  content: string,
+  filename: string,
+  code: string,
   isMain: boolean,
   transform: PlaygroundTransform | PlaygroundTransform[] | undefined,
 ) => {
   const file = {
-    name,
-    content,
+    filename,
+    code,
     isMain,
   }
   if (!transform) {
@@ -435,22 +460,25 @@ const transformFiles = (
   main: string,
   transforms: PlaygroundTransformMap,
   applyTransformCache: ApplyTransformCache,
-): PlaygroundFileMap => {
-  return Object.entries(files).reduce((acc, [name, content]) => {
-    const extension = getExtension(name)
+): PlaygroundFiles => {
+  return Object.entries(files).reduce((acc, [id, file]) => {
+    console.log(id, file)
+    const filename = file.filename
+    const code: string = file.code
+    const extension = getExtension(filename)
     if (!extension) {
       throw new Error('File does not have extension.')
     }
     const transform = transforms[extension]
-    const isMain = name === main
-    let memoizedApplyTransform = applyTransformCache[name]
+    const isMain = filename === main
+    let memoizedApplyTransform = applyTransformCache[filename]
     if (!memoizedApplyTransform) {
       memoizedApplyTransform = memoizeOne(applyTransform)
-      applyTransformCache[name] = memoizedApplyTransform
+      applyTransformCache[filename] = memoizedApplyTransform
     }
     return {
       ...acc,
-      [name]: memoizedApplyTransform(name, content, isMain, transform),
+      [filename]: memoizedApplyTransform(filename, code, isMain, transform),
     }
   }, {})
 }
@@ -459,6 +487,8 @@ function PlaygroundPreview() {
   const { files, transforms, main, applyTransformCache } = useContext(
     PlaygroundContext,
   )
+  console.log('WTFyy')
+  console.log(files)
   // Transform the files and change structure.
   const playgroundFiles = useMemo(
     () => transformFiles(files, main, transforms, applyTransformCache),
@@ -470,7 +500,12 @@ function PlaygroundPreview() {
   )
   return (
     <iframe
-      style={{ border: '1px solid rgb(236, 236, 236)', display: 'block' }}
+      style={{
+        border: '1px solid rgb(236, 236, 236)',
+        display: 'block',
+        margin: 0,
+        padding: 0,
+      }}
       height={200}
       width="100%"
       frameBorder="0"
@@ -482,8 +517,13 @@ function PlaygroundPreview() {
 }
 
 const mainDefault = 'index.js'
-const filesDefaultV = {
-  [mainDefault]: `document.body.appendChild(document.createTextNode('hello world'))`,
+
+const filesDefaultV: PlaygroundFiles = {
+  [mainDefault]: {
+    filename: mainDefault,
+    code: `document.body.appendChild(document.createTextNode('hello world'))`,
+    isMain: true,
+  },
 }
 const selectedFileDefaultV = mainDefault
 const fileOrderDefaultV = [mainDefault]
@@ -491,97 +531,239 @@ const transformsDefault = {
   js: transformImports,
 }
 
-function PlaygroundEditorTabs() {
+function PlaygroundEditorTab(props: { filename: string }) {
+  const { filename } = props
   const {
-    files,
     selectedFile,
+    files,
     selectedFileOnChange,
     filesOnChange,
   } = useContext(PlaygroundContext)
+  const isSelected = filename === selectedFile ? 'red' : undefined
   return (
-    <div style={{ border: '1px solid black', display: 'flex' }}>
-      {Object.keys(files).map((filename) => (
+    <div
+      key={filename}
+      css={{
+        position: 'relative',
+        background: isSelected ? 'rgb(245, 247, 255)' : 'transparent',
+        border: isSelected
+          ? '1px solid rgb(204, 214, 252)'
+          : '1px solid transparent',
+        borderBottom: '1px solid transparent',
+        display: 'flex',
+        flexDirection: 'row',
+      }}
+    >
+      <i
+        css={{
+          cursor: 'move',
+          width: '5px',
+          position: 'absolute',
+          left: '5px',
+          top: 6,
+          bottom: 6,
+          '--drag-handle-color': '#dedede',
+          background:
+            'linear-gradient(to right, var(--drag-handle-color) 1px, transparent 1px, transparent 2px, var(--drag-handle-color) 2px, var(--drag-handle-color) 3px, transparent 3px, transparent 4px, var(--drag-handle-color) 4px )',
+        }}
+      />
+      <div
+        css={{
+          border: 0,
+          background: 0,
+          padding: 10,
+          paddingRight: 5,
+          margin: 0,
+          outline: 0,
+          marginLeft: 5,
+          cursor: 'pointer',
+          color: isSelected ? '#333' : '#555',
+          ':hover': {
+            color: '#000',
+          },
+        }}
+        onClick={() => {
+          selectedFileOnChange(filename)
+        }}
+      >
         <div
-          key={filename}
-          style={{
-            background: filename === selectedFile ? 'red' : undefined,
-            display: 'flex',
-            flexDirection: 'row',
+          {...(isSelected
+            ? {
+                spellCheck: false,
+                contentEditable: true,
+                suppressContentEditableWarning: true,
+                onInput: (e) => {
+                  const value: string = e.currentTarget.textContent || ''
+                  const file: PlaygroundFile = files[filename]
+                  console.log('new value', value)
+                  filesOnChange((v) => ({
+                    ...v,
+                    [filename]: {
+                      ...file,
+                      filename: value,
+                    },
+                  }))
+                },
+              }
+            : {})}
+          css={{
+            margin: 0,
+            background: 'none',
+            border: 'none',
+            outline: 'none',
+            ...fontStyle,
+            fontFamily: fontRoboto,
+          }}
+          defaultValue={filename}
+        >
+          {filename}
+        </div>
+      </div>
+      <button
+        css={{
+          border: 0,
+          background: 0,
+          padding: 10,
+          paddingLeft: 5,
+          margin: 0,
+          outline: 0,
+          cursor: 'pointer',
+          color: 'silver',
+          ':hover': {
+            color: 'black',
+          },
+        }}
+        onClick={() => {
+          filesOnChange((files) => {
+            const clonedFiles = { ...files }
+            delete clonedFiles[filename]
+            return clonedFiles
+          })
+        }}
+      >
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          css={{
+            display: 'block',
+            width: 12,
+            height: 12,
+            overflow: 'hidden',
+            verticalAlign: 'middle',
+            OObjectFit: 'contain',
+            objectFit: 'contain',
+            WebkitTransformOrigin: 'center center',
+            transformOrigin: 'center center',
+            stroke: 'currentColor',
+            strokeWidth: '2',
+            strokeLinecap: 'round',
+            strokeLinejoin: 'round',
+            fill: 'none',
           }}
         >
-          <button
-            style={{
-              border: 0,
-              background: 0,
-              padding: 10,
-              margin: 0,
-              outline: 0,
-            }}
-            onClick={() => {
-              selectedFileOnChange(filename)
-            }}
-          >
-            {filename}
-          </button>
-          <button
-            style={{
-              border: 0,
-              background: 0,
-              padding: 10,
-              margin: 0,
-              outline: 0,
-            }}
-            onClick={() => {
-              filesOnChange((files) => {
-                const clonedFiles = { ...files }
-                delete clonedFiles[filename]
-                return clonedFiles
-              })
-            }}
-          >
-            x
-          </button>
-        </div>
-      ))}
+          <line stroke="currentColor" x1="18" y1="6" x2="6" y2="18"></line>
+          <line stroke="currentColor" x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
     </div>
   )
 }
 
-export function PlaygroundFileIdk({
-  code,
-  filename,
-}: {
-  code: string
-  filename: string
-}) {
-  const { filesOnChange } = useContext(PlaygroundContext)
-  useLayoutEffect(() => {
-    filesOnChange((files) => ({
-      ...files,
-      [filename]: code,
-    }))
-  }, [filename, code, filesOnChange])
-  return null
+function PlaygroundEditorTabs() {
+  const { files, filesOnChange } = useContext(PlaygroundContext)
+  return (
+    <div style={{ display: 'flex', marginBottom: -2, marginTop: 4 }}>
+      {Object.keys(files).map((filename) => (
+        <PlaygroundEditorTab key={filename} filename={filename} />
+      ))}
+      <button
+        css={{
+          border: 0,
+          background: 0,
+          padding: 10,
+          paddingLeft: 5,
+          margin: 0,
+          outline: 0,
+          cursor: 'pointer',
+          color: 'silver',
+          ':hover': {
+            color: 'black',
+          },
+        }}
+        onClick={() => {
+          const id = 'idk.js'
+          filesOnChange((v) => ({
+            ...v,
+            [id]: {
+              filename: 'idk.js',
+              code: 'const god = "dam"',
+              isMain: false,
+            },
+          }))
+        }}
+      >
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          css={{
+            display: 'block',
+            width: 12,
+            height: 12,
+            overflow: 'hidden',
+            verticalAlign: 'middle',
+            OObjectFit: 'contain',
+            objectFit: 'contain',
+            WebkitTransformOrigin: 'center center',
+            transformOrigin: 'center center',
+            stroke: 'currentColor',
+            strokeWidth: '4',
+            strokeLinecap: 'round',
+            strokeLinejoin: 'round',
+            fill: 'none',
+          }}
+        >
+          <line stroke="currentColor" x1="12" y1="0" x2="12" y2="24"></line>
+          <line stroke="currentColor" x1="0" y1="12" x2="24" y2="12"></line>
+        </svg>
+      </button>
+    </div>
+  )
 }
 
-export function Playground(props: PlaygroundProps & { children: any[] }) {
-  const { children } = props
-  const files = useMemo(() => {
+export function Playground(
+  props: PlaygroundProps & { children: any[]; style?: any; className?: string },
+) {
+  const { children, style, className } = props
+  const files: PlaygroundFiles = useMemo<PlaygroundFiles>(() => {
     return children.reduce((acc, v) => {
-      const code = v.props.children.props.children
-      const filename = v.props.children.props.filename
+      const filename: string = v.props.children.props.filename
+      const code: string = v.props.children.props.children.trim()
+      const file: PlaygroundFile = {
+        filename,
+        code,
+        isMain: false,
+      }
       return {
         ...acc,
-        [filename]: code,
+        [filename]: file,
       }
     }, {})
   }, [children])
+  console.log('-------------------')
+  console.log(files)
+  console.log('-------------------')
   return (
     <PlaygroundProvider {...props} files={files}>
-      <PlaygroundPreview />
-      <PlaygroundError />
-      <PlaygroundEditorTabs />
-      <PlaygroundEditor />
+      <div style={style} className={className}>
+        <PlaygroundPreview />
+        <PlaygroundError />
+        <PlaygroundEditorTabs />
+        <div style={{ border: '1px solid rgb(204, 214, 252)' }}>
+          <PlaygroundEditor />
+        </div>
+      </div>
     </PlaygroundProvider>
   )
 }
