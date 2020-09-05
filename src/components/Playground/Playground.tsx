@@ -76,7 +76,7 @@ export const transformSvelte: PlaygroundTransform = (v) => v
 export const transformTypeScript: PlaygroundTransform = (v) => v
 
 const escape = (v: string) => v.replaceAll('`', '\\`').replaceAll('$', '\\$')
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const unescape = (v: string) => v.replaceAll('\\`', '`').replaceAll('\\$', '$')
 
 /**
@@ -234,41 +234,6 @@ const PlaygroundContext = React.createContext<
   }
 >(null as any)
 
-function PlaygroundProvider({
-  main = mainDefault,
-  mainPreset,
-  files: filesDefault = filesDefaultV,
-  selectedFile: selectedFileDefault = selectedFileDefaultV,
-  fileOrder: fileOrderDefault = fileOrderDefaultV,
-  transforms = transformsDefault,
-  children,
-  ...other
-}: PlaygroundProps & { children: React.ReactNode }) {
-  const [applyTransformCache, applyTransformCacheOnChange] = React.useState({})
-  const [files, filesOnChange] = useState<PlaygroundFiles>(filesDefault)
-  const [selectedFile, selectedFileOnChange] = useState(selectedFileDefault)
-  const [fileOrder, fileOrderOnChange] = useState(fileOrderDefault)
-  const finalProps = {
-    main,
-    mainPreset,
-    transforms: transformsDefault,
-    ...other,
-    files,
-    filesOnChange,
-    selectedFile,
-    selectedFileOnChange,
-    fileOrder,
-    fileOrderOnChange,
-    applyTransformCache,
-    applyTransformCacheOnChange,
-  }
-  return (
-    <PlaygroundContext.Provider value={finalProps}>
-      {children}
-    </PlaygroundContext.Provider>
-  )
-}
-
 const theme = {
   plain: {},
   styles: [],
@@ -291,7 +256,6 @@ const sortFiles = (
   } = { css: {}, js: {}, html: undefined }
   const filesEntries = Object.entries(files)
   filesEntries.forEach(([filename, content]) => {
-    console.log(filename, content)
     const extension = getExtension(filename)
     if (extension === 'js') {
       sortedFiles.js[filename] = content
@@ -314,10 +278,7 @@ const sortFiles = (
 /**
  * Constructs snippet from individual html, css and js code.
  */
-export function constructSnippet(
-  { files }: { files: PlaygroundFiles },
-  id: string | number,
-) {
+export function constructSnippet({ files }: { files: PlaygroundFiles }) {
   const sortedFiles = sortFiles(files)
   return `
 <!DOCTYPE html>
@@ -391,14 +352,14 @@ function PlaygroundEditor() {
   const value = file.code
   const onValueChange = useCallback(
     (newCode) =>
-      filesOnChange({
+      filesOnChange((files) => ({
         ...files,
         [selectedFile]: {
           ...file,
           code: newCode,
         },
-      }),
-    [selectedFile, filesOnChange, files],
+      })),
+    [filesOnChange, selectedFile, file],
   )
   const baseTheme = theme && typeof theme.plain === 'object' ? theme.plain : {}
   return (
@@ -423,7 +384,7 @@ function PlaygroundEditor() {
   )
 }
 
-function PlaygroundError(props: any) {
+function PlaygroundError() {
   return null
   // return (
   //   <div style={{ border: '1px solid red', background: '#f5f7ff' }}>
@@ -461,8 +422,7 @@ const transformFiles = (
   transforms: PlaygroundTransformMap,
   applyTransformCache: ApplyTransformCache,
 ): PlaygroundFiles => {
-  return Object.entries(files).reduce((acc, [id, file]) => {
-    console.log(id, file)
+  return Object.entries(files).reduce((acc, [_id, file]) => {
     const filename = file.filename
     const code: string = file.code
     const extension = getExtension(filename)
@@ -487,8 +447,6 @@ function PlaygroundPreview() {
   const { files, transforms, main, applyTransformCache } = useContext(
     PlaygroundContext,
   )
-  console.log('WTFyy')
-  console.log(files)
   // Transform the files and change structure.
   const playgroundFiles = useMemo(
     () => transformFiles(files, main, transforms, applyTransformCache),
@@ -529,6 +487,41 @@ const selectedFileDefaultV = mainDefault
 const fileOrderDefaultV = [mainDefault]
 const transformsDefault = {
   js: transformImports,
+}
+
+function PlaygroundProvider({
+  main = mainDefault,
+  mainPreset,
+  files: filesDefault = filesDefaultV,
+  selectedFile: selectedFileDefault = selectedFileDefaultV,
+  fileOrder: fileOrderDefault = fileOrderDefaultV,
+  transforms = transformsDefault,
+  children,
+  ...other
+}: PlaygroundProps & { children: React.ReactNode }) {
+  const [applyTransformCache, applyTransformCacheOnChange] = React.useState({})
+  const [files, filesOnChange] = useState<PlaygroundFiles>(filesDefault)
+  const [selectedFile, selectedFileOnChange] = useState(selectedFileDefault)
+  const [fileOrder, fileOrderOnChange] = useState(fileOrderDefault)
+  const finalProps = {
+    ...other,
+    main,
+    mainPreset,
+    transforms,
+    files,
+    filesOnChange,
+    selectedFile,
+    selectedFileOnChange,
+    fileOrder,
+    fileOrderOnChange,
+    applyTransformCache,
+    applyTransformCacheOnChange,
+  }
+  return (
+    <PlaygroundContext.Provider value={finalProps}>
+      {children}
+    </PlaygroundContext.Provider>
+  )
 }
 
 function PlaygroundEditorTab(props: { filename: string }) {
@@ -595,7 +588,6 @@ function PlaygroundEditorTab(props: { filename: string }) {
                 onInput: (e) => {
                   const value: string = e.currentTarget.textContent || ''
                   const file: PlaygroundFile = files[filename]
-                  console.log('new value', value)
                   filesOnChange((v) => ({
                     ...v,
                     [filename]: {
@@ -751,9 +743,6 @@ export function Playground(
       }
     }, {})
   }, [children])
-  console.log('-------------------')
-  console.log(files)
-  console.log('-------------------')
   return (
     <PlaygroundProvider {...props} files={files}>
       <div style={style} className={className}>
