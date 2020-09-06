@@ -6,6 +6,7 @@ import React, {
   Fragment,
   useState,
   useMemo,
+  useEffect,
 } from 'react'
 import Editor from 'react-simple-code-editor'
 import Highlight from 'prism-react-renderer'
@@ -15,6 +16,7 @@ import { fontRoboto } from '../../styles'
 import capsize from 'capsize'
 import { transformImports } from './transformImports'
 import { transformBabel } from './transformBabel'
+import { darken, lighten } from 'polished'
 
 const fontMetrics = {
   capHeight: 1456,
@@ -60,9 +62,7 @@ type PromiseOrValue<T> = Promise<T> | T
 /**
  * Transform a single file.
  */
-export type PlaygroundTransform = (
-  file: PlaygroundFile,
-) => PromiseOrValue<PlaygroundFile>
+export type PlaygroundTransform = (file: PlaygroundFile) => PlaygroundFile
 
 /**
  * A mapping of file id to file contents.
@@ -162,13 +162,29 @@ type PlaygroundPropsInternal = Omit<
   'selectedFileControlled' | 'fileOrderControlled' | 'filesControlled'
 >
 
-type ApplyTransformCache = { [filename: string]: any }
+const applyTransforms = (
+  file: PlaygroundFile,
+  transforms: PlaygroundTransform[],
+): PlaygroundFile => {
+  let transformed = file
+  transforms.forEach((t) => (transformed = t(transformed)))
+  return transformed
+}
+
+type ApplyTransformCache = { [filename: string]: typeof applyTransforms }
 type ApplyTransformCacheOnChange = React.Dispatch<
   React.SetStateAction<ApplyTransformCache>
 >
 
+type PlaygroundError = string | null
+type PlaygroundErrorOnChange = React.Dispatch<
+  React.SetStateAction<PlaygroundError>
+>
+
 const PlaygroundContext = React.createContext<
   PlaygroundPropsInternal & {
+    error: PlaygroundError
+    errorOnChange: PlaygroundErrorOnChange
     applyTransformCache: ApplyTransformCache
     applyTransformCacheOnChange: ApplyTransformCacheOnChange
   }
@@ -325,28 +341,27 @@ function PlaygroundEditor() {
 }
 
 function PlaygroundError() {
-  return null
-  // return (
-  //   <div style={{ border: '1px solid red', background: '#f5f7ff' }}>
-  //     The error.
-  //   </div>
-  // )
-}
-
-const applyTransforms = (
-  filename: string,
-  code: string,
-  isMain: boolean,
-  transforms: PlaygroundTransform[],
-): PromiseOrValue<PlaygroundFile> => {
-  const file: PlaygroundFile = {
-    filename,
-    code,
-    isMain,
+  const { error } = useContext(PlaygroundContext)
+  if (!error) {
+    return null
   }
-  let transformed = file
-  transforms.forEach((t) => (transformed = t(transformed)))
-  return transformed
+  return (
+    <pre
+      style={{
+        display: 'block',
+        margin: 0,
+        padding: 10,
+        marginTop: 4,
+        fontSize: '14px',
+        lineHeight: '14px',
+        border: `1px solid ${darken(0.25, '#FF0000')}`,
+        color: darken(0.25, '#FF0000'),
+        backgroundColor: lighten(0.4, '#FF0000'),
+      }}
+    >
+      {error.toString()}
+    </pre>
+  )
 }
 
 const transformFiles = (
@@ -368,26 +383,35 @@ const transformFiles = (
     }
     return {
       ...acc,
-      [filename]: memoizedApplyTransform(
-        file,
-        transformsForExtension,
-      ),
+      [filename]: memoizedApplyTransform(file, transformsForExtension),
     }
   }, {})
 }
 
 function PlaygroundPreview() {
-  const { files, transforms, main, applyTransformCache } = useContext(
+  const { files, transforms, applyTransformCache, errorOnChange } = useContext(
     PlaygroundContext,
   )
-  // Transform the files and change structure.
-  const playgroundFiles = useMemo(
-    () => transformFiles(files, transforms, applyTransformCache),
-    [files, main, transforms, applyTransformCache],
-  )
-  const code = useMemo(() => constructSnippet({ files: playgroundFiles }), [
-    playgroundFiles,
+  const [transformedFiles, setTransformedFiles] = useState<PlaygroundFiles>({})
+
+  useEffect(() => {
+    try {
+      const result = transformFiles(files, transforms, applyTransformCache)
+      setTransformedFiles(result)
+      errorOnChange(null)
+    } catch (e) {
+      console.log(e)
+      errorOnChange(e)
+    }
+  }, [files, transforms, applyTransformCache, errorOnChange])
+
+  console.log('---------------------------------------')
+  console.log(transformedFiles)
+  console.log('---------------------------------------')
+  const srcDoc = useMemo(() => constructSnippet({ files: transformedFiles }), [
+    transformedFiles,
   ])
+
   return (
     <iframe
       style={{
@@ -399,7 +423,7 @@ function PlaygroundPreview() {
       height={200}
       width="100%"
       frameBorder="0"
-      srcDoc={code}
+      srcDoc={srcDoc}
       // @ts-ignore
       loading="lazy"
     />
@@ -435,6 +459,7 @@ function PlaygroundProvider({
   const [files, filesOnChange] = useState<PlaygroundFiles>(filesDefault)
   const [selectedFile, selectedFileOnChange] = useState(selectedFileDefault)
   const [fileOrder, fileOrderOnChange] = useState(fileOrderDefault)
+  const [error, errorOnChange] = useState('')
   const finalProps = {
     ...other,
     main,
@@ -448,6 +473,8 @@ function PlaygroundProvider({
     fileOrderOnChange,
     applyTransformCache,
     applyTransformCacheOnChange,
+    error,
+    errorOnChange,
   }
   return (
     <PlaygroundContext.Provider value={finalProps}>
@@ -659,7 +686,7 @@ function PlaygroundEditorTabs() {
 export function Playground(
   props: PlaygroundProps & { children: any[]; style?: any; className?: string },
 ) {
-  const { children, style, className } = props
+  const { children, style, className, main = mainDefault } = props
   const files: PlaygroundFiles = useMemo<PlaygroundFiles>(() => {
     return children.reduce((acc, v) => {
       const filename: string = v.props.children.props.filename
@@ -667,23 +694,23 @@ export function Playground(
       const file: PlaygroundFile = {
         filename,
         code,
-        isMain: false,
+        isMain: filename === main,
       }
       return {
         ...acc,
         [filename]: file,
       }
     }, {})
-  }, [children])
+  }, [children, main])
   return (
     <PlaygroundProvider {...props} files={files}>
       <div style={style} className={className}>
         <PlaygroundPreview />
-        <PlaygroundError />
         <PlaygroundEditorTabs />
         <div style={{ border: '1px solid rgb(204, 214, 252)' }}>
           <PlaygroundEditor />
         </div>
+        <PlaygroundError />
       </div>
     </PlaygroundProvider>
   )
