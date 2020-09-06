@@ -9,9 +9,9 @@ export function Table(props: { children: React.ReactNode; style: any }) {
       css={{
         overflowX,
         marginBottom: '1.53rem',
-        '& td > :first-child': {
-          marginTop: 0,
-        },
+        // '& td > :first-child': {
+        //   marginTop: 0,
+        // },
         '& td > :last-child': {
           marginBottom: 0,
         },

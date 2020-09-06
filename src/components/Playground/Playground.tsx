@@ -9,11 +9,12 @@ import React, {
 } from 'react'
 import Editor from 'react-simple-code-editor'
 import Highlight from 'prism-react-renderer'
-import camelCase from 'lodash.camelcase'
 import memoizeOne from 'memoize-one'
 import Prism from 'prismjs'
 import { fontRoboto } from '../../styles'
 import capsize from 'capsize'
+import { transformImports } from './transformImports'
+import { transformBabel } from './transformBabel'
 
 const fontMetrics = {
   capHeight: 1456,
@@ -54,75 +55,14 @@ export interface PlaygroundFile {
   isMain: boolean
 }
 
+type PromiseOrValue<T> = Promise<T> | T
+
 /**
  * Transform a single file.
  */
-export type PlaygroundTransform = (file: PlaygroundFile) => PlaygroundFile
-
-/**
- * Transform Svelte to JS.
- *
- * This is done using the Svelte compiler.
- */
-export const transformSvelte: PlaygroundTransform = (v) => v
-
-/**
- * Transform TypeScript to JS.
- *
- * This does not check types.
- *
- * This is done using esbuild.
- */
-export const transformTypeScript: PlaygroundTransform = (v) => v
-
-const escape = (v: string) => v.replaceAll('`', '\\`').replaceAll('$', '\\$')
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const unescape = (v: string) => v.replaceAll('\\`', '`').replaceAll('\\$', '$')
-
-/**
- * j
- * Transform local imports to a format that will work.
- * This is implemented using a regex because bringing in a parser for it would probably add 100kb to the bundle size.
- */
-export const transformImports: PlaygroundTransform = (
+export type PlaygroundTransform = (
   file: PlaygroundFile,
-): PlaygroundFile => {
-  const camelName = camelCase(file.filename)
-  let output = file.code
-  output = escape(output)
-  output = output.replaceAll(/from '(.*)'/g, (fullMatch, importPath) => {
-    return `from '$\{${camelCase(importPath)}()}'`
-  })
-  output = `var ${camelName} = () => esm\`${output}\``
-  if (file.isMain) {
-    output = `${output}\nimport(${camelName}())`
-  }
-  return {
-    ...file,
-    code: output,
-  }
-}
-
-/**
- * Transforms bare imports to imports from Skypack (https://www.skypack.dev).
- *
- * @example
- *
- * // If you want to import lodash:
- * import lodash from 'lodash'
- *
- * // Will be transformed to:
- * import lodash from 'https://cdn.skypack.dev/lodash'
- *
- * @example
- *
- * // If you want your code to keep working you could set a version:
- * import lodash from 'lodash@4.17.15'
- *
- * // Will be transformed to:
- * import lodash from 'https://cdn.skypack.dev/lodash@4.17.15'
- */
-export const transformBareImportsToSkypack: PlaygroundTransform = (v) => v
+) => PromiseOrValue<PlaygroundFile>
 
 /**
  * A mapping of file id to file contents.
@@ -134,7 +74,7 @@ type PlaygroundFiles = {
 }
 
 type PlaygroundTransformMap = {
-  [extension: string]: PlaygroundTransform | PlaygroundTransform[]
+  [extension: string]: PlaygroundTransform[]
 }
 
 /**
@@ -393,52 +333,45 @@ function PlaygroundError() {
   // )
 }
 
-const applyTransform = (
+const applyTransforms = (
   filename: string,
   code: string,
   isMain: boolean,
-  transform: PlaygroundTransform | PlaygroundTransform[] | undefined,
-) => {
-  const file = {
+  transforms: PlaygroundTransform[],
+): PromiseOrValue<PlaygroundFile> => {
+  const file: PlaygroundFile = {
     filename,
     code,
     isMain,
   }
-  if (!transform) {
-    return file
-  }
-  if (transform instanceof Array) {
-    let transformed = file
-    transform.forEach((t) => (transformed = t(transformed)))
-    return transformed
-  } else {
-    return transform(file)
-  }
+  let transformed = file
+  transforms.forEach((t) => (transformed = t(transformed)))
+  return transformed
 }
 
 const transformFiles = (
   files: PlaygroundFiles,
-  main: string,
-  transforms: PlaygroundTransformMap,
+  transformsMap: PlaygroundTransformMap,
   applyTransformCache: ApplyTransformCache,
 ): PlaygroundFiles => {
   return Object.entries(files).reduce((acc, [_id, file]) => {
     const filename = file.filename
-    const code: string = file.code
     const extension = getExtension(filename)
     if (!extension) {
       throw new Error('File does not have extension.')
     }
-    const transform = transforms[extension]
-    const isMain = filename === main
+    const transformsForExtension = transformsMap[extension] || []
     let memoizedApplyTransform = applyTransformCache[filename]
     if (!memoizedApplyTransform) {
-      memoizedApplyTransform = memoizeOne(applyTransform)
+      memoizedApplyTransform = memoizeOne(applyTransforms)
       applyTransformCache[filename] = memoizedApplyTransform
     }
     return {
       ...acc,
-      [filename]: memoizedApplyTransform(filename, code, isMain, transform),
+      [filename]: memoizedApplyTransform(
+        file,
+        transformsForExtension,
+      ),
     }
   }, {})
 }
@@ -449,13 +382,12 @@ function PlaygroundPreview() {
   )
   // Transform the files and change structure.
   const playgroundFiles = useMemo(
-    () => transformFiles(files, main, transforms, applyTransformCache),
+    () => transformFiles(files, transforms, applyTransformCache),
     [files, main, transforms, applyTransformCache],
   )
-  const code = useMemo(
-    () => constructSnippet({ files: playgroundFiles }, '10'),
-    [playgroundFiles],
-  )
+  const code = useMemo(() => constructSnippet({ files: playgroundFiles }), [
+    playgroundFiles,
+  ])
   return (
     <iframe
       style={{
@@ -486,7 +418,7 @@ const filesDefaultV: PlaygroundFiles = {
 const selectedFileDefaultV = mainDefault
 const fileOrderDefaultV = [mainDefault]
 const transformsDefault = {
-  js: transformImports,
+  js: [transformBabel, transformImports],
 }
 
 function PlaygroundProvider({
