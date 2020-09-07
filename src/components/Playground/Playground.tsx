@@ -351,6 +351,7 @@ function PlaygroundEditor() {
       style={{
         whiteSpace: 'pre',
         fontFamily: 'monospace',
+        boxSizing: 'border-box',
         background: '#f5f7ff',
         overflowX: 'scroll',
         fontSize: '14px',
@@ -442,6 +443,7 @@ function PlaygroundPreview() {
   return (
     <iframe
       style={{
+        boxSizing: 'border-box',
         border: '1px solid rgb(236, 236, 236)',
         display: 'block',
         margin: 0,
@@ -606,6 +608,7 @@ function PlaygroundEditorTabs() {
         display: 'flex',
         marginBottom: -2,
         marginTop: 4,
+        height: 32,
         overflowX: 'auto',
         overflowY: 'hidden',
         scrollbarWidth: 'none',

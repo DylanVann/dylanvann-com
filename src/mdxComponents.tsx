@@ -10,11 +10,36 @@ import { Quote } from './components/Quote'
 import { Table } from './components/Table'
 import { Pre } from './components/Pre'
 import { Code } from './components/Code'
-import { Playground } from './components/Playground/Playground'
+import { useState, useEffect } from 'react'
 
-const PlaygroundWithMargin = (props: any) => (
-  <Playground {...props} css={{ marginBottom: '1.53em' }} />
-)
+const PlaceHolder = ({ children }: any) => {
+  let lines = 0
+  children.forEach((child: any) => {
+    const code: string = child.props.children.props.children.trim()
+    lines = Math.max(lines, code.split('\n').length)
+  })
+  const codeHeight = lines * 21.42 + 40
+  return (
+    <div
+      css={{
+        width: '100%',
+        background: '#f5f7ff',
+        marginBottom: '1.53em',
+        height: 32 + 4 + 200 + codeHeight,
+      }}
+    />
+  )
+}
+
+const PlaygroundWithMargin = (props: any) => {
+  const [Playground, setPlayground] = useState<any>(() => PlaceHolder)
+  useEffect(() => {
+    import('./components/Playground/Playground').then(({ Playground }) =>
+      setPlayground(() => Playground),
+    )
+  }, [])
+  return <Playground {...props} css={{ marginBottom: '1.53em' }} />
+}
 
 export const mdxComponents = {
   Caption,
