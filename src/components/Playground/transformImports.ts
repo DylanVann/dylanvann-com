@@ -21,11 +21,14 @@ export const transformImports: PlaygroundTransform = (
   const camelName = camelCase(name)
   let output = file.code
   output = escape(output)
-  output = output.replaceAll(/from ['"]\.\/(.*)['"]/g, (fullMatch, importPath) => {
-    const identifier = camelCase(importPath.split('.').shift())
-    console.log('wtf', importPath, identifier)
-    return `from '$\{${identifier}()}'`
-  })
+  output = output.replaceAll(
+    /from ['"]\.\/(.*)['"]/g,
+    (fullMatch, importPath) => {
+      const identifier = camelCase(importPath.split('.').shift())
+      console.log('wtf', importPath, identifier)
+      return `from '$\{${identifier}()}'`
+    },
+  )
   output = `var ${camelName} = () => esm\`${output}\``
   if (file.filename === main) {
     output = `${output}\nimport(${camelName}())`
