@@ -39,8 +39,6 @@
   },
   "dependencies": {
     "@babel/core": "^7.10.2",
-    "@babel/preset-env": "^7.11.5",
-    "@babel/preset-react": "^7.10.4",
     "@babel/standalone": "^7.11.6",
     "@dylanvann/gatsby-remark-videos": "^1.0.0",
     "@emotion/core": "^10.0.28",
@@ -116,7 +114,6 @@
     "typeface-roboto": "^0.0.75",
     "typescript": "^4.0.2",
     "typography": "^0.16.19",
-    "typography-theme-us-web-design-standards": "^0.16.19",
-    "uncontrollable": "^7.1.1"
+    "typography-theme-us-web-design-standards": "^0.16.19"
   }
 }
