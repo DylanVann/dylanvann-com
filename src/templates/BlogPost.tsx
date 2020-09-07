@@ -5,7 +5,6 @@ import { Bio } from '../components/Bio'
 import { Container } from '../components/Container'
 import { Layout } from '../components/Layout'
 import { Post } from '../components/Post'
-import { TopNav } from '../components/TopNav'
 
 const BlogPostTemplate = (props: { location: any; description?: string }) => {
   const post = get(props, 'data.mdx')
@@ -14,7 +13,6 @@ const BlogPostTemplate = (props: { location: any; description?: string }) => {
   return (
     <Layout {...props} title={title} description={description}>
       <Container>
-        <TopNav />
         <Post {...post} />
         <hr />
         <Bio />

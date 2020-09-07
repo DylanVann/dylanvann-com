@@ -95,7 +95,7 @@ export const globalStyle = css`
   .anchor {
     position: absolute;
     left: 0;
-    top: 50px;
+    top: 0;
     bottom: 0;
     transform: translateX(-100%);
     padding-right: 4px;
