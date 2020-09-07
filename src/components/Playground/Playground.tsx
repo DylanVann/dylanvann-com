@@ -1,12 +1,15 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
 import React, {
+  Dispatch,
   useContext,
   useCallback,
   Fragment,
   useState,
   useMemo,
   useEffect,
+  useReducer,
+  useLayoutEffect,
 } from 'react'
 import Editor from 'react-simple-code-editor'
 import Highlight from 'prism-react-renderer'
@@ -40,6 +43,8 @@ if (!String.prototype.replaceAll) {
   }
 }
 
+type PromiseOrValue<T> = Promise<T> | T
+
 /**
  * File interface.
  */
@@ -58,7 +63,14 @@ export interface PlaygroundFile {
   code: string
 }
 
-type PromiseOrValue<T> = Promise<T> | T
+/**
+ * A mapping of file id to file contents.
+ *
+ * @defaultValue {"index.js": "console.log('hello world')"}
+ */
+type PlaygroundFiles = {
+  [id: string]: PlaygroundFile
+}
 
 /**
  * Transform a single file.
@@ -69,102 +81,96 @@ export type PlaygroundTransform = (
 ) => PlaygroundFile
 
 /**
- * A mapping of file id to file contents.
- *
- * @defaultValue {"index.js": "console.log('hello world')"}
+ * A mapping of extension to an array of transforms.
  */
-type PlaygroundFiles = {
-  [id: string]: PlaygroundFile
-}
-
-type PlaygroundTransformMap = {
+type PlaygroundTransforms = {
   [extension: string]: PlaygroundTransform[]
 }
 
-/**
- * Props of the Playground component.
- */
-export interface PlaygroundProps {
-  /**
-   * The file to use as the main file.
-   * Meaning the file to be executed on the rendered page.
-   *
-   * @defaultValue 'index.js'
-   */
-  main?: string
-  /**
-   * A preset main file, that will import and use the default export of App.js.
-   * App.js could be generated from app.tsx, app.svelte, app.res, etc.
-   *
-   * This is used to avoid needing to write `ReactDOM.render` (React) or `new App(...)` (Svelte).
-   *
-   * - `react` preset will import a component from `index.js` and render it.
-   * - `svelte` preset will import a component from `index.svelte` and render it.
-   *
-   * If the user creates an index.js file it will be created with the content from the preset.
-   * This is an escape hatch for if the user wishes to modify the index.js code.
-   *
-   * @defaultValue undefined
-   */
-  mainPreset?: 'react' | 'svelte'
-  /**
-   * A mapping of filename to file contents.
-   *
-   * @defaultValue {"index.js": "console.log('hello world')"}
-   */
+interface State {
+  lastFileId: number
   files: PlaygroundFiles
-  filesControlled?: PlaygroundFiles
-  filesOnChange?: React.Dispatch<React.SetStateAction<PlaygroundFiles>>
-  /**
-   * A mapping of file extension to {@link PlaygroundTransform} or an array of {@link PlaygroundTransform}.
-   * If an array is given the transforms will be applied sequentially.
-   *
-   * @defaultValue undefined
-   *
-   * @example
-   *
-   * const myTransform = [transformTypeScript, transformBareImportsToSkypack]
-   *
-   * {
-   *   '.ts': myTransform,
-   *   '.tsx': myTransform,
-   * }
-   */
-  transforms?: PlaygroundTransformMap
-  /**
-   * File order in the editor.
-   */
-  fileOrder: string[]
-  fileOrderControlled?: string[]
-  fileOrderOnChange?: React.Dispatch<React.SetStateAction<string[]>>
-  /**
-   * Selected file in the editor.
-   */
-  selectedFile: string
-  selectedFileControlled?: string
-  selectedFileOnChange?: React.Dispatch<React.SetStateAction<string>>
+  main: string
+  order: string[]
+  selected: string
 }
 
-type RequiredAndNotNull<T> = {
-  [P in keyof T]-?: Exclude<T[P], null | undefined>
+type Action =
+  | { type: 'onClickedNewFile' }
+  | { type: 'onClickedDeleteFile'; id: string }
+  | { type: 'onClickedFile'; id: string }
+  | { type: 'onChangedFilename'; id: string; name: string }
+  | {
+      type: 'onChangedFile'
+      id: string
+      code: string
+    }
+
+const reducer = (state: State, action: Action): State => {
+  switch (action.type) {
+    case 'onChangedFilename': {
+      const { id, name } = action
+      return {
+        ...state,
+        files: {
+          ...state.files,
+          [id]: {
+            ...state.files[id],
+            filename: name,
+          },
+        },
+      }
+    }
+    case 'onClickedFile': {
+      const { id } = action
+      return {
+        ...state,
+        selected: id,
+      }
+    }
+    case 'onChangedFile': {
+      const { id } = action
+      return {
+        ...state,
+        files: {
+          ...state.files,
+          [id]: {
+            ...state.files[id],
+            code: action.code,
+          },
+        },
+      }
+    }
+    case 'onClickedDeleteFile': {
+      const { id } = action
+      const filesClone = { ...state.files }
+      delete filesClone[id]
+      const order = state.order.filter((v) => v !== id)
+      return {
+        ...state,
+        order,
+        selected: state.selected === id ? order[0] : state.selected,
+        files: filesClone,
+      }
+    }
+    case 'onClickedNewFile': {
+      const id = (state.lastFileId + 1).toString()
+      return {
+        ...state,
+        lastFileId: state.lastFileId + 1,
+        order: [...state.order, id],
+        selected: id,
+        files: {
+          ...state.files,
+          [id]: {
+            filename: 'untitled.js',
+            code: '',
+          },
+        },
+      }
+    }
+  }
 }
-
-type RequireAndNotNullSome<T, K extends keyof T> = RequiredAndNotNull<
-  Pick<T, K>
-> &
-  Omit<T, K>
-
-type PlaygroundPropsInternal = Omit<
-  RequireAndNotNullSome<
-    PlaygroundProps,
-    | 'fileOrderOnChange'
-    | 'selectedFileOnChange'
-    | 'filesOnChange'
-    | 'main'
-    | 'transforms'
-  >,
-  'selectedFileControlled' | 'fileOrderControlled' | 'filesControlled'
->
 
 const applyTransforms = (
   file: PlaygroundFile,
@@ -187,12 +193,14 @@ type PlaygroundErrorOnChange = React.Dispatch<
 >
 
 const PlaygroundContext = React.createContext<
-  PlaygroundPropsInternal & {
+  {
+    transforms: PlaygroundTransforms
     error: PlaygroundError
     errorOnChange: PlaygroundErrorOnChange
     applyTransformCache: ApplyTransformCache
     applyTransformCacheOnChange: ApplyTransformCacheOnChange
-  }
+    dispatch: Dispatch<Action>
+  } & State
 >(null as any)
 
 const theme = {
@@ -290,8 +298,8 @@ const extensionToLanguage: { [ext: string]: string } = {
 }
 
 function PlaygroundEditor() {
-  const { files, filesOnChange, selectedFile } = useContext(PlaygroundContext)
-  const file = files[selectedFile]
+  const { files, dispatch, selected } = useContext(PlaygroundContext)
+  const file = files[selected]
   const { filename } = file
   const extension = getExtension(filename)
   const language = extensionToLanguage[extension]
@@ -323,14 +331,8 @@ function PlaygroundEditor() {
   )
   const onValueChange = useCallback(
     (newCode) =>
-      filesOnChange((files) => ({
-        ...files,
-        [selectedFile]: {
-          ...file,
-          code: newCode,
-        },
-      })),
-    [filesOnChange, selectedFile, file],
+      dispatch({ type: 'onChangedFile', id: selected, code: newCode }),
+    [dispatch, selected],
   )
   const baseTheme = theme && typeof theme.plain === 'object' ? theme.plain : {}
   return (
@@ -372,9 +374,9 @@ function PlaygroundError() {
         marginTop: 4,
         fontSize: '14px',
         lineHeight: '14px',
-        border: `1px solid ${darken(0.25, '#FF0000')}`,
         color: darken(0.25, '#FF0000'),
         backgroundColor: lighten(0.4, '#FF0000'),
+        overflowX: 'auto',
       }}
     >
       {error.toString()}
@@ -385,7 +387,7 @@ function PlaygroundError() {
 const transformFiles = (
   files: PlaygroundFiles,
   main: string,
-  transformsMap: PlaygroundTransformMap,
+  transformsMap: PlaygroundTransforms,
   applyTransformCache: ApplyTransformCache,
 ): PlaygroundFiles => {
   return Object.entries(files).reduce((acc, [_id, file]) => {
@@ -455,50 +457,34 @@ function PlaygroundPreview() {
   )
 }
 
-const mainDefaultV = 'index.js'
-const filesDefaultV: PlaygroundFiles = {
-  [mainDefaultV]: {
-    filename: mainDefaultV,
-    code: `document.body.appendChild(document.createTextNode('hello world'))`,
-  },
-}
-const selectedFileDefaultV = mainDefaultV
-const fileOrderDefaultV = [mainDefaultV]
 const transformsDefault = {
   js: [transformBabel, transformImports],
   svelte: [transformSvelte, transformBabel, transformImports],
 }
 
 function PlaygroundProvider({
-  main = mainDefaultV,
-  mainPreset,
-  files: filesDefault = filesDefaultV,
-  selectedFile: selectedFileDefault = selectedFileDefaultV,
-  fileOrder: fileOrderDefault = fileOrderDefaultV,
+  state,
+  dispatch,
   transforms = transformsDefault,
   children,
   ...other
-}: PlaygroundProps & { children: React.ReactNode }) {
+}: {
+  transforms?: PlaygroundTransforms
+  state: State
+  dispatch: Dispatch<Action>
+  children: React.ReactNode
+}) {
   const [applyTransformCache, applyTransformCacheOnChange] = React.useState({})
-  const [files, filesOnChange] = useState<PlaygroundFiles>(filesDefault)
-  const [selectedFile, selectedFileOnChange] = useState(selectedFileDefault)
-  const [fileOrder, fileOrderOnChange] = useState(fileOrderDefault)
   const [error, errorOnChange] = useState<PlaygroundError>(null)
   const finalProps = {
     ...other,
-    main,
-    mainPreset,
+    ...state,
     transforms,
-    files,
-    filesOnChange,
-    selectedFile,
-    selectedFileOnChange,
-    fileOrder,
-    fileOrderOnChange,
     applyTransformCache,
     applyTransformCacheOnChange,
     error,
     errorOnChange,
+    dispatch,
   }
   return (
     <PlaygroundContext.Provider value={finalProps}>
@@ -509,41 +495,25 @@ function PlaygroundProvider({
 
 function PlaygroundEditorTab(props: { id: string }) {
   const { id } = props
-  const {
-    selectedFile,
-    files,
-    selectedFileOnChange,
-    filesOnChange,
-  } = useContext(PlaygroundContext)
+  const { selected, files, dispatch } = useContext(PlaygroundContext)
   const file = files[id]
   const { filename } = file
-  const isSelected = id === selectedFile ? 'red' : undefined
+  const isSelected = id === selected
+  const [ref, setRef] = useState<HTMLDivElement | null>(null)
+  useLayoutEffect(() => {
+    if (ref) {
+      ref.textContent = filename
+    }
+  }, [ref, filename])
   return (
     <div
       css={{
         position: 'relative',
         background: isSelected ? 'rgb(245, 247, 255)' : 'transparent',
-        border: isSelected
-          ? '1px solid rgb(204, 214, 252)'
-          : '1px solid transparent',
-        borderBottom: '1px solid transparent',
         display: 'flex',
         flexDirection: 'row',
       }}
     >
-      <i
-        css={{
-          cursor: 'move',
-          width: '5px',
-          position: 'absolute',
-          left: '5px',
-          top: 6,
-          bottom: 6,
-          '--drag-handle-color': '#dedede',
-          background:
-            'linear-gradient(to right, var(--drag-handle-color) 1px, transparent 1px, transparent 2px, var(--drag-handle-color) 2px, var(--drag-handle-color) 3px, transparent 3px, transparent 4px, var(--drag-handle-color) 4px )',
-        }}
-      />
       <div
         css={{
           border: 0,
@@ -552,16 +522,13 @@ function PlaygroundEditorTab(props: { id: string }) {
           paddingRight: 5,
           margin: 0,
           outline: 0,
-          marginLeft: 5,
           cursor: 'pointer',
           color: isSelected ? '#333' : '#555',
           ':hover': {
             color: '#000',
           },
         }}
-        onClick={() => {
-          selectedFileOnChange(id)
-        }}
+        onClick={() => dispatch({ type: 'onClickedFile', id })}
       >
         <div
           {...(isSelected
@@ -571,17 +538,11 @@ function PlaygroundEditorTab(props: { id: string }) {
                 suppressContentEditableWarning: true,
                 onInput: (e) => {
                   const value: string = e.currentTarget.textContent || ''
-                  const file: PlaygroundFile = files[id]
-                  filesOnChange((v) => ({
-                    ...v,
-                    [id]: {
-                      ...file,
-                      filename: value,
-                    },
-                  }))
+                  dispatch({ type: 'onChangedFilename', id, name: value })
                 },
               }
             : {})}
+          ref={(el) => setRef(el)}
           css={{
             margin: 0,
             background: 'none',
@@ -590,10 +551,7 @@ function PlaygroundEditorTab(props: { id: string }) {
             ...fontStyle,
             fontFamily: fontRoboto,
           }}
-          defaultValue={filename}
-        >
-          {filename}
-        </div>
+        />
       </div>
       <button
         css={{
@@ -609,13 +567,7 @@ function PlaygroundEditorTab(props: { id: string }) {
             color: 'black',
           },
         }}
-        onClick={() => {
-          filesOnChange((files) => {
-            const clonedFiles = { ...files }
-            delete clonedFiles[id]
-            return clonedFiles
-          })
-        }}
+        onClick={() => dispatch({ type: 'onClickedDeleteFile', id })}
       >
         <svg
           width="12"
@@ -647,13 +599,21 @@ function PlaygroundEditorTab(props: { id: string }) {
 }
 
 function PlaygroundEditorTabs() {
-  const { files, filesOnChange, selectedFileOnChange } = useContext(
-    PlaygroundContext,
-  )
+  const { dispatch, order } = useContext(PlaygroundContext)
   return (
-    <div style={{ display: 'flex', marginBottom: -2, marginTop: 4 }}>
-      {Object.keys(files).map((filename) => (
-        <PlaygroundEditorTab key={filename} id={filename} />
+    <div
+      css={{
+        display: 'flex',
+        marginBottom: -2,
+        marginTop: 4,
+        overflowX: 'auto',
+        overflowY: 'hidden',
+        scrollbarWidth: 'none',
+        '::-webkit-scrollbar': { width: 0, height: 0 },
+      }}
+    >
+      {order.map((id) => (
+        <PlaygroundEditorTab key={id} id={id} />
       ))}
       <button
         css={{
@@ -669,17 +629,7 @@ function PlaygroundEditorTabs() {
             color: 'black',
           },
         }}
-        onClick={() => {
-          const id = 'untitled.js'
-          filesOnChange((v) => ({
-            ...v,
-            [id]: {
-              filename: 'untitled.js',
-              code: '',
-            },
-          }))
-          selectedFileOnChange(id)
-        }}
+        onClick={() => dispatch({ type: 'onClickedNewFile' })}
       >
         <svg
           width="12"
@@ -710,25 +660,29 @@ function PlaygroundEditorTabs() {
   )
 }
 
-export function Playground(
-  props: PlaygroundProps & { children: any[]; style?: any; className?: string },
-) {
+export function Playground(props: {
+  children: any[]
+  style?: any
+  className?: string
+}) {
   const { children, style, className } = props
-  const { files, main, selected } = useMemo<{
-    files: PlaygroundFiles
-    main?: string
-    selected?: string
-  }>(() => {
-    let main
-    let selected
+  const initialState: State = useMemo<State>(() => {
+    let main: string | undefined
+    let selected: string | undefined
     const processedFiles = children.reduce((acc, v) => {
       const filename: string = v.props.children.props.filename
       const isMain: boolean = v.props.children.props.main
       if (isMain) {
+        if (main) {
+          throw new Error('Two files set themselves as main.')
+        }
         main = filename
       }
       const isSelected: boolean = v.props.children.props.selected
       if (isSelected) {
+        if (selected) {
+          throw new Error('Two files set themselves as selected.')
+        }
         selected = filename
       }
       const code: string = v.props.children.props.children.trim()
@@ -741,25 +695,25 @@ export function Playground(
         [filename]: file,
       }
     }, {})
+    if (!main) {
+      throw new Error('Could not find main.')
+    }
+    const order = Object.keys(processedFiles)
     return {
+      lastFileId: 0,
       files: processedFiles,
+      order,
       main,
-      selected,
+      selected: selected === undefined ? order[0] : selected,
     }
   }, [children])
+  const [state, dispatch] = useReducer(reducer, initialState)
   return (
-    <PlaygroundProvider
-      {...props}
-      files={files}
-      main={main}
-      selectedFile={selected as string}
-    >
+    <PlaygroundProvider state={state} dispatch={dispatch}>
       <div style={style} className={className}>
         <PlaygroundPreview />
         <PlaygroundEditorTabs />
-        <div style={{ border: '1px solid rgb(204, 214, 252)' }}>
-          <PlaygroundEditor />
-        </div>
+        <PlaygroundEditor />
         <PlaygroundError />
       </div>
     </PlaygroundProvider>
