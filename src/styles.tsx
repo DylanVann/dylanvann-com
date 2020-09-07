@@ -1,7 +1,5 @@
 import { css } from '@emotion/core'
 import { lighten, darken } from 'polished'
-import 'prism-themes/themes/prism-base16-ateliersulphurpool.light.css'
-import 'prismjs/plugins/diff-highlight/prism-diff-highlight.css'
 import 'typeface-raleway'
 import 'typeface-roboto'
 
@@ -40,7 +38,7 @@ export const fontRobotoArray = [
   'sans-serif',
 ]
 
-export const topNavHeight = 50
+export const fontRoboto = fontRobotoArray.join(', ')
 
 export const globalStyle = css`
   * {
@@ -59,13 +57,26 @@ export const globalStyle = css`
     font-size: inherit;
   }
 
+  pre.diff-highlight > code .token.deleted,
+  pre > code.diff-highlight .token.deleted {
+    background-color: rgba(255, 0, 0, 0.1);
+    color: inherit;
+    display: block;
+  }
+
+  pre.diff-highlight > code .token.inserted,
+  pre > code.diff-highlight .token.inserted {
+    background-color: rgba(0, 255, 128, 0.1);
+    color: inherit;
+    display: block;
+  }
+
   body {
     font-weight: 300;
     background-color: #fcfcfc;
   }
 
   #___gatsby {
-    padding-top: 50px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -98,7 +109,7 @@ export const globalStyle = css`
   .anchor {
     position: absolute;
     left: 0;
-    top: 50px;
+    top: 0;
     bottom: 0;
     transform: translateX(-100%);
     padding-right: 4px;
@@ -123,5 +134,9 @@ export const globalStyle = css`
 
   .gatsby-highlight {
     margin-bottom: 1.53rem;
+  }
+
+  td {
+    vertical-align: top;
   }
 `

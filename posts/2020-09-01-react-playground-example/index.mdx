@@ -1,0 +1,36 @@
+---
+title: React Playground Example
+draft: true
+author: Dylan Vann
+---
+
+<Playground>
+
+
+```jsx filename=index.js main
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
+
+ReactDOM.render(<App />, document.body)
+```
+
+```jsx filename=App.js selected
+import React, { useState } from 'react'
+
+export default function App() {
+  const [count, setCount] = useState(0)
+  const increment = () => setCount(count + 1)
+  const decrement = () => setCount(count - 1)
+  return (
+    <div>
+      <button onClick={decrement}>-</button>
+      <span>{` ${count} `}</span>
+      <button onClick={increment}>+</button>
+    </div>
+  )
+}
+```
+
+</Playground>
+

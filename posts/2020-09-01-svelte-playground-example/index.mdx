@@ -1,0 +1,31 @@
+---
+title: Svelte Playground Example
+draft: true
+author: Dylan Vann
+---
+
+<Playground>
+
+
+```js filename=index.js main
+import App from './App.svelte'
+
+const app = new App({
+  target: document.body,
+})
+```
+
+```svelte filename=App.svelte selected
+<script>
+  let count = 0
+</script>
+
+<div>
+  <button on:click={() => count--}>-</button>
+  <span>{count}</span>
+  <button on:click={() => count++}>+</button>
+</div>
+```
+
+</Playground>
+

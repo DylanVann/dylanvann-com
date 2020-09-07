@@ -5,7 +5,7 @@
     "paths": { "*": ["types/*"] },
     "target": "esnext",
     "module": "commonjs",
-    "lib": ["dom", "es2017"],
+    "lib": ["dom", "es2017", "ESNext"],
     "allowJs": true,
     "checkJs": false,
     "jsx": "react",
