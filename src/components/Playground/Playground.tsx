@@ -510,7 +510,6 @@ function PlaygroundEditorTab(props: { id: string }) {
   return (
     <div
       css={{
-        position: 'relative',
         background: isSelected ? 'rgb(245, 247, 255)' : 'transparent',
         display: 'flex',
         flexDirection: 'row',
@@ -606,7 +605,6 @@ function PlaygroundEditorTabs() {
     <div
       css={{
         display: 'flex',
-        marginBottom: -2,
         marginTop: 4,
         height: 32,
         overflowX: 'auto',
