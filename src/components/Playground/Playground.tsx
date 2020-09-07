@@ -643,7 +643,6 @@ function PlaygroundEditorTabs() {
             verticalAlign: 'middle',
             OObjectFit: 'contain',
             objectFit: 'contain',
-            WebkitTransformOrigin: 'center center',
             transformOrigin: 'center center',
             stroke: 'currentColor',
             strokeWidth: '4',

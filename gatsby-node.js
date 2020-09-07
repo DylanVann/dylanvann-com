@@ -33,11 +33,11 @@ exports.createPages = async ({ graphql, actions }) => {
                 slug
                 date(formatString: "MMMM DD, YYYY")
                 datetime: date(formatString: "YYYY-MM-DD")
-                draft
               }
               frontmatter {
                 title
                 subtitle
+                draft
                 github
               }
             }
@@ -54,12 +54,12 @@ exports.createPages = async ({ graphql, actions }) => {
   const allEdges = result.data.allMdx.edges
 
   const showPost = (edge) => {
-    const draft = edge.node.fields.draft
-    if (process.env.NODE_ENV === 'production') {
-      return !draft
-    } else {
+    const draft = edge.node.frontmatter.draft
+    if (!draft) {
       return true
     }
+    // Show the draft if this is not production.
+    return process.env.NODE_ENV !== 'production'
   }
 
   const postEdges = allEdges.filter(showPost)
@@ -110,12 +110,6 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       name: `slug`,
       node,
       value: slug,
-    })
-    const isDraft = slugWithDate.startsWith('/drafts/')
-    createNodeField({
-      name: `draft`,
-      node,
-      value: isDraft,
     })
     if (date) {
       createNodeField({
