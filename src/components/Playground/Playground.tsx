@@ -11,13 +11,14 @@ import React, {
 import Editor from 'react-simple-code-editor'
 import Highlight from 'prism-react-renderer'
 import memoizeOne from 'memoize-one'
-import Prism from 'prismjs'
+import { Prism } from '../Prism'
 import { fontRoboto } from '../../styles'
 import capsize from 'capsize'
 import { transformImports } from './transformImports'
 import { transformBabel } from './transformBabel'
 import { darken, lighten } from 'polished'
 import { transformSvelte } from './transformSvelte'
+import { getExtension } from './utils'
 
 const fontMetrics = {
   capHeight: 1456,
@@ -199,12 +200,6 @@ const theme = {
   styles: [],
 }
 
-const getName = (filename: string): string | undefined =>
-  filename.split('.').shift()
-
-const getExtension = (filename: string): string | undefined =>
-  filename.split('.').pop()
-
 const sortFiles = (
   files: PlaygroundFiles,
 ): {
@@ -218,9 +213,6 @@ const sortFiles = (
     html?: PlaygroundFile
   } = { css: {}, js: {}, html: undefined }
   const filesEntries = Object.entries(files)
-  console.log('-----------------------------')
-  console.log(filesEntries)
-  console.log('------------------------------')
   filesEntries.forEach(([_id, content]) => {
     const { filename } = content
     const extension = getExtension(filename)
@@ -291,15 +283,26 @@ ${Object.values(sortedFiles.js)
 `
 }
 
+const extensionToLanguage: { [ext: string]: string } = {
+  js: 'jsx',
+  jsx: 'jsx',
+  svelte: 'svelte',
+}
+
 function PlaygroundEditor() {
   const { files, filesOnChange, selectedFile } = useContext(PlaygroundContext)
+  const file = files[selectedFile]
+  const { filename } = file
+  const extension = getExtension(filename)
+  const language = extensionToLanguage[extension]
+  const value = file.code
   const highlightCode = useCallback(
     (code) => (
       <Highlight
         Prism={Prism as any}
         code={code}
         theme={theme}
-        language={'javascript'}
+        language={language as any}
       >
         {({ tokens, getLineProps, getTokenProps }) => (
           <Fragment>
@@ -316,10 +319,8 @@ function PlaygroundEditor() {
         )}
       </Highlight>
     ),
-    [],
+    [language],
   )
-  const file = files[selectedFile]
-  const value = file.code
   const onValueChange = useCallback(
     (newCode) =>
       filesOnChange((files) => ({
@@ -427,7 +428,6 @@ function PlaygroundPreview() {
       setTransformedFiles(result)
       errorOnChange(null)
     } catch (e) {
-      console.log(e)
       errorOnChange(e)
     }
   }, [files, transforms, applyTransformCache, errorOnChange, main])
@@ -507,18 +507,19 @@ function PlaygroundProvider({
   )
 }
 
-function PlaygroundEditorTab(props: { filename: string }) {
-  const { filename } = props
+function PlaygroundEditorTab(props: { id: string }) {
+  const { id } = props
   const {
     selectedFile,
     files,
     selectedFileOnChange,
     filesOnChange,
   } = useContext(PlaygroundContext)
-  const isSelected = filename === selectedFile ? 'red' : undefined
+  const file = files[id]
+  const { filename } = file
+  const isSelected = id === selectedFile ? 'red' : undefined
   return (
     <div
-      key={filename}
       css={{
         position: 'relative',
         background: isSelected ? 'rgb(245, 247, 255)' : 'transparent',
@@ -559,7 +560,7 @@ function PlaygroundEditorTab(props: { filename: string }) {
           },
         }}
         onClick={() => {
-          selectedFileOnChange(filename)
+          selectedFileOnChange(id)
         }}
       >
         <div
@@ -570,10 +571,10 @@ function PlaygroundEditorTab(props: { filename: string }) {
                 suppressContentEditableWarning: true,
                 onInput: (e) => {
                   const value: string = e.currentTarget.textContent || ''
-                  const file: PlaygroundFile = files[filename]
+                  const file: PlaygroundFile = files[id]
                   filesOnChange((v) => ({
                     ...v,
-                    [filename]: {
+                    [id]: {
                       ...file,
                       filename: value,
                     },
@@ -611,7 +612,7 @@ function PlaygroundEditorTab(props: { filename: string }) {
         onClick={() => {
           filesOnChange((files) => {
             const clonedFiles = { ...files }
-            delete clonedFiles[filename]
+            delete clonedFiles[id]
             return clonedFiles
           })
         }}
@@ -646,11 +647,13 @@ function PlaygroundEditorTab(props: { filename: string }) {
 }
 
 function PlaygroundEditorTabs() {
-  const { files, filesOnChange } = useContext(PlaygroundContext)
+  const { files, filesOnChange, selectedFileOnChange } = useContext(
+    PlaygroundContext,
+  )
   return (
     <div style={{ display: 'flex', marginBottom: -2, marginTop: 4 }}>
       {Object.keys(files).map((filename) => (
-        <PlaygroundEditorTab key={filename} filename={filename} />
+        <PlaygroundEditorTab key={filename} id={filename} />
       ))}
       <button
         css={{
@@ -667,16 +670,15 @@ function PlaygroundEditorTabs() {
           },
         }}
         onClick={() => {
-          const id = 'idk.js'
+          const id = 'untitled.js'
           filesOnChange((v) => ({
             ...v,
             [id]: {
-              filename: 'idk.js',
-              code: 'const god = "dam"',
-              isMain: false,
-              isSelected: false,
+              filename: 'untitled.js',
+              code: '',
             },
           }))
+          selectedFileOnChange(id)
         }}
       >
         <svg

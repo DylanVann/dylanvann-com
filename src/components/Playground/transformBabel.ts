@@ -11,7 +11,6 @@ registerPlugin(
 )
 
 export const transformBabel: PlaygroundTransform = (file) => {
-  console.log('babel', file.filename)
   const result = transform(file.code, {
     presets: [
       ['react', { runtime: 'classic' }],

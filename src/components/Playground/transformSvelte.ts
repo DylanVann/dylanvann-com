@@ -1,8 +1,6 @@
 import { PlaygroundTransform } from './Playground'
 import { compile } from 'svelte/compiler'
 
-console.log(compile)
-
 /**
  * Transform Svelte to JS.
  *

@@ -1,13 +1,11 @@
 import camelCase from 'lodash.camelcase'
 import { PlaygroundTransform, PlaygroundFile } from './Playground'
+import { getName } from './utils'
 
 const escape = (v: string) => v.replaceAll('`', '\\`').replaceAll('$', '\\$')
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const unescape = (v: string) => v.replaceAll('\\`', '`').replaceAll('\\$', '$')
-
-const getName = (filename: string): string | undefined =>
-  filename.split('.').shift()
 
 /**
  * Transform local imports to a format that will work.
@@ -17,7 +15,7 @@ export const transformImports: PlaygroundTransform = (
   file: PlaygroundFile,
   main: string,
 ): PlaygroundFile => {
-  const name = file.filename.split('.').shift()
+  const name = getName(file.filename)
   const camelName = camelCase(name)
   let output = file.code
   output = escape(output)
@@ -25,7 +23,6 @@ export const transformImports: PlaygroundTransform = (
     /from ['"]\.\/(.*)['"]/g,
     (fullMatch, importPath) => {
       const identifier = camelCase(importPath.split('.').shift())
-      console.log('wtf', importPath, identifier)
       return `from '$\{${identifier}()}'`
     },
   )
