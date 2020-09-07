@@ -57,6 +57,20 @@ export const globalStyle = css`
     font-size: inherit;
   }
 
+  pre.diff-highlight > code .token.deleted,
+  pre > code.diff-highlight .token.deleted {
+    background-color: rgba(255, 0, 0, 0.1);
+    color: inherit;
+    display: block;
+  }
+
+  pre.diff-highlight > code .token.inserted,
+  pre > code.diff-highlight .token.inserted {
+    background-color: rgba(0, 255, 128, 0.1);
+    color: inherit;
+    display: block;
+  }
+
   body {
     font-weight: 300;
     background-color: #fcfcfc;
@@ -120,5 +134,9 @@ export const globalStyle = css`
 
   .gatsby-highlight {
     margin-bottom: 1.53rem;
+  }
+
+  td {
+    vertical-align: top;
   }
 `
