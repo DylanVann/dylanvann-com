@@ -1,0 +1,33 @@
+---
+title: Svelte
+author: Dylan Vann
+---
+
+<Playground>
+
+
+```js filename=index.js main
+import App from './App.svelte'
+
+const app = new App({
+  target: document.body,
+})
+```
+
+```svelte filename=App.svelte
+<script>
+  let count = 0
+
+  const switchTrack = () => {
+    count++
+  }
+</script>
+
+<div>
+  <button on:click={switchTrack}>Inc</button>
+  {count}
+</div>
+```
+
+</Playground>
+

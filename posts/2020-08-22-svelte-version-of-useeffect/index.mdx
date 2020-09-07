@@ -11,25 +11,6 @@ tags:
 
 **Disclaimer: I'm new to Svelte so this isn't so much a recommendation as it is a "I guess this is a way to do it 🤷‍♂️".**
 
-<Playground>
-
-```js playground filename=index.js
-import { helloWorld } from './helloWorld.js'
-
-document.body.appendChild(document.createTextNode(helloWorld))
-```
-
-```js playground filename=helloWorld.js
-import { world } from './world.js'
-export const helloWorld = 'hello world'
-```
-
-```js playground filename=world.js
-export const world = 'world'
-```
-
-</Playground>
-
 I've been playing around with Svelte lately, trying to port some React code to it as an experiment.
 
 A challenge I came across is that I could not find a Svelte equivalent of `useEffect`.
@@ -39,12 +20,60 @@ This replaces some usages of `useEffect`.
 
 However, for cases where we want to perform reactive effects that only trigger side effects I was unsure how to port the code to Svelte.
 
-The React code to port:
+**The React code to port**:
 
-```js
-import { useEffect } from 'react'
+You can see that when the track instance is swapped we remove the listener on the previous track, and add one on the new track.
 
-const MyComp = ({ track }) => {
+<Playground>
+
+
+```html filename=index.html
+<div id="root" />
+```
+
+```js filename=index.js main
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { App } from './App.js'
+
+ReactDOM.render(<App />, document.getElementById('root'))
+```
+
+```js filename=App.js
+import React, { useState } from 'react'
+import { Track } from './Track.js'
+
+const appendChild = document.body.appendChild.bind(document.body)
+const addText = (text) => appendChild(document.createTextNode(text))
+const addBreak = () => appendChild(document.createElement('br'))
+
+const createTrack = () => ({
+  on(event) {
+    addText(`Added listener on: ${event}`)
+    addBreak()
+  },
+  off(event) {
+    addText(`Removed listener on: ${event}`)
+    addBreak()
+  },
+})
+
+export const App = () => {
+  const [track, setTrack] = useState(createTrack())
+  const switchTrack = () => setTrack(createTrack())
+  return (
+    <div>
+      <button onClick={switchTrack}>Switch Track</button>
+      <Track track={track} />
+    </div>
+  )
+}
+```
+
+```jsx filename=Track.js selected
+import React, { useEffect } from 'react'
+
+export const Track = ({ track }) => {
   useEffect(() => {
     let onStop = () => track.stopAllTracks()
     track.on('stop', onStop)
@@ -55,6 +84,9 @@ const MyComp = ({ track }) => {
   return null
 }
 ```
+
+</Playground>
+
 
 The behavior we want is:
 
@@ -83,9 +115,60 @@ Svelte has support for creating stores reactively. Svelte also has support for a
 
 So we can use this custom store creating function like so:
 
-```svelte
+<Playground>
+
+
+```html filename=index.html
+<div id="root" />
+```
+
+```js filename=index.js main
+import App from './App.svelte'
+
+const app = new App({
+  target: document.getElementById('root'),
+})
+```
+
+```svelte filename=App.svelte
 <script>
-  import { useEffect } from './useEffect'
+  import Track from './Track.svelte'
+
+  const appendChild = document.body.appendChild.bind(document.body)
+  const addText = (text) => appendChild(document.createTextNode(text))
+  const addBreak = () => appendChild(document.createElement('br'))
+
+  const createTrack = () => ({
+    on(event) {
+      addText(`Added listener on: ${event}`)
+      addBreak()
+    },
+    off(event) {
+      addText(`Removed listener on: ${event}`)
+      addBreak()
+    },
+  })
+
+  let track = createTrack()
+
+  const switchTrack = () => {
+    track = createTrack()
+  }
+</script>
+
+<div>
+  <button on:click={switchTrack}>Switch Track</button>
+  <Track {track} />
+</div>
+```
+
+```js filename=useEffect.js
+export const useEffect = (subscribe) => ({ subscribe })
+```
+
+```svelte filename=Track.svelte selected
+<script>
+  import { useEffect } from './useEffect.js'
 
   export let track
 
@@ -100,6 +183,9 @@ So we can use this custom store creating function like so:
   $: $effect
 </script>
 ```
+
+</Playground>
+
 
 `effect` is assigned using a reactive declaration, so a new store is created whenever `track` is changed.
 The Svelte compiler does the dependency tracking work for us, so there's no dependency array like in React.

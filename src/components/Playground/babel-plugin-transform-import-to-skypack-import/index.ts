@@ -6,9 +6,7 @@ function getCdnPathWithVersion(
   const libraryNameWithVersion = explicitVersion
     ? `${libraryName}@${explicitVersion}`
     : libraryName
-  // const finalPath = path.join(libraryNameWithVersion, ...libraryInternalPaths)
   const finalPath = [libraryNameWithVersion, ...libraryInternalPaths].join('/')
-  console.log('finalPath', finalPath)
   return `https://cdn.skypack.dev/${finalPath}`
 }
 

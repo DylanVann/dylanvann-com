@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { colorTextAccent, colorTextDark, topNavHeight } from '../styles'
+import { colorTextAccent, colorTextDark } from '../styles'
 import { Container } from './Container'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons/faTwitter'
@@ -8,11 +8,6 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub'
 import { Link } from 'gatsby'
 
 const TopNavContainer = styled('div')`
-  transform: translateZ(0);
-  z-index: 999;
-  position: fixed;
-  top: 0;
-  right: 0;
   width: 100%;
   background: #fff;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
@@ -43,7 +38,7 @@ const NavUL = styled('ul')`
 const StyledContainer = styled(Container)`
   padding-top: 0;
   padding-bottom: 0;
-  line-height: ${topNavHeight}px;
+  line-height: 50px;
   a {
     text-decoration: none;
     color: ${colorTextDark} !important;

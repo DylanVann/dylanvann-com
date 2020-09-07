@@ -110,6 +110,7 @@
     "react-helmet-async": "^1.0.6",
     "react-simple-code-editor": "^0.11.0",
     "react-typography": "^0.16.19",
+    "svelte": "^3.24.1",
     "theme-ui": "^0.3.1",
     "typeface-raleway": "^0.0.75",
     "typeface-roboto": "^0.0.75",

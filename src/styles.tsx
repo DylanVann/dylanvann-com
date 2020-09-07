@@ -40,8 +40,6 @@ export const fontRobotoArray = [
 
 export const fontRoboto = fontRobotoArray.join(', ')
 
-export const topNavHeight = 50
-
 export const globalStyle = css`
   * {
     box-sizing: border-box;
@@ -65,7 +63,6 @@ export const globalStyle = css`
   }
 
   #___gatsby {
-    padding-top: 50px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;

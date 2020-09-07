@@ -17,6 +17,7 @@ import capsize from 'capsize'
 import { transformImports } from './transformImports'
 import { transformBabel } from './transformBabel'
 import { darken, lighten } from 'polished'
+import { transformSvelte } from './transformSvelte'
 
 const fontMetrics = {
   capHeight: 1456,
@@ -54,7 +55,6 @@ export interface PlaygroundFile {
    * A transform can change this in any way.
    */
   code: string
-  isMain: boolean
 }
 
 type PromiseOrValue<T> = Promise<T> | T
@@ -62,7 +62,10 @@ type PromiseOrValue<T> = Promise<T> | T
 /**
  * Transform a single file.
  */
-export type PlaygroundTransform = (file: PlaygroundFile) => PlaygroundFile
+export type PlaygroundTransform = (
+  file: PlaygroundFile,
+  main: string,
+) => PlaygroundFile
 
 /**
  * A mapping of file id to file contents.
@@ -164,10 +167,11 @@ type PlaygroundPropsInternal = Omit<
 
 const applyTransforms = (
   file: PlaygroundFile,
+  main: string,
   transforms: PlaygroundTransform[],
 ): PlaygroundFile => {
   let transformed = file
-  transforms.forEach((t) => (transformed = t(transformed)))
+  transforms.forEach((t) => (transformed = t(transformed, main)))
   return transformed
 }
 
@@ -195,6 +199,9 @@ const theme = {
   styles: [],
 }
 
+const getName = (filename: string): string | undefined =>
+  filename.split('.').shift()
+
 const getExtension = (filename: string): string | undefined =>
   filename.split('.').pop()
 
@@ -211,7 +218,11 @@ const sortFiles = (
     html?: PlaygroundFile
   } = { css: {}, js: {}, html: undefined }
   const filesEntries = Object.entries(files)
-  filesEntries.forEach(([filename, content]) => {
+  console.log('-----------------------------')
+  console.log(filesEntries)
+  console.log('------------------------------')
+  filesEntries.forEach(([_id, content]) => {
+    const { filename } = content
     const extension = getExtension(filename)
     if (extension === 'js') {
       sortedFiles.js[filename] = content
@@ -231,10 +242,13 @@ const sortFiles = (
   return sortedFiles
 }
 
-/**
- * Constructs snippet from individual html, css and js code.
- */
-export function constructSnippet({ files }: { files: PlaygroundFiles }) {
+export function getSrcDoc({
+  files,
+  main,
+}: {
+  files: PlaygroundFiles
+  main: string
+}) {
   const sortedFiles = sortFiles(files)
   return `
 <!DOCTYPE html>
@@ -261,10 +275,10 @@ var esm = ({ raw }, ...vals) => {
 
 ${Object.values(sortedFiles.js)
   .sort((a, b) => {
-    if (a.isMain) {
+    if (a.filename === main) {
       return 1
     }
-    if (b.isMain) {
+    if (b.filename === main) {
       return -1
     }
     return 0
@@ -325,7 +339,9 @@ function PlaygroundEditor() {
       padding={20}
       highlight={highlightCode}
       css={{
+        overflowX: 'scroll',
         textarea: {
+          overflowX: 'scroll',
           outline: 'none',
         },
       }}
@@ -333,6 +349,7 @@ function PlaygroundEditor() {
         whiteSpace: 'pre',
         fontFamily: 'monospace',
         background: '#f5f7ff',
+        overflowX: 'scroll',
         fontSize: '14px',
         ...baseTheme,
       }}
@@ -366,6 +383,7 @@ function PlaygroundError() {
 
 const transformFiles = (
   files: PlaygroundFiles,
+  main: string,
   transformsMap: PlaygroundTransformMap,
   applyTransformCache: ApplyTransformCache,
 ): PlaygroundFiles => {
@@ -383,32 +401,39 @@ const transformFiles = (
     }
     return {
       ...acc,
-      [filename]: memoizedApplyTransform(file, transformsForExtension),
+      [filename]: memoizedApplyTransform(file, main, transformsForExtension),
     }
   }, {})
 }
 
 function PlaygroundPreview() {
-  const { files, transforms, applyTransformCache, errorOnChange } = useContext(
-    PlaygroundContext,
-  )
+  const {
+    files,
+    transforms,
+    applyTransformCache,
+    errorOnChange,
+    main,
+  } = useContext(PlaygroundContext)
   const [transformedFiles, setTransformedFiles] = useState<PlaygroundFiles>({})
 
   useEffect(() => {
     try {
-      const result = transformFiles(files, transforms, applyTransformCache)
+      const result = transformFiles(
+        files,
+        main,
+        transforms,
+        applyTransformCache,
+      )
       setTransformedFiles(result)
       errorOnChange(null)
     } catch (e) {
       console.log(e)
       errorOnChange(e)
     }
-  }, [files, transforms, applyTransformCache, errorOnChange])
+  }, [files, transforms, applyTransformCache, errorOnChange, main])
 
-  console.log('---------------------------------------')
-  console.log(transformedFiles)
-  console.log('---------------------------------------')
-  const srcDoc = useMemo(() => constructSnippet({ files: transformedFiles }), [
+  const srcDoc = useMemo(() => getSrcDoc({ files: transformedFiles, main }), [
+    main,
     transformedFiles,
   ])
 
@@ -430,23 +455,22 @@ function PlaygroundPreview() {
   )
 }
 
-const mainDefault = 'index.js'
-
+const mainDefaultV = 'index.js'
 const filesDefaultV: PlaygroundFiles = {
-  [mainDefault]: {
-    filename: mainDefault,
+  [mainDefaultV]: {
+    filename: mainDefaultV,
     code: `document.body.appendChild(document.createTextNode('hello world'))`,
-    isMain: true,
   },
 }
-const selectedFileDefaultV = mainDefault
-const fileOrderDefaultV = [mainDefault]
+const selectedFileDefaultV = mainDefaultV
+const fileOrderDefaultV = [mainDefaultV]
 const transformsDefault = {
   js: [transformBabel, transformImports],
+  svelte: [transformSvelte, transformBabel, transformImports],
 }
 
 function PlaygroundProvider({
-  main = mainDefault,
+  main = mainDefaultV,
   mainPreset,
   files: filesDefault = filesDefaultV,
   selectedFile: selectedFileDefault = selectedFileDefaultV,
@@ -459,7 +483,7 @@ function PlaygroundProvider({
   const [files, filesOnChange] = useState<PlaygroundFiles>(filesDefault)
   const [selectedFile, selectedFileOnChange] = useState(selectedFileDefault)
   const [fileOrder, fileOrderOnChange] = useState(fileOrderDefault)
-  const [error, errorOnChange] = useState('')
+  const [error, errorOnChange] = useState<PlaygroundError>(null)
   const finalProps = {
     ...other,
     main,
@@ -650,6 +674,7 @@ function PlaygroundEditorTabs() {
               filename: 'idk.js',
               code: 'const god = "dam"',
               isMain: false,
+              isSelected: false,
             },
           }))
         }}
@@ -686,24 +711,47 @@ function PlaygroundEditorTabs() {
 export function Playground(
   props: PlaygroundProps & { children: any[]; style?: any; className?: string },
 ) {
-  const { children, style, className, main = mainDefault } = props
-  const files: PlaygroundFiles = useMemo<PlaygroundFiles>(() => {
-    return children.reduce((acc, v) => {
+  const { children, style, className } = props
+  const { files, main, selected } = useMemo<{
+    files: PlaygroundFiles
+    main?: string
+    selected?: string
+  }>(() => {
+    let main
+    let selected
+    const processedFiles = children.reduce((acc, v) => {
       const filename: string = v.props.children.props.filename
+      const isMain: boolean = v.props.children.props.main
+      if (isMain) {
+        main = filename
+      }
+      const isSelected: boolean = v.props.children.props.selected
+      if (isSelected) {
+        selected = filename
+      }
       const code: string = v.props.children.props.children.trim()
       const file: PlaygroundFile = {
         filename,
         code,
-        isMain: filename === main,
       }
       return {
         ...acc,
         [filename]: file,
       }
     }, {})
-  }, [children, main])
+    return {
+      files: processedFiles,
+      main,
+      selected,
+    }
+  }, [children])
   return (
-    <PlaygroundProvider {...props} files={files}>
+    <PlaygroundProvider
+      {...props}
+      files={files}
+      main={main}
+      selectedFile={selected as string}
+    >
       <div style={style} className={className}>
         <PlaygroundPreview />
         <PlaygroundEditorTabs />
