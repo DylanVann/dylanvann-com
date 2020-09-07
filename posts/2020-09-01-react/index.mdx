@@ -6,61 +6,28 @@ author: Dylan Vann
 <Playground>
 
 
-```html filename=index.html
-<div id="root" />
-```
-
 ```js filename=index.js main
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { App } from './App.js'
+import App from './App.js'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<App />, document.body)
 ```
 
-```js filename=App.js
+```js filename=App.js selected
 import React, { useState } from 'react'
-import { Track } from './Track.js'
 
-const appendChild = document.body.appendChild.bind(document.body)
-const addText = (text) => appendChild(document.createTextNode(text))
-const addBreak = () => appendChild(document.createElement('br'))
-
-const createTrack = () => ({
-  on(event) {
-    addText(`Added listener on: ${event}`)
-    addBreak()
-  },
-  off(event) {
-    addText(`Removed listener on: ${event}`)
-    addBreak()
-  },
-})
-
-export const App = () => {
-  const [track, setTrack] = useState(createTrack())
-  const switchTrack = () => setTrack(createTrack())
+export default function App() {
+  const [count, setCount] = useState(0)
+  const increment = () => setCount(count + 1)
+  const decrement = () => setCount(count - 1)
   return (
     <div>
-      <button onClick={switchTrack}>Switch Track</button>
-      <Track track={track} />
+      <button onClick={decrement}>-</button>
+      <span>{` ${count} `}</span>
+      <button onClick={increment}>+</button>
     </div>
   )
-}
-```
-
-```jsx filename=Track.js selected
-import React, { useEffect } from 'react'
-
-export const Track = ({ track }) => {
-  useEffect(() => {
-    let onStop = () => track.stopAllTracks()
-    track.on('stop', onStop)
-    return () => {
-      track.off('stop', onStop)
-    }
-  }, [track])
-  return null
 }
 ```
 

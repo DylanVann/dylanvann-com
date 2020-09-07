@@ -14,18 +14,15 @@ const app = new App({
 })
 ```
 
-```svelte filename=App.svelte
+```svelte filename=App.svelte selected
 <script>
   let count = 0
-
-  const switchTrack = () => {
-    count++
-  }
 </script>
 
 <div>
-  <button on:click={switchTrack}>Inc</button>
-  {count}
+  <button on:click={() => count--}>-</button>
+  <span>{count}</span>
+  <button on:click={() => count++}>+</button>
 </div>
 ```
 
