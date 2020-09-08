@@ -74,7 +74,7 @@ export interface PlaygroundFile {
  *
  * @defaultValue {"index.js": "console.log('hello world')"}
  */
-type PlaygroundFiles = {
+export type PlaygroundFiles = {
   [id: string]: PlaygroundFile
 }
 
@@ -93,7 +93,7 @@ type PlaygroundTransforms = {
   [extension: string]: PlaygroundTransform[]
 }
 
-interface State {
+export interface PlaygroundState {
   lastFileId: number
   files: PlaygroundFiles
   main: string
@@ -112,7 +112,7 @@ type Action =
       code: string
     }
 
-const reducer = (state: State, action: Action): State => {
+const reducer = (state: PlaygroundState, action: Action): PlaygroundState => {
   switch (action.type) {
     case 'onChangedFilename': {
       const { id, name } = action
@@ -206,7 +206,7 @@ const PlaygroundContext = React.createContext<
     applyTransformCache: ApplyTransformCache
     applyTransformCacheOnChange: ApplyTransformCacheOnChange
     dispatch: Dispatch<Action>
-  } & State
+  } & PlaygroundState
 >(null as any)
 
 const theme = {
@@ -481,7 +481,7 @@ function PlaygroundProvider({
   ...other
 }: {
   transforms?: PlaygroundTransforms
-  state: State
+  state: PlaygroundState
   dispatch: Dispatch<Action>
   children: React.ReactNode
 }) {
@@ -669,53 +669,17 @@ function PlaygroundEditorTabs() {
   )
 }
 
-export function Playground(props: {
-  children: any[]
+export interface PlaygroundProps {
   style?: any
   className?: string
-}) {
-  const { children, style, className } = props
-  const initialState: State = useMemo<State>(() => {
-    let main: string | undefined
-    let selected: string | undefined
-    const processedFiles = children.reduce((acc, v) => {
-      const filename: string = v.props.children.props.filename
-      const isMain: boolean = v.props.children.props.main
-      if (isMain) {
-        if (main) {
-          throw new Error('Two files set themselves as main.')
-        }
-        main = filename
-      }
-      const isSelected: boolean = v.props.children.props.selected
-      if (isSelected) {
-        if (selected) {
-          throw new Error('Two files set themselves as selected.')
-        }
-        selected = filename
-      }
-      const code: string = v.props.children.props.children.trim()
-      const file: PlaygroundFile = {
-        filename,
-        code,
-      }
-      return {
-        ...acc,
-        [filename]: file,
-      }
-    }, {})
-    if (!main) {
-      throw new Error('Could not find main.')
-    }
-    const order = Object.keys(processedFiles)
-    return {
-      lastFileId: 0,
-      files: processedFiles,
-      order,
-      main,
-      selected: selected === undefined ? order[0] : selected,
-    }
-  }, [children])
+  initialState: PlaygroundState
+}
+
+export function Playground({
+  style,
+  className,
+  initialState,
+}: PlaygroundProps) {
   const [state, dispatch] = useReducer(reducer, initialState)
   return (
     <PlaygroundProvider state={state} dispatch={dispatch}>

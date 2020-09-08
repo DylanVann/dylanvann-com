@@ -18,17 +18,19 @@ import {
   tabsMarginTop,
   previewBorder,
 } from './components/Playground/constants'
+import { getInitialState } from './components/Playground/getInitialState'
+import type { PlaygroundProps } from './components/Playground/Playground'
 
-const PlaceHolder = ({ children }: any) => {
-  let lines = 0
-  children.forEach((child: any) => {
-    const code: string = child.props.children.props.children.trim()
-    lines = Math.max(lines, code.split('\n').length)
-  })
+const PlaceHolder = ({ style, className, initialState }: PlaygroundProps) => {
+  const lines = initialState.files[initialState.selected].code
+    .trim()
+    .split('\n').length
   const codeHeight = lines * lineHeight + 40
   return (
     <div
-      css={{ display: 'flex', flexDirection: 'column', marginBottom: '1.53em' }}
+      style={style}
+      className={className}
+      css={{ display: 'flex', flexDirection: 'column' }}
     >
       <div
         css={{
@@ -50,13 +52,20 @@ const PlaceHolder = ({ children }: any) => {
 }
 
 const PlaygroundWithMargin = (props: any) => {
+  const initialState = getInitialState(props.children)
   const [Playground, setPlayground] = useState<any>(() => PlaceHolder)
   useEffect(() => {
     import('./components/Playground/Playground').then(({ Playground }) =>
       setPlayground(() => Playground),
     )
   }, [])
-  return <Playground {...props} css={{ marginBottom: '1.53em' }} />
+  return (
+    <Playground
+      {...props}
+      initialState={initialState}
+      css={{ marginBottom: '1.53em' }}
+    />
+  )
 }
 
 export const mdxComponents = {
