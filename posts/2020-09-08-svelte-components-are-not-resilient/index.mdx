@@ -1,0 +1,453 @@
+---
+title: Svelte Components Are Not Resilient
+subtitle: Common Svelte Patterns Encourage Non-Resilient Components
+author: Dylan Vann
+description: How common Svelte patterns encourage non-resilient components.
+tags:
+  - Svelte
+  - JavaScript
+  - Web
+---
+
+The term "resilient components" here is coming from Dan Abromov's article [Writing Resilient Components](https://overreacted.io/writing-resilient-components/).
+
+The principles he outlines are:
+
+1. Don’t stop the data flow.
+   - **Props and state can change, and components should handle those changes whenever they happen.**
+2. Always be ready to render.
+   - A component shouldn’t break because it’s rendered more or less often.
+3. No component is a singleton.
+   - Even if a component is rendered just once, your design will improve if rendering twice doesn’t break it.
+4. Keep the local state isolated.
+   - Think about which state is local to a particular UI representation — and don’t hoist that state higher than necessary.
+
+The principle we're discussing in relation to Svelte is "Don't stop the data flow.", otherwise phrased as "Props and state can change, and components should handle those changes whenever they happen.".
+
+Let's start by writing a Svelte component.
+We want to write a component that fetches some photos from an API (this is taken from the `onMount` example in the Svelte docs).
+
+## PhotoGrid:
+
+<Playground previewHeight={400}>
+
+
+```js filename=index.js main
+import App from './App.svelte'
+
+new App({
+  target: document.body,
+})
+```
+
+```svelte filename=App.svelte
+<script>
+  import PhotoGrid from './PhotoGrid.svelte'
+  import ow from 'oceanwind'
+</script>
+
+<div class={ow`m-4`}>
+  <PhotoGrid />
+</div>
+
+```
+
+```svelte filename=PhotoGrid.svelte selected
+<script>
+  import { onMount } from 'svelte'
+  import ow from 'oceanwind'
+
+  let photos = []
+
+  onMount(async () => {
+    const res = await fetch(
+      `https://jsonplaceholder.typicode.com/photos?_limit=20`,
+    )
+    photos = await res.json()
+  })
+</script>
+
+<div>
+  <strong> Photos: </strong>
+  <div class={ow`w-full grid grid-cols-3 gap-4`}>
+    {#each photos as photo}
+      <figure class={ow`w-full m-0`}>
+        <img
+          class={ow`w-full m-0`}
+          src={photo.thumbnailUrl}
+          alt={photo.title} />
+        <figcaption>{photo.title}</figcaption>
+      </figure>
+    {:else}
+      <p>loading...</p>
+    {/each}
+  </div>
+</div>
+```
+
+</Playground>
+
+
+Now that we have a nice `PhotoGrid` component, let's write a component for selecting an album:
+
+## PhotoGrid With AlbumSelector in Svelte (broken):
+
+<Playground previewHeight={400}>
+
+
+```js filename=index.js main
+import App from './App.svelte'
+
+new App({
+  target: document.body,
+})
+```
+
+```svelte filename=App.svelte
+<script>
+  import AlbumSelector from './AlbumSelector.svelte'
+  import PhotoGrid from './PhotoGrid.svelte'
+  import ow from 'oceanwind'
+
+  let album
+</script>
+
+<div class={ow`m-4`}>
+  <AlbumSelector bind:album />
+  <PhotoGrid {album} />
+</div>
+```
+
+```svelte filename=AlbumSelector.svelte
+<script>
+  import { onMount } from 'svelte'
+
+  export let album = undefined
+  let albums = []
+
+  onMount(async () => {
+    const res = await fetch(
+      `https://jsonplaceholder.typicode.com/albums?_limit=5`,
+    )
+    albums = await res.json()
+  })
+</script>
+
+<div>
+  <strong> Select Album: </strong>
+
+  {#each albums as item}
+    <label>
+      <input type="radio" bind:group={album} value={item.id} />
+      {item.title}
+    </label>
+  {:else}
+    <p>loading...</p>
+  {/each}
+</div>
+```
+
+```svelte filename=PhotoGrid.svelte selected
+<script>
+  import { onMount } from 'svelte'
+  import ow from 'oceanwind'
+
+  export let album = undefined
+  let photos = []
+
+  onMount(async () => {
+    const res = await fetch(
+      `https://jsonplaceholder.typicode.com/photos?_limit=20${
+        album !== undefined ? `&albumId=${album}` : ''
+      }`,
+    )
+    photos = await res.json()
+  })
+</script>
+
+<div>
+  <strong> Photos: </strong>
+  <div class={ow`w-full grid grid-cols-3 gap-4`}>
+    {#each photos as photo}
+      <figure class={ow`w-full m-0`}>
+        <img
+          class={ow`w-full m-0`}
+          src={photo.thumbnailUrl}
+          alt={photo.title} />
+        <figcaption>{photo.title}</figcaption>
+      </figure>
+    {:else}
+      <p>loading...</p>
+    {/each}
+  </div>
+</div>
+```
+
+</Playground>
+
+
+Beautiful, except that switching albums does not update the `PhotoGrid`.
+This is not the automatic reactivity we were promised by Svelte.
+
+Why does it not work?
+
+The answer is that `onMount` is not reactive, and so our component is not reactive. `onMount` does not rerun when our props change, so it does not fetch new data when the album prop is changed.
+
+If we were to write our `PhotoGrid` component in React (with hooks) it would look something like this:
+
+## PhotoGrid with AlbumSelector in React (not broken):
+
+<Playground previewHeight={400}>
+
+
+```js filename=index.js main
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { App } from './App'
+
+ReactDOM.render(<App />, document.body)
+```
+
+```jsx filename=App.js
+import React, { useState } from 'react'
+import ow from 'oceanwind'
+import { AlbumSelector } from './AlbumSelector'
+import { PhotoGrid } from './PhotoGrid'
+
+export function App() {
+  const [album, setAlbum] = useState()
+  return (
+    <div className={ow`m-4`}>
+      <AlbumSelector onSelectedAlbum={setAlbum} />
+      <PhotoGrid album={album} />
+    </div>
+  )
+}
+```
+
+```jsx filename=AlbumSelector.js
+import React, { useState, useEffect } from 'react'
+import ow from 'oceanwind'
+
+export function AlbumSelector({ onSelectedAlbum }) {
+  const [albums, setAlbums] = useState([])
+  useEffect(() => {
+    let mounted = true
+    fetch(`https://jsonplaceholder.typicode.com/albums?_limit=5`)
+      .then((v) => v.json())
+      .then((v) => {
+        if (mounted) {
+          setAlbums(v)
+        }
+      })
+    return () => (mounted = false)
+  }, [])
+  const [selected, setSelected] = useState(undefined)
+  const onChange = (v) => {
+    const value = v.target.value
+    onSelectedAlbum(value)
+    setSelected(value)
+  }
+  return (
+    <div>
+      <strong>Select Album:</strong>
+      {albums !== undefined ? (
+        albums.map((item) => (
+          <label key={item.id} className={ow`mx-1`}>
+            <input
+              className={ow`mr-1`}
+              type="radio"
+              value={item.id}
+              checked={item.id?.toString() === selected?.toString()}
+              onChange={onChange}
+            />
+            {item.title}
+          </label>
+        ))
+      ) : (
+        <p>loading...</p>
+      )}
+    </div>
+  )
+}
+```
+
+```jsx filename=PhotoGrid.js selected
+import React, { useState, useEffect } from 'react'
+import ow from 'oceanwind'
+
+export function PhotoGrid({ album }) {
+  const [photos, setPhotos] = useState([])
+  useEffect(() => {
+    let mounted = true
+    fetch(
+      `https://jsonplaceholder.typicode.com/photos?_limit=20${
+        album !== undefined ? `&albumId=${album}` : ''
+      }`,
+    )
+      .then((v) => v.json())
+      .then((v) => {
+        if (mounted) {
+          setPhotos(v)
+        }
+      })
+    return () => (mounted = false)
+  }, [album])
+  return (
+    <div>
+      <strong>Photos:</strong>
+      <div className={ow`w-full grid grid-cols-3 gap-4`}>
+        {photos !== undefined ? (
+          photos.map((photo) => (
+            <figure key={photo.title} className={ow`w-full m-0`}>
+              <img
+                className={ow`w-full m-0`}
+                src={photo.thumbnailUrl}
+                alt={photo.title}
+              />
+              <figcaption>{photo.title}</figcaption>
+            </figure>
+          ))
+        ) : (
+          <p>loading...</p>
+        )}
+      </div>
+    </div>
+  )
+}
+```
+
+</Playground>
+
+
+This component is written to be almost the same as our Svelte version, and yet it works when we change albums, the photos for the selected album are fetched!
+
+The key difference is that we use `useEffect` instead of `onMount`.
+Using the dependency array we tell React that the effect (fetching photos) should rerun when the `album` prop is changed.
+Even if we didn't think of this dependency ourselves `eslint-plugin-react-hooks` would tell us about it.
+
+When using React hooks there is no concept of `onMount` because the idea of only running some code on mount leads to writing non-resilient components,
+components that do one thing when they mount, and then don't take prop changes into account.
+
+Previously with React's class component API we would need to use `componentDidUpdate`, React hooks improves upon this, it encourages writing resilient components from the start, and we can also write cleanup logic in the same `useEffect` call.
+
+To fix our Svelte version you might think we could use `beforeUpdate` or `afterUpdate`,
+but these lifecycle functions are related to the DOM being updated, not to prop updates.
+We only want to rerun our fetching when the album prop is changed.
+
+What is the best way to fix this then? I'm not sure what the best way is, but one way would be to [implement `useEffect` for Svelte ourselves](https://dylanvann.com/svelte-version-of-useeffect):
+
+## PhotoGrid with AlbumSelector in Svelte (fixed with useEffect):
+
+<Playground previewHeight={400}>
+
+
+```js filename=index.js main
+import App from './App.svelte'
+
+new App({
+  target: document.body,
+})
+```
+
+```svelte filename=App.svelte
+<script>
+  import AlbumSelector from './AlbumSelector.svelte'
+  import PhotoGrid from './PhotoGrid.svelte'
+  import ow from 'oceanwind'
+
+  let album
+</script>
+
+<div class={ow`m-4`}>
+  <AlbumSelector bind:album />
+  <PhotoGrid {album} />
+</div>
+```
+
+```svelte filename=AlbumSelector.svelte
+<script>
+  import { onMount } from 'svelte'
+
+  export let album = undefined
+  let albums = []
+
+  onMount(async () => {
+    const res = await fetch(
+      `https://jsonplaceholder.typicode.com/albums?_limit=5`,
+    )
+    albums = await res.json()
+  })
+</script>
+
+<div>
+  <strong> Select Album: </strong>
+
+  {#each albums as item}
+    <label>
+      <input type="radio" bind:group={album} value={item.id} />
+      {item.title}
+    </label>
+  {:else}
+    <p>loading...</p>
+  {/each}
+</div>
+```
+
+```svelte filename=PhotoGrid.svelte selected
+<script>
+  import { beforeUpdate, onMount } from 'svelte'
+  import ow from 'oceanwind'
+
+  export let album = undefined
+  let photos = []
+
+  const useEffect = (subscribe) => ({ subscribe })
+
+  let effect
+  $: effect = useEffect(() => {
+    fetch(
+      `https://jsonplaceholder.typicode.com/photos?_limit=20${
+        album !== undefined ? `&albumId=${album}` : ''
+      }`,
+    )
+      .then((v) => v.json())
+      .then((v) => (photos = v))
+    return () => {}
+  })
+  $: $effect
+</script>
+
+<div>
+  <strong> Photos: </strong>
+  <div class={ow`w-full grid grid-cols-3 gap-4`}>
+    {#each photos as photo}
+      <figure class={ow`w-full m-0`}>
+        <img
+          class={ow`w-full m-0`}
+          src={photo.thumbnailUrl}
+          alt={photo.title} />
+        <figcaption>{photo.title}</figcaption>
+      </figure>
+    {:else}
+      <p>loading...</p>
+    {/each}
+  </div>
+</div>
+```
+
+</Playground>
+
+
+With this code we use Svelte's reactivity and a custom store to have our fetch rerun whenever the album prop is changed.
+
+It works, I'm not sure this will work with SSR though, and the code is a bit verbose/convoluted.
+IMO Svelte should make something like `useEffect` part of the framework so that this could work better and be less verbose.
+
+## Conclusion
+
+- Our custom `useEffect` is not idiomatic Svelte.
+- Idiomatic Svelte uses `onMount` which results in non-resilient components.
+- Idiomatic React (Hooks) uses `useEffect` which results in resilient components, assuming you listen to the linter.
+
+I do like the direction Svelte is heading but I think this is one area that could be improved.

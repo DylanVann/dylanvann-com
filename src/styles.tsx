@@ -7,10 +7,11 @@ export const colorTextDark = '#333333'
 export const colorTextMuted = '#575757'
 export const colorTextTitle = lighten(0.1, colorTextDark)
 export const colorTextAccent = '#428bca'
-
+export const blockShadow = '0 0 20px 0 rgba(0, 0, 0, 0.25)'
+export const blockShadowMuted = '0 0 10px 0 rgba(0, 0, 0, 0.1)'
 export const blockStyle = css`
   display: block;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: ${blockShadow};
 `
 
 export const linkStyle = css`

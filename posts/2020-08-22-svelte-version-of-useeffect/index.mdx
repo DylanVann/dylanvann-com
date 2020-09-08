@@ -34,13 +34,17 @@ You can see that when the track instance is swapped we remove the listener on th
 ```js filename=index.js main
 import React from 'react'
 import ReactDOM from 'react-dom'
+import ow from 'oceanwind'
 import { App } from './App.js'
+
+document.body.className = ow`m-4`
 
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
 ```js filename=App.js
 import React, { useState } from 'react'
+import ow from 'oceanwind'
 import { Track } from './Track.js'
 
 const appendChild = document.body.appendChild.bind(document.body)
@@ -63,7 +67,12 @@ export const App = () => {
   const switchTrack = () => setTrack(createTrack())
   return (
     <div>
-      <button onClick={switchTrack}>Switch Track</button>
+      <button
+        className={ow`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`}
+        onClick={switchTrack}
+      >
+        Switch Track
+      </button>
       <Track track={track} />
     </div>
   )
@@ -124,6 +133,9 @@ So we can use this custom store creating function like so:
 
 ```js filename=index.js main
 import App from './App.svelte'
+import ow from 'oceanwind'
+
+document.body.className = ow`m-4`
 
 const app = new App({
   target: document.getElementById('root'),
@@ -133,6 +145,7 @@ const app = new App({
 ```svelte filename=App.svelte
 <script>
   import Track from './Track.svelte'
+  import ow from 'oceanwind'
 
   const appendChild = document.body.appendChild.bind(document.body)
   const addText = (text) => appendChild(document.createTextNode(text))
@@ -157,7 +170,12 @@ const app = new App({
 </script>
 
 <div>
-  <button on:click={switchTrack}>Switch Track</button>
+  <button
+    class={ow`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`}
+    on:click={switchTrack}
+  >
+    Switch Track
+  </button>
   <Track {track} />
 </div>
 ```
@@ -182,6 +200,7 @@ export const useEffect = (subscribe) => ({ subscribe })
   })
   $: $effect
 </script>
+
 ```
 
 </Playground>

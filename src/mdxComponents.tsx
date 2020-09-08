@@ -13,15 +13,21 @@ import { Code } from './components/Code'
 import { useState, useEffect } from 'react'
 import {
   lineHeight,
-  previewHeight,
   tabsHeight,
   tabsMarginTop,
   previewBorder,
+  previewHeightDefault,
 } from './components/Playground/constants'
 import { getInitialState } from './components/Playground/getInitialState'
 import type { PlaygroundProps } from './components/Playground/Playground'
+import { blockShadowMuted } from './styles'
 
-const PlaceHolder = ({ style, className, initialState }: PlaygroundProps) => {
+const PlaceHolder = ({
+  style,
+  className,
+  initialState,
+  previewHeight = previewHeightDefault,
+}: PlaygroundProps) => {
   const lines = initialState.files[initialState.selected].code
     .trim()
     .split('\n').length
@@ -38,6 +44,7 @@ const PlaceHolder = ({ style, className, initialState }: PlaygroundProps) => {
           height: previewHeight,
           border: previewBorder,
           background: 'white',
+          boxShadow: blockShadowMuted,
         }}
       />
       <div

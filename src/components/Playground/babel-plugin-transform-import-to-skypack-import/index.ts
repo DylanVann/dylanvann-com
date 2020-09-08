@@ -1,3 +1,8 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const getUnpkgUrl = (name: string) => `https://unpkg.com/${name}?module`
+const getSkypackUrl = (name: string) =>
+  `https://cdn.skypack.dev/${name}?min&dist=es2019`
+
 function getCdnPathWithVersion(
   rawTarget: string,
   explicitVersion: string | void,
@@ -7,7 +12,7 @@ function getCdnPathWithVersion(
     ? `${libraryName}@${explicitVersion}`
     : libraryName
   const finalPath = [libraryNameWithVersion, ...libraryInternalPaths].join('/')
-  return `https://cdn.skypack.dev/${finalPath}`
+  return getSkypackUrl(finalPath)
 }
 
 function isLibraryPath(rawTarget: string) {

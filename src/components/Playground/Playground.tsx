@@ -15,7 +15,7 @@ import Editor from 'react-simple-code-editor'
 import Highlight from 'prism-react-renderer'
 import memoizeOne from 'memoize-one'
 import { Prism } from '../Prism'
-import { fontRoboto } from '../../styles'
+import { fontRoboto, blockShadowMuted } from '../../styles'
 import capsize from 'capsize'
 import { transformImports } from './transformImports'
 import { transformBabel } from './transformBabel'
@@ -27,6 +27,7 @@ import {
   tabsMarginTop,
   lineHeight,
   previewBorder,
+  previewHeightDefault,
 } from './constants'
 
 const fontMetrics = {
@@ -261,9 +262,13 @@ export function getSrcDoc({
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+/>
 <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
 <title>Document</title>
+<link rel="stylesheet" href="https://unpkg.com/tailwindcss@1.7.5/dist/base.min.css" />
 ${Object.values(sortedFiles.css)
   .map((css) => `<style>${css.code}</style>`)
   .join('\n')}
@@ -419,7 +424,7 @@ const transformFiles = (
   }, {})
 }
 
-function PlaygroundPreview() {
+function PlaygroundPreview({ height = 200 }: { height?: number }) {
   const {
     files,
     transforms,
@@ -451,14 +456,15 @@ function PlaygroundPreview() {
 
   return (
     <iframe
-      style={{
+      css={{
         boxSizing: 'border-box',
         border: previewBorder,
+        boxShadow: blockShadowMuted,
         display: 'block',
         margin: 0,
         padding: 0,
       }}
-      height={200}
+      height={height}
       width="100%"
       frameBorder="0"
       srcDoc={srcDoc}
@@ -670,6 +676,7 @@ function PlaygroundEditorTabs() {
 }
 
 export interface PlaygroundProps {
+  previewHeight?: number
   style?: any
   className?: string
   initialState: PlaygroundState
@@ -679,12 +686,13 @@ export function Playground({
   style,
   className,
   initialState,
+  previewHeight = previewHeightDefault,
 }: PlaygroundProps) {
   const [state, dispatch] = useReducer(reducer, initialState)
   return (
     <PlaygroundProvider state={state} dispatch={dispatch}>
       <div style={style} className={className}>
-        <PlaygroundPreview />
+        <PlaygroundPreview height={previewHeight} />
         <PlaygroundEditorTabs />
         <PlaygroundEditor />
         <PlaygroundError />
