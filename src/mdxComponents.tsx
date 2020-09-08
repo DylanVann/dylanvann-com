@@ -11,6 +11,13 @@ import { Table } from './components/Table'
 import { Pre } from './components/Pre'
 import { Code } from './components/Code'
 import { useState, useEffect } from 'react'
+import {
+  lineHeight,
+  previewHeight,
+  tabsHeight,
+  tabsMarginTop,
+  previewBorder,
+} from './components/Playground/constants'
 
 const PlaceHolder = ({ children }: any) => {
   let lines = 0
@@ -18,16 +25,27 @@ const PlaceHolder = ({ children }: any) => {
     const code: string = child.props.children.props.children.trim()
     lines = Math.max(lines, code.split('\n').length)
   })
-  const codeHeight = lines * 21.42 + 40
+  const codeHeight = lines * lineHeight + 40
   return (
     <div
-      css={{
-        width: '100%',
-        background: '#f5f7ff',
-        marginBottom: '1.53em',
-        height: 32 + 4 + 200 + codeHeight,
-      }}
-    />
+      css={{ display: 'flex', flexDirection: 'column', marginBottom: '1.53em' }}
+    >
+      <div
+        css={{
+          boxSizing: 'border-box',
+          height: previewHeight,
+          border: previewBorder,
+          background: 'white',
+        }}
+      />
+      <div
+        css={{
+          marginTop: tabsMarginTop,
+          height: tabsHeight + codeHeight,
+          background: '#f5f7ff',
+        }}
+      />
+    </div>
   )
 }
 

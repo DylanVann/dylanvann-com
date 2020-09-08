@@ -22,6 +22,12 @@ import { transformBabel } from './transformBabel'
 import { darken, lighten } from 'polished'
 import { transformSvelte } from './transformSvelte'
 import { getExtension } from './utils'
+import {
+  tabsHeight,
+  tabsMarginTop,
+  lineHeight,
+  previewBorder,
+} from './constants'
 
 const fontMetrics = {
   capHeight: 1456,
@@ -297,6 +303,8 @@ const extensionToLanguage: { [ext: string]: string } = {
   svelte: 'svelte',
 }
 
+const lineHeightStyle = { lineHeight: `${lineHeight}px` }
+
 function PlaygroundEditor() {
   const { files, dispatch, selected } = useContext(PlaygroundContext)
   const file = files[selected]
@@ -316,7 +324,7 @@ function PlaygroundEditor() {
           <Fragment>
             {tokens.map((line, i) => (
               // eslint-disable-next-line react/jsx-key
-              <div {...getLineProps({ line, key: i })}>
+              <div {...getLineProps({ line, key: i })} css={lineHeightStyle}>
                 {line.map((token, key) => (
                   // eslint-disable-next-line react/jsx-key
                   <span {...getTokenProps({ token, key })} />
@@ -349,6 +357,7 @@ function PlaygroundEditor() {
         },
       }}
       style={{
+        ...lineHeightStyle,
         whiteSpace: 'pre',
         fontFamily: 'monospace',
         boxSizing: 'border-box',
@@ -444,7 +453,7 @@ function PlaygroundPreview() {
     <iframe
       style={{
         boxSizing: 'border-box',
-        border: '1px solid rgb(236, 236, 236)',
+        border: previewBorder,
         display: 'block',
         margin: 0,
         padding: 0,
@@ -605,8 +614,8 @@ function PlaygroundEditorTabs() {
     <div
       css={{
         display: 'flex',
-        marginTop: 4,
-        height: 32,
+        marginTop: tabsMarginTop,
+        height: tabsHeight,
         overflowX: 'auto',
         overflowY: 'hidden',
         scrollbarWidth: 'none',
