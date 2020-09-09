@@ -424,7 +424,11 @@ const transformFiles = (
   }, {})
 }
 
-function PlaygroundPreview({ height = 200 }: { height?: number }) {
+function PlaygroundPreview({
+  height = previewHeightDefault,
+}: {
+  height?: number
+}) {
   const {
     files,
     transforms,
