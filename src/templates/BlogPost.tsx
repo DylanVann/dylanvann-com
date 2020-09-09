@@ -11,7 +11,7 @@ const BlogPostTemplate = (props: { location: any; description?: string }) => {
   const post = get(props, 'data.mdx')
   const title = get(post, 'frontmatter.title')
   const description = get(post, 'frontmatter.description')
-  const slug = get(props, 'fields.slug')
+  const slug = get(post, 'fields.slug')
   const baseUrl =
     process.env.CONTEXT === 'production'
       ? process.env.URL
