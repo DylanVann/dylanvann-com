@@ -3,6 +3,7 @@ const path = require('path')
 const { createFilePath } = require('gatsby-source-filesystem')
 const { createOpenGraphImage } = require('gatsby-plugin-open-graph-images')
 const createPaginatedPages = require('gatsby-paginate')
+const fs = require('fs-extra')
 
 const BlogIndexPath = path.resolve('src/templates/BlogIndex.tsx')
 const BlogPostPath = path.resolve('./src/templates/BlogPost.tsx')
@@ -115,4 +116,8 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       })
     }
   }
+}
+
+exports.onPostBuild = async () => {
+  await fs.remove(path.join(__dirname, 'public', '__generated'))
 }
