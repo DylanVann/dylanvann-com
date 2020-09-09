@@ -5,17 +5,19 @@ import babelPluginTransformImportToSkypackImport from './babel-plugin-transform-
 registerPlugin(
   'babel-plugin-transform-import-to-skypack-import',
   babelPluginTransformImportToSkypackImport(
-    { react: '16.13.1', 'react-dom': '16.13.1', svelte: '3.24.1' },
+    {
+      react: '16.13.1',
+      'react-dom': '16.13.1',
+      svelte: '3.24.1',
+      oceanwind: '0.2.0',
+    },
     (message) => console.warn(message),
   ),
 )
 
 export const transformBabel: PlaygroundTransform = (file) => {
   const result = transform(file.code, {
-    presets: [
-      ['react', { runtime: 'classic' }],
-      // ['env', { modules: false, targets: 'Chrome > 40', loose: true }],
-    ],
+    presets: [['react', { runtime: 'classic' }]],
     plugins: ['babel-plugin-transform-import-to-skypack-import'],
   })
   return {
