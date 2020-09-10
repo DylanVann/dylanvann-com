@@ -1,16 +1,13 @@
+import { parsePackageName } from './parsePackageName'
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getUnpkgUrl = (name: string) => `https://unpkg.com/${name}?module`
 const getSkypackUrl = (name: string) =>
   `https://cdn.skypack.dev/${name}?min&dist=es2019`
 
-function getCdnPathWithVersion(
-  rawTarget: string,
-  explicitVersion: string | void,
-) {
-  const [libraryName, ...libraryInternalPaths] = rawTarget.split('/')
-  const libraryNameWithVersion = explicitVersion
-    ? `${libraryName}@${explicitVersion}`
-    : libraryName
+function getCdnPathWithVersion(name: string, path?: string, version?: string) {
+  const libraryInternalPaths = (path && path.split('/')) || []
+  const libraryNameWithVersion = version ? `${name}@${version}` : name
   const finalPath = [libraryNameWithVersion, ...libraryInternalPaths].join('/')
   return getSkypackUrl(finalPath)
 }
@@ -21,7 +18,7 @@ function isLibraryPath(rawTarget: string) {
 
 function handleLibraryName(
   target: string,
-  versions: { [libraryName: string]: string | void },
+  versions: { [libraryName: string]: string | undefined },
   onwarn?: any,
 ): string | void {
   // ignore http at first
@@ -29,20 +26,20 @@ function handleLibraryName(
     return target
   }
   if (isLibraryPath(target)) {
-    const [libraryName] = target.split('/')
-    const explicitVersion = versions[libraryName]
-    if (onwarn && explicitVersion == null) {
+    const { name, version, path } = parsePackageName(target)
+    const explicitVersion = version || versions[name]
+    if (onwarn && explicitVersion === undefined) {
       onwarn(
         `[transform-import-path-to-skypack-cdn] ${target}'s version is not found in dependencies.`,
       )
     }
-    return getCdnPathWithVersion(target, explicitVersion)
+    return getCdnPathWithVersion(name, path, explicitVersion)
   }
 }
 
 export default function transformImportPathToSkypackCDN(
   versions: {
-    [libraryName: string]: string | void
+    [libraryName: string]: string | undefined
   },
   onwarn?: (message: string) => void,
 ) {
