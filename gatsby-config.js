@@ -97,10 +97,11 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    isCI && {
-      resolve: `gatsby-plugin-google-analytics`,
+    {
+      resolve: `gatsby-plugin-segment-js`,
       options: {
-        trackingId: process.env.GOOGLE_ANALYTICS_TRACKING_ID,
+        prodKey: process.env.SEGMENT_TRACKING_ID,
+        trackPage: true,
       },
     },
     {
